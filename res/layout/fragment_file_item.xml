@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- android:minHeight="67.0dip" android:maxHeight="67.0dip" -->
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="2.0dip"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginTop="2.0dip"
+        android:adjustViewBounds="true"
+        android:background="@drawable/default_thumbnail"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10.0dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:ellipsize="end"
+        android:paddingTop="6.0dip"
+        android:singleLine="true"
+        android:textColor="@color/title"
+        android:textSize="16sp" />
+    
+    
+	<!-- 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="7.0dip"
+        android:orientation="vertical"
+        android:paddingBottom="14.0dip"
+        android:paddingTop="12.0dip" >
+
+        <RelativeLayout
+            android:id="@+id/file_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/file_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/listview_item_file_size_text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/file_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingRight="7.0dip"
+                android:textColor="@color/listview_item_file_duration_text_color"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+		-->
+</RelativeLayout>

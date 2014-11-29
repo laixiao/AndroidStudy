@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <ExpandableListView
+        android:id="@+id/expandableListView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+    </ExpandableListView>
+    <LinearLayout
+        android:id="@+id/topGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:visibility="gone"
+        android:layout_alignParentTop="true">
+        
+         <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="10dip"
+            android:src="@drawable/user_group" >
+        </ImageView>
+
+        <RelativeLayout
+            android:id="@+id/layout_013"
+            android:layout_alignRight="@id/ImageView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/content_001"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:paddingLeft="10px"
+                android:textColor="#FFFFFF"
+                android:textSize="26px" >
+            </TextView>
+
+            <ImageView
+                android:id="@+id/tubiao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                 />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

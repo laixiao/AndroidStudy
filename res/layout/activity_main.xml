@@ -1,0 +1,199 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <!-- 1.顶部标题=====顶部标题 =====顶部标题 =====顶部标题 -->
+
+    <RelativeLayout
+        android:id="@+id/titlelayout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tilebackground"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="主页" />
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:background="#00000000"
+            android:src="@drawable/titlebutton01" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/titlelayout02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tilebackground"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/textView031"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="服务" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/titlelayout03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tilebackground"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/fabiaoshuoshuo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="发表" />
+
+        <TextView
+            android:id="@+id/textView011"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="动态" />
+    </RelativeLayout>
+
+    <!-- 1.顶部标题=====顶部标题 =====顶部标题 =====顶部标题 -->
+
+    <RelativeLayout
+        android:id="@+id/middlelayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomlayout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/titlelayout01"
+        android:background="@drawable/middlebackground01"
+        android:visibility="visible" >
+
+        <ListView
+            android:id="@+id/listView01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            >
+        </ListView>
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/middlelayout2"
+        android:background="@drawable/middlebackground01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomlayout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/titlelayout02"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/button025"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/middlelayout3"
+        android:background="@drawable/middlebackground01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomlayout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/titlelayout03"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/button035"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="显示说说界面" />
+    </RelativeLayout>
+    <!-- 2.底部导航==== 底部导航=====底部导航 -->
+
+    <LinearLayout
+        android:id="@+id/bottomlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+       android:background="@drawable/shape11"
+       android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:src="@drawable/active"
+         	
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            
+            android:textColor="#ffffff" />
+
+         <ImageButton
+            android:id="@+id/button2"
+            android:src="@drawable/inactive2"
+         	
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            
+            android:textColor="#ffffff" />
+
+        <ImageButton
+            android:id="@+id/button3"
+            android:src="@drawable/inactive3"
+         	
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            
+            android:textColor="#ffffff" />
+        <ImageButton
+            android:id="@+id/button4"
+            android:src="@drawable/inactive4"
+         	
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            
+            android:textColor="#ffffff" />
+    </LinearLayout>
+    <!-- 2.底部导航==== 底部导航=====底部导航 -->
+
+</RelativeLayout>
