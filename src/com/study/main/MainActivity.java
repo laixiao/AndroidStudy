@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private RelativeLayout titlelayout01, titlelayout02, titlelayout03,
 			middlelayout1, middlelayout2, middlelayout3;
 	private ListView listView01;
-	private ImageButton button1, button2, button3;
+	private Button button1, button2, button3;
 	private Button fabiaoshuoshuo;
 	private ImageButton imageButton1;
 	private ResideMenu resideMenu;
@@ -77,9 +77,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		middlelayout1 = (RelativeLayout) this.findViewById(R.id.middlelayout1);
 		middlelayout2 = (RelativeLayout) this.findViewById(R.id.middlelayout2);
 		middlelayout3 = (RelativeLayout) this.findViewById(R.id.middlelayout3);
-		button1 = (ImageButton) this.findViewById(R.id.button1);
-		button2 = (ImageButton) this.findViewById(R.id.button2);
-		button3 = (ImageButton) this.findViewById(R.id.button3);
+		button1 = (Button) this.findViewById(R.id.button1);
+		button2 = (Button) this.findViewById(R.id.button2);
+		button3 = (Button) this.findViewById(R.id.button3);
 		listView01 = (ListView) this.findViewById(R.id.listView01);
 
 		fabiaoshuoshuo = (Button) this.findViewById(R.id.fabiaoshuoshuo);
@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				middlelayout1.setVisibility(View.VISIBLE);
 				middlelayout2.setVisibility(View.INVISIBLE);
 				middlelayout3.setVisibility(View.INVISIBLE);
-				button1.setBackgroundResource(R.drawable.inactive);
+				//button1.setPressed(true);
 
 			}
 		});

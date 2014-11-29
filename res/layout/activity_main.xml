@@ -58,16 +58,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
         android:background="@drawable/tilebackground"
         android:visibility="gone" >
 
         <Button
             android:id="@+id/fabiaoshuoshuo"
+            android:background="#00000000"
+            android:drawableLeft="@drawable/aaaaa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="发表" />
+            android:text="" />
 
         <TextView
             android:id="@+id/textView011"
@@ -147,51 +150,55 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-       android:background="@drawable/shape11"
+       android:background="@drawable/bottombackground01"
        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <ImageButton
+        <Button
             android:id="@+id/button1"
-            android:src="@drawable/active"
-         	
+           
+         	android:drawableTop="@drawable/a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            
+            android:text="主页"
+            android:textSize="15sp"
             android:textColor="#ffffff" />
 
-         <ImageButton
+      <Button
             android:id="@+id/button2"
-            android:src="@drawable/inactive2"
-         	
+           
+         	android:drawableTop="@drawable/aaaap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            
+            android:text="本地视频"
+            android:textSize="15sp"
             android:textColor="#ffffff" />
 
-        <ImageButton
+       <Button
             android:id="@+id/button3"
-            android:src="@drawable/inactive3"
-         	
+           
+         	android:drawableTop="@drawable/aaap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            
+            android:text="消息"
+            android:textSize="15sp"
             android:textColor="#ffffff" />
-        <ImageButton
+       <Button
             android:id="@+id/button4"
-            android:src="@drawable/inactive4"
-         	
+           
+         	android:drawableTop="@drawable/aap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            
+            android:text="动态"
+            android:textSize="15sp"
             android:textColor="#ffffff" />
     </LinearLayout>
     <!-- 2.底部导航==== 底部导航=====底部导航 -->
