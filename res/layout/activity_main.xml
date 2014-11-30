@@ -90,7 +90,7 @@
         android:layout_above="@+id/bottomlayout"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/titlelayout01"
-        android:background="@drawable/middlebackground01"
+        android:background="@drawable/login_bg"
         android:visibility="visible" >
 
         <ListView
@@ -106,7 +106,7 @@
 
     <RelativeLayout
         android:id="@+id/middlelayout2"
-        android:background="@drawable/middlebackground01"
+        android:background="@drawable/login_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomlayout"
@@ -125,7 +125,7 @@
 
     <RelativeLayout
         android:id="@+id/middlelayout3"
-        android:background="@drawable/middlebackground01"
+        android:background="@drawable/login_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomlayout"

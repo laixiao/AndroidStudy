@@ -13,25 +13,25 @@ public final class R {
 		public static final int transparent = 0x7f060000;
 	}
 	public static final class drawable {
-		public static final int mediacontroller_button = 0x7f02005e;
-		public static final int mediacontroller_pause = 0x7f02005f;
-		public static final int mediacontroller_play = 0x7f020060;
-		public static final int scrubber_control_disabled_holo = 0x7f02006f;
-		public static final int scrubber_control_focused_holo = 0x7f020070;
-		public static final int scrubber_control_normal_holo = 0x7f020071;
-		public static final int scrubber_control_pressed_holo = 0x7f020072;
-		public static final int scrubber_control_selector_holo = 0x7f020073;
-		public static final int scrubber_primary_holo = 0x7f020074;
-		public static final int scrubber_progress_horizontal_holo_dark = 0x7f020075;
-		public static final int scrubber_secondary_holo = 0x7f020076;
-		public static final int scrubber_track_holo_dark = 0x7f020077;
+		public static final int mediacontroller_button = 0x7f020066;
+		public static final int mediacontroller_pause = 0x7f020067;
+		public static final int mediacontroller_play = 0x7f020068;
+		public static final int scrubber_control_disabled_holo = 0x7f020076;
+		public static final int scrubber_control_focused_holo = 0x7f020077;
+		public static final int scrubber_control_normal_holo = 0x7f020078;
+		public static final int scrubber_control_pressed_holo = 0x7f020079;
+		public static final int scrubber_control_selector_holo = 0x7f02007a;
+		public static final int scrubber_primary_holo = 0x7f02007b;
+		public static final int scrubber_progress_horizontal_holo_dark = 0x7f02007c;
+		public static final int scrubber_secondary_holo = 0x7f02007d;
+		public static final int scrubber_track_holo_dark = 0x7f02007e;
 	}
 	public static final class id {
-		public static final int mediacontroller_file_name = 0x7f0a00a4;
-		public static final int mediacontroller_play_pause = 0x7f0a00a0;
-		public static final int mediacontroller_seekbar = 0x7f0a00a3;
-		public static final int mediacontroller_time_current = 0x7f0a00a1;
-		public static final int mediacontroller_time_total = 0x7f0a00a2;
+		public static final int mediacontroller_file_name = 0x7f0a00a7;
+		public static final int mediacontroller_play_pause = 0x7f0a00a3;
+		public static final int mediacontroller_seekbar = 0x7f0a00a6;
+		public static final int mediacontroller_time_current = 0x7f0a00a4;
+		public static final int mediacontroller_time_total = 0x7f0a00a5;
 	}
 	public static final class layout {
 		public static final int mediacontroller = 0x7f030027;

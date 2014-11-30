@@ -22,10 +22,8 @@ public class LoginAndRegister extends Activity {
 	private RelativeLayout registerlayout01;
 	private LinearLayout loginlayout01;
 	
-	private EditText username01, password01;
-	private EditText register_username01,register_password01;
-	private Button login01, register01;
-	private Button register_register01,register_return01;
+	private EditText username01, password01,register_username01,register_password01;
+	private Button login01, register01,register_register01,register_return01;
 	private ImageButton loginclearbutton,register_clearbutton01;
 	BmobUser user;
 	
@@ -39,7 +37,6 @@ public class LoginAndRegister extends Activity {
 		init();
 		
 	}
-
 	private void init() {
 		// TODO Auto-generated method stub
 		login01 = (Button) this.findViewById(R.id.login01);
@@ -56,12 +53,8 @@ public class LoginAndRegister extends Activity {
 		register_clearbutton01=(ImageButton) this.findViewById(R.id.register_clearbutton01);
 		registerlayout01=(RelativeLayout) this.findViewById(R.id.registerlayout01);
 		loginlayout01=(LinearLayout) this.findViewById(R.id.loginlayout01);
-		
-		
-		
-		
-		
 		registerlayout01.setVisibility(View.INVISIBLE);
+	
 		username01.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -135,7 +128,7 @@ public class LoginAndRegister extends Activity {
 			}
 		});
 		
-		
+		//µÇÂ½°´Å¥
 		login01.setOnClickListener(new View.OnClickListener() {
 
 			@Override
