@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		middlelayout1 = (RelativeLayout) this.findViewById(R.id.middlelayout1);
 		middlelayout2 = (RelativeLayout) this.findViewById(R.id.middlelayout2);
 		middlelayout3 = (RelativeLayout) this.findViewById(R.id.middlelayout3);
-		button1 = (Button) this.findViewById(R.id.button1);
+		button1 = (Button) this.findViewById(R.id.button1);button1.setSelected(true);
 		button2 = (Button) this.findViewById(R.id.button2);
 		button3 = (Button) this.findViewById(R.id.button3);
 		listView01 = (ListView) this.findViewById(R.id.listView01);
@@ -100,12 +100,14 @@ public class MainActivity extends Activity implements OnClickListener {
 				middlelayout1.setVisibility(View.VISIBLE);
 				middlelayout2.setVisibility(View.INVISIBLE);
 				middlelayout3.setVisibility(View.INVISIBLE);
-				//button1.setPressed(true);
+				button1.setSelected(true);
+				button2.setSelected(false);
+				button3.setSelected(false);
+				
 
 			}
 		});
 		button2.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -115,6 +117,10 @@ public class MainActivity extends Activity implements OnClickListener {
 				middlelayout1.setVisibility(View.INVISIBLE);
 				middlelayout2.setVisibility(View.VISIBLE);
 				middlelayout3.setVisibility(View.INVISIBLE);
+				
+				button1.setSelected(false);
+				button2.setSelected(true);
+				button3.setSelected(false);
 			}
 		});
 		button3.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +135,9 @@ public class MainActivity extends Activity implements OnClickListener {
 				middlelayout2.setVisibility(View.INVISIBLE);
 				middlelayout3.setVisibility(View.VISIBLE);
 
+				button1.setSelected(false);
+				button2.setSelected(false);
+				button3.setSelected(true);
 			}
 		});
 
