@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
     tools:context="${relativePackage}.${activityClass}" >
 
     <!-- 1.顶部标题=====顶部标题 =====顶部标题 =====顶部标题 -->
@@ -58,18 +59,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:gravity="center_vertical"
         android:background="@drawable/title_bg"
+        android:gravity="center_vertical"
         android:visibility="gone" >
 
         <Button
             android:id="@+id/fabiaoshuoshuo"
-            android:background="#00000000"
-            android:drawableLeft="@drawable/bottombutton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:background="#00000000"
+            android:drawableLeft="@drawable/bottombutton1"
             android:text="" />
 
         <TextView
@@ -90,7 +91,6 @@
         android:layout_above="@+id/bottomlayout"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/titlelayout01"
-        android:background="@drawable/login_bg"
         android:visibility="visible" >
 
         <ListView
@@ -98,39 +98,54 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            >
+            android:layout_alignParentTop="true" >
         </ListView>
-        
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/middlelayout2"
-        android:background="@drawable/login_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomlayout"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/titlelayout02"
+        android:background="@drawable/login_bg"
         android:visibility="gone" >
 
-        <Button
-            android:id="@+id/button025"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="2" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000" >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@drawable/divider"
+                android:dividerHeight="1.0px"
+                android:drawSelectorOnTop="false"
+                android:fadingEdge="none"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" />
+
+            <Button
+                android:id="@+id/repeatScanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="重新扫描" />
+        </FrameLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/middlelayout3"
-        android:background="@drawable/login_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomlayout"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/titlelayout03"
+        android:background="@drawable/login_bg"
         android:visibility="gone" >
 
         <Button
@@ -150,55 +165,48 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-       android:background="@drawable/title_bg"
-       android:gravity="center_vertical"
+        android:background="@drawable/title_bg"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/button1"
-           	android:background="#00000000"
-           	
-         	android:drawableTop="@drawable/bottombutton1"
-         	android:drawablePadding="4dp"
-         	android:paddingTop="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-           
+            android:background="#00000000"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/bottombutton1"
+            android:paddingTop="7dp"
             android:text="主页"
-            android:textSize="13sp"
-            android:textColor="@drawable/bottombuttoncolor" />
+            android:textColor="@drawable/bottombuttoncolor"
+            android:textSize="13sp" />
 
-      <Button
+        <Button
             android:id="@+id/button2"
-           	android:background="#00000000"
-           	
-         	android:drawableTop="@drawable/bottombutton2"
-         	android:drawablePadding="4dp"
-         	android:paddingTop="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-           
+            android:background="#00000000"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/bottombutton2"
+            android:paddingTop="7dp"
             android:text="本地视频"
-            android:textSize="13sp"
-            android:textColor="@drawable/bottombuttoncolor" />
+            android:textColor="@drawable/bottombuttoncolor"
+            android:textSize="13sp" />
 
-       <Button
+        <Button
             android:id="@+id/button3"
-           	android:background="#00000000"
-           	
-         	android:drawableTop="@drawable/bottombutton3"
-         	android:drawablePadding="2dp"
-         	android:paddingTop="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-           
+            android:background="#00000000"
+            android:drawablePadding="2dp"
+            android:drawableTop="@drawable/bottombutton3"
+            android:paddingTop="7dp"
             android:text="动态"
-            android:textSize="13sp"
-            android:textColor="@drawable/bottombuttoncolor" />
-    
+            android:textColor="@drawable/bottombuttoncolor"
+            android:textSize="13sp" />
     </LinearLayout>
     <!-- 2.底部导航==== 底部导航=====底部导航 -->
 

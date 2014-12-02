@@ -1,7 +1,8 @@
 package com.study.main;
 
+import java.io.File;
+import java.util.ArrayList;
 import cn.bmob.v3.BmobUser;
-
 import com.study.main.ResideMenu.ResideMenu;
 import com.study.main.ResideMenu.ResideMenuInfo;
 import com.study.main.ResideMenu.ResideMenuItem;
@@ -13,19 +14,26 @@ import com.study.main.ui.Simple.laoluoActivity;
 import com.study.main.ui.Simple.mainActivity01;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.UserInfo;
-import com.study.main.ui.media.LocalList;
-import com.study.main.ui.media.uploadfile;
-
+import com.study.main.ui.media.ArrayAdapter;
+import com.study.main.ui.media.FileUtils;
+import com.study.main.ui.media.localVideoView;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -33,7 +41,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, OnItemClickListener {
 	private RelativeLayout titlelayout01, titlelayout02, titlelayout03,
 			middlelayout1, middlelayout2, middlelayout3;
 	private ListView listView01;
@@ -57,6 +65,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	private long mExitTime;
 	private TextView shezhi;
 
+	
+	
+	 private FileAdapter mAdapter;
+	 private ListView listView;
+	 private Button repeatScanner;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +80,29 @@ public class MainActivity extends Activity implements OnClickListener {
 		setUpMenu();
 		setListener();
 		init();
+		init2();
+	}
 
+	private void init2() {
+		// TODO Auto-generated method stub
+		   mAdapter = new FileAdapter(this, null);
+	       listView = (ListView)this.findViewById(android.R.id.list);
+	       repeatScanner=(Button) this.findViewById(R.id.repeatScanner);
+	       listView.setAdapter(mAdapter);
+	       listView.setOnItemClickListener(this);
+	       new ScanVideoTask().execute();
+	       repeatScanner.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mAdapter.clear();
+			    new ScanVideoTask().execute();
+			    
+			}
+		});
+	      
+	      
 	}
 
 	private void init() {
@@ -267,8 +303,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		} else if (view == menu_item03) {
 			Intent intent = new Intent();
 			// intent.putExtra("flog", "装扮");
-			intent.setClass(getApplicationContext(), LocalList.class);
-			startActivity(intent);
+			//intent.setClass(getApplicationContext(), LocalList.class);
+			//startActivity(intent);
 		} else if (view == menu_item04) {
 			Intent intent = new Intent();
 			// intent.putExtra("flog", "收藏");
@@ -373,5 +409,76 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
+	
+	
+	
+	
+	
+	//1.listView点击事件
+    @Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+    	 final File f = mAdapter.getItem(position);
+    	
+ 			 Intent intent = new Intent(MainActivity.this, localVideoView.class);
+ 	         intent.putExtra("path", f.getPath());
+ 	         startActivity(intent);
+ 	    	
+
+	}
+    /** 2.扫描SD卡 */
+    private class ScanVideoTask extends AsyncTask<Void, File, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+        	//判断SD卡是否存在
+            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+
+          eachAllMedias(Environment.getExternalStorageDirectory());
+           
+        }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(File... values) {
+            mAdapter.add(values[0]);
+            mAdapter.notifyDataSetChanged();
+        }
+
+        /** 遍历所有文件夹，查找出视频文件 */
+        public void eachAllMedias(File f) {
+            if (f != null && f.exists() && f.isDirectory()) {
+                File[] files = f.listFiles();
+                if (files != null) {
+                    for (File file : f.listFiles()) {
+                        if (file.isDirectory()) {
+                            eachAllMedias(file);
+                        } else if (file.exists() && file.canRead() && FileUtils.isVideoOrAudio(file)) {
+                            publishProgress(file);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //3.listView适配器
+    public class FileAdapter extends ArrayAdapter<File> {
+
+        public FileAdapter(Context ctx, ArrayList<File> l) {
+            super(ctx, l);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final File f = getItem(position);
+            if (convertView == null) {
+                final LayoutInflater mInflater =getLayoutInflater();
+                convertView = mInflater.inflate(R.layout.fragment_file_item, null);
+            }
+            ((TextView) convertView.findViewById(R.id.title)).setText(f.getName());
+            return convertView;
+        }
+    }
 
 }

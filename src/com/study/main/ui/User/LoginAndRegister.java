@@ -19,8 +19,8 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
 public class LoginAndRegister extends Activity {
-	private RelativeLayout registerlayout01;
-	private LinearLayout loginlayout01;
+
+	private LinearLayout loginlayout01,registerlayout01;
 	
 	private EditText username01, password01,register_username01,register_password01;
 	private Button  register01,register_register01,register_return01;
@@ -49,7 +49,7 @@ public class LoginAndRegister extends Activity {
 		register_password01 = (EditText) this.findViewById(R.id.register_password01);
 		loginclearbutton=(ImageButton) this.findViewById(R.id.loginclearbutton);
 		register_clearbutton01=(ImageButton) this.findViewById(R.id.register_clearbutton01);
-		registerlayout01=(RelativeLayout) this.findViewById(R.id.registerlayout01);
+		registerlayout01=(LinearLayout) this.findViewById(R.id.registerlayout01);
 		loginlayout01=(LinearLayout) this.findViewById(R.id.loginlayout01);
 
 	

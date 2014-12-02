@@ -3,6 +3,7 @@ package com.study.main.ui.media;
 import java.io.File;
 import java.util.List;
 
+import com.study.main.MainActivity;
 import com.study.main.R;
 import com.study.main.Entity.UserMovie;
 
@@ -69,7 +70,7 @@ public class uploadfile extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent1 = new Intent(uploadfile.this,
-						LocalList.class);
+						MainActivity.class);
 				startActivity(intent1);
 			}
 		});

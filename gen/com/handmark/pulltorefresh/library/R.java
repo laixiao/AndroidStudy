@@ -50,10 +50,10 @@ public final class R {
 	}
 	public static final class id {
 		public static final int both = 0x7f0a000c;
-		public static final int column1 = 0x7f0a00da;
-		public static final int column2 = 0x7f0a00db;
+		public static final int column1 = 0x7f0a00d9;
+		public static final int column2 = 0x7f0a00da;
 		public static final int disabled = 0x7f0a000d;
-		public static final int fl_inner = 0x7f0a00ab;
+		public static final int fl_inner = 0x7f0a00aa;
 		public static final int flip = 0x7f0a0013;
 		public static final int gridview = 0x7f0a0000;
 		public static final int manualOnly = 0x7f0a000e;
@@ -61,18 +61,18 @@ public final class R {
 		public static final int pullFromEnd = 0x7f0a0010;
 		public static final int pullFromStart = 0x7f0a0011;
 		public static final int pullUpFromBottom = 0x7f0a0012;
-		public static final int pull_to_refresh_image = 0x7f0a00ac;
-		public static final int pull_to_refresh_progress = 0x7f0a00ad;
-		public static final int pull_to_refresh_sub_text = 0x7f0a00af;
-		public static final int pull_to_refresh_text = 0x7f0a00ae;
+		public static final int pull_to_refresh_image = 0x7f0a00ab;
+		public static final int pull_to_refresh_progress = 0x7f0a00ac;
+		public static final int pull_to_refresh_sub_text = 0x7f0a00ae;
+		public static final int pull_to_refresh_text = 0x7f0a00ad;
 		public static final int rotate = 0x7f0a0014;
 		public static final int scrollview = 0x7f0a0002;
 		public static final int webview = 0x7f0a0001;
 	}
 	public static final class layout {
-		public static final int pull_to_refresh_header_horizontal = 0x7f030028;
-		public static final int pull_to_refresh_header_vertical = 0x7f030029;
-		public static final int water_fall_view_inner = 0x7f030035;
+		public static final int pull_to_refresh_header_horizontal = 0x7f030027;
+		public static final int pull_to_refresh_header_vertical = 0x7f030028;
+		public static final int water_fall_view_inner = 0x7f030034;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f070010;
