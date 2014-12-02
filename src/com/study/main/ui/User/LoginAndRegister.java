@@ -23,8 +23,8 @@ public class LoginAndRegister extends Activity {
 	private LinearLayout loginlayout01;
 	
 	private EditText username01, password01,register_username01,register_password01;
-	private Button login01, register01,register_register01,register_return01;
-	private ImageButton loginclearbutton,register_clearbutton01;
+	private Button  register01,register_register01,register_return01;
+	private ImageButton login01,loginclearbutton,register_clearbutton01;
 	BmobUser user;
 	
 	@Override
@@ -39,21 +39,19 @@ public class LoginAndRegister extends Activity {
 	}
 	private void init() {
 		// TODO Auto-generated method stub
-		login01 = (Button) this.findViewById(R.id.login01);
+		login01 = (ImageButton) this.findViewById(R.id.login01);
 		register01 = (Button) this.findViewById(R.id.register01);
 		register_register01 = (Button) this.findViewById(R.id.register_register01);
 		register_return01 = (Button) this.findViewById(R.id.register_return01);
-		
 		username01 = (EditText) this.findViewById(R.id.username01);
 		password01 = (EditText) this.findViewById(R.id.password01);
 		register_username01 = (EditText) this.findViewById(R.id.register_username01);
 		register_password01 = (EditText) this.findViewById(R.id.register_password01);
-		
 		loginclearbutton=(ImageButton) this.findViewById(R.id.loginclearbutton);
 		register_clearbutton01=(ImageButton) this.findViewById(R.id.register_clearbutton01);
 		registerlayout01=(RelativeLayout) this.findViewById(R.id.registerlayout01);
 		loginlayout01=(LinearLayout) this.findViewById(R.id.loginlayout01);
-		registerlayout01.setVisibility(View.INVISIBLE);
+
 	
 		username01.addTextChangedListener(new TextWatcher() {
 			
@@ -167,7 +165,7 @@ public class LoginAndRegister extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				loginlayout01.setVisibility(View.INVISIBLE);
+				loginlayout01.setVisibility(View.GONE);
 				registerlayout01.setVisibility(View.VISIBLE);
 			}
 		});
@@ -217,7 +215,7 @@ public class LoginAndRegister extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				loginlayout01.setVisibility(View.VISIBLE);
-				registerlayout01.setVisibility(View.INVISIBLE);
+				registerlayout01.setVisibility(View.GONE);
 			}
 		});
 		
