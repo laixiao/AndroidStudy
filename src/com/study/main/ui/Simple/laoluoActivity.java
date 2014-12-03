@@ -244,7 +244,7 @@ public class laoluoActivity extends Activity {
 			title.setText(entity.getName());
 			
 			ImageView image = (ImageView) view.findViewById(R.id.tubiao);
-			System.out.println("isExpanded----->" + isExpanded);
+			//System.out.println("isExpanded----->" + isExpanded);
 			if (isExpanded) {
 				image.setBackgroundResource(R.drawable.btn_browser2);
 			} else {
