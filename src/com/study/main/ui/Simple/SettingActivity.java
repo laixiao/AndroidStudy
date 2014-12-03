@@ -15,14 +15,13 @@ public class SettingActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.settingactivity);
+		setContentView(R.layout.user_info);
 
-		TextView text = (TextView) findViewById(R.id.textView);
-
-		Intent receive = getIntent();
-		String flog = receive.getStringExtra("flog");
-
-		text.setText(flog);
+//		TextView text = (TextView) findViewById(R.id.textView);
+//		Intent receive = getIntent();
+//		String flog = receive.getStringExtra("flog");
+//
+//		text.setText(flog);
 
 	}
 }

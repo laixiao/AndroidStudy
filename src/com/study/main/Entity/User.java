@@ -6,7 +6,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
 public class User extends BmobUser{
-	private String sex;
+	private boolean sex;
 
 	private String phonenumber;
 	private String nickname;
@@ -31,6 +31,12 @@ public class User extends BmobUser{
 	
 	
 
+	public boolean isSex() {
+		return sex;
+	}
+	public void setSex(boolean sex) {
+		this.sex = sex;
+	}
 	@Override
 	public String toString() {
 		return "User [phonenumber=" + phonenumber + ", nickname=" + nickname
@@ -67,13 +73,9 @@ public class User extends BmobUser{
 		this.favourcount = favourcount;
 	}
 
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+	
 
+	
 	public String getPhonenumber() {
 		return phonenumber;
 	}

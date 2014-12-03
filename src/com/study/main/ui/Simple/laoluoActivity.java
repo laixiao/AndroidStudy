@@ -171,23 +171,23 @@ public class laoluoActivity extends Activity {
 			final laoluo_child entity=(laoluo_child) getChild(groupPosition, childPosition);
 			
 			ImageView child_image=(ImageView) view.findViewById(R.id.child_image);
-			if(entity.getIco().getFileUrl()!=null){
-			ImageLoader.getInstance().displayImage(
-					entity.getIco().getFileUrl(),
-					child_image,
-					MyApplication.getInstance().getOptions(
-							R.drawable.child01),
-					new SimpleImageLoadingListener() {
-
-						@Override
-						public void onLoadingComplete(String imageUri, View view,
-								Bitmap loadedImage) {
-							// TODO Auto-generated method stub
-							super.onLoadingComplete(imageUri, view, loadedImage);
-						}
-
-					});
-			}
+//			if(entity.getIco().getFileUrl()!=null){
+//			ImageLoader.getInstance().displayImage(
+//					entity.getIco().getFileUrl(),
+//					child_image,
+//					MyApplication.getInstance().getOptions(
+//							R.drawable.child01),
+//					new SimpleImageLoadingListener() {
+//
+//						@Override
+//						public void onLoadingComplete(String imageUri, View view,
+//								Bitmap loadedImage) {
+//							// TODO Auto-generated method stub
+//							super.onLoadingComplete(imageUri, view, loadedImage);
+//						}
+//
+//					});
+//			}
 			child_image.setOnClickListener(new OnClickListener() {
 				
 				@Override
