@@ -8,17 +8,11 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class laoluo_parent extends BmobObject{
 
-	private BmobFile ico;
+	
 	private String  name;
 	private String count;
 	private BmobRelation child;
 	
-	public BmobFile getIco() {
-		return ico;
-	}
-	public void setIco(BmobFile ico) {
-		this.ico = ico;
-	}
 	public String getName() {
 		return name;
 	}

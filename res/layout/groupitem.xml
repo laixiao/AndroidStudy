@@ -11,6 +11,8 @@
         android:layout_height="wrap_content" >
 
         <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/ImageView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,8 +37,8 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="title"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textColor="#000000"
+            android:textSize="16sp" />
 
     </RelativeLayout>
     <!-- </LinearLayout> -->

@@ -5,7 +5,6 @@ import cn.bmob.v3.datatype.BmobFile;
 
 public class laoluo_child extends BmobObject{
 
-	private BmobFile ico;
 	private String name;
 	private String content;
 	private String url;
@@ -23,12 +22,7 @@ public class laoluo_child extends BmobObject{
 	public void setParent(laoluo_parent parent) {
 		this.parent = parent;
 	}
-	public BmobFile getIco() {
-		return ico;
-	}
-	public void setIco(BmobFile ico) {
-		this.ico = ico;
-	}
+
 	public String getName() {
 		return name;
 	}
