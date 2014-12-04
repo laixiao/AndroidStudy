@@ -73,7 +73,7 @@ public class laoluoActivity extends Activity {
 	private void initData() {
 		
 		BmobQuery<laoluo_parent> query0=new BmobQuery<laoluo_parent>();
-		query0.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+		query0.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 		query0.setLimit(99);
 		query0.findObjects(laoluoActivity.this, new FindListener<laoluo_parent>() {
 			
@@ -88,12 +88,12 @@ public class laoluoActivity extends Activity {
 				final List<laoluo_child> children1 = new ArrayList<laoluo_child>();
 				BmobQuery<laoluo_child> query1=new BmobQuery<laoluo_child>();
 				query1.addWhereEqualTo("parent", "L5Xp1116");
-				query1.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+				query1.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 				query1.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {
 					
 					public void onSuccess(List<laoluo_child> arg1) {
 						// TODO Auto-generated method stub
-						Toast.makeText(laoluoActivity.this, "子1查询成功", Toast.LENGTH_LONG).show();
+						
 						children1.addAll(arg1);
 						childData.add(children1);
 						//expandableAdapter.notifyDataSetChanged();
@@ -102,7 +102,7 @@ public class laoluoActivity extends Activity {
 						final List<laoluo_child> children2 = new ArrayList<laoluo_child>();
 						BmobQuery<laoluo_child> query2=new BmobQuery<laoluo_child>();
 						query2.addWhereEqualTo("parent", "kmgL555P");
-						query2.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+						query2.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 						query2.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 							public void onSuccess(List<laoluo_child> arg2) {
 								// TODO Auto-generated method stub
@@ -114,7 +114,7 @@ public class laoluoActivity extends Activity {
 								final List<laoluo_child> children3 = new ArrayList<laoluo_child>();
 								BmobQuery<laoluo_child> query3=new BmobQuery<laoluo_child>();
 								query3.addWhereEqualTo("parent", "18AL333G");
-								query3.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+								query3.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 								query3.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 									public void onSuccess(List<laoluo_child> arg3) {
 										// TODO Auto-generated method stub
@@ -125,7 +125,7 @@ public class laoluoActivity extends Activity {
 										final List<laoluo_child> children4 = new ArrayList<laoluo_child>();
 										BmobQuery<laoluo_child> query4=new BmobQuery<laoluo_child>();
 										query4.addWhereEqualTo("parent", "S4LpVVV1");
-										query4.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+										query4.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 										query4.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 											public void onSuccess(List<laoluo_child> arg4) {
 												// TODO Auto-generated method stub
@@ -136,7 +136,7 @@ public class laoluoActivity extends Activity {
 												final List<laoluo_child> children5 = new ArrayList<laoluo_child>();
 												BmobQuery<laoluo_child> query5=new BmobQuery<laoluo_child>();
 												query5.addWhereEqualTo("parent", "4ZfQ888D");
-												query5.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+												query5.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 												query5.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 													public void onSuccess(List<laoluo_child> arg5) {
 														// TODO Auto-generated method stub
@@ -147,7 +147,7 @@ public class laoluoActivity extends Activity {
 														final List<laoluo_child> children6 = new ArrayList<laoluo_child>();
 														BmobQuery<laoluo_child> query6=new BmobQuery<laoluo_child>();
 														query6.addWhereEqualTo("parent", "6yAOCCCT");
-														query6.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+														query6.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 														query6.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 															public void onSuccess(List<laoluo_child> arg6) {
 																// TODO Auto-generated method stub
@@ -158,7 +158,7 @@ public class laoluoActivity extends Activity {
 																final List<laoluo_child> children7 = new ArrayList<laoluo_child>();
 																BmobQuery<laoluo_child> query7=new BmobQuery<laoluo_child>();
 																query7.addWhereEqualTo("parent", "zh7K666J");
-																query7.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																query7.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																query7.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																	public void onSuccess(List<laoluo_child> arg7) {
 																		// TODO Auto-generated method stub
@@ -169,7 +169,7 @@ public class laoluoActivity extends Activity {
 																		final List<laoluo_child> children8 = new ArrayList<laoluo_child>();
 																		BmobQuery<laoluo_child> query8=new BmobQuery<laoluo_child>();
 																		query8.addWhereEqualTo("parent", "ZdUkCCCd");
-																		query8.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																		query8.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																		query8.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																			public void onSuccess(List<laoluo_child> arg8) {
 																				// TODO Auto-generated method stub
@@ -180,7 +180,7 @@ public class laoluoActivity extends Activity {
 																				final List<laoluo_child> children9 = new ArrayList<laoluo_child>();
 																				BmobQuery<laoluo_child> query9=new BmobQuery<laoluo_child>();
 																				query9.addWhereEqualTo("parent", "qGWZlll6");
-																				query9.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																				query9.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																				query9.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																					public void onSuccess(List<laoluo_child> arg9) {
 																						// TODO Auto-generated method stub
@@ -191,7 +191,7 @@ public class laoluoActivity extends Activity {
 																						final List<laoluo_child> children10 = new ArrayList<laoluo_child>();
 																						BmobQuery<laoluo_child> query10=new BmobQuery<laoluo_child>();
 																						query10.addWhereEqualTo("parent", "nKrOxxxL");
-																						query10.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																						query10.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																						query10.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																							public void onSuccess(List<laoluo_child> arg10) {
 																								// TODO Auto-generated method stub
@@ -202,7 +202,7 @@ public class laoluoActivity extends Activity {
 																								final List<laoluo_child> children11 = new ArrayList<laoluo_child>();
 																								BmobQuery<laoluo_child> query11=new BmobQuery<laoluo_child>();
 																								query11.addWhereEqualTo("parent", "nwJ1000B");
-																								query11.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																								query11.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																								query11.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																									public void onSuccess(List<laoluo_child> arg11) {
 																										// TODO Auto-generated method stub
@@ -213,7 +213,7 @@ public class laoluoActivity extends Activity {
 																										final List<laoluo_child> children12 = new ArrayList<laoluo_child>();
 																										BmobQuery<laoluo_child> query12=new BmobQuery<laoluo_child>();
 																										query12.addWhereEqualTo("parent", "KkqI2225");
-																										query12.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																										query12.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																										query12.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																											public void onSuccess(List<laoluo_child> arg12) {
 																												// TODO Auto-generated method stub
@@ -224,7 +224,7 @@ public class laoluoActivity extends Activity {
 																												final List<laoluo_child> children13 = new ArrayList<laoluo_child>();
 																												BmobQuery<laoluo_child> query13=new BmobQuery<laoluo_child>();
 																												query13.addWhereEqualTo("parent", "mRLP888b");
-																												query13.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																												query13.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																												query13.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																													public void onSuccess(List<laoluo_child> arg13) {
 																														// TODO Auto-generated method stub
@@ -235,7 +235,7 @@ public class laoluoActivity extends Activity {
 																														final List<laoluo_child> children14 = new ArrayList<laoluo_child>();
 																														BmobQuery<laoluo_child> query14=new BmobQuery<laoluo_child>();
 																														query14.addWhereEqualTo("parent", "bQ9K333O");
-																														query14.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																														query14.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																														query14.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																															public void onSuccess(List<laoluo_child> arg14) {
 																																// TODO Auto-generated method stub
@@ -246,7 +246,7 @@ public class laoluoActivity extends Activity {
 																																final List<laoluo_child> children15 = new ArrayList<laoluo_child>();
 																																BmobQuery<laoluo_child> query15=new BmobQuery<laoluo_child>();
 																																query15.addWhereEqualTo("parent", "otjHIHHI");
-																																query15.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																																query15.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																																query15.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																	public void onSuccess(List<laoluo_child> arg15) {
 																																		// TODO Auto-generated method stub
@@ -257,7 +257,7 @@ public class laoluoActivity extends Activity {
 																																		final List<laoluo_child> children16 = new ArrayList<laoluo_child>();
 																																		BmobQuery<laoluo_child> query16=new BmobQuery<laoluo_child>();
 																																		query16.addWhereEqualTo("parent", "4T3NV88V");
-																																		query16.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																																		query16.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																																		query16.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																			public void onSuccess(List<laoluo_child> arg16) {
 																																				// TODO Auto-generated method stub
@@ -268,7 +268,7 @@ public class laoluoActivity extends Activity {
 																																				final List<laoluo_child> children17 = new ArrayList<laoluo_child>();
 																																				BmobQuery<laoluo_child> query17=new BmobQuery<laoluo_child>();
 																																				query17.addWhereEqualTo("parent", "eg6cIFFI");
-																																				query17.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																																				query17.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																																				query17.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																					public void onSuccess(List<laoluo_child> arg17) {
 																																						// TODO Auto-generated method stub
@@ -279,10 +279,11 @@ public class laoluoActivity extends Activity {
 																																						final List<laoluo_child> children18 = new ArrayList<laoluo_child>();
 																																						BmobQuery<laoluo_child> query18=new BmobQuery<laoluo_child>();
 																																						query18.addWhereEqualTo("parent", "Ss632002");
-																																						query18.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+																																						query18.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
 																																						query18.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																							public void onSuccess(List<laoluo_child> arg18) {
 																																								// TODO Auto-generated method stub
+																																								Toast.makeText(laoluoActivity.this, "子数据加载成功", Toast.LENGTH_LONG).show();
 																																								children18.addAll(arg18);
 																																								childData.add(children18);
 																																								expandableAdapter.notifyDataSetChanged();
