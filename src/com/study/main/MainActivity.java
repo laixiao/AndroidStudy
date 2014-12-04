@@ -23,6 +23,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,10 +36,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,8 +76,18 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	
 	 private FileAdapter mAdapter;
 	 private ListView listView;
-	 private Button repeatScanner;
-		
+
+	private SwipeRefreshLayout swip;
+	Handler handler = new Handler(){  
+        @Override  
+        public void handleMessage(Message msg) {  
+            super.handleMessage(msg); 
+          //当更新完数据后，调用setRefreshing(false);来关闭刷新。
+            swip.setRefreshing(false);  
+        }  
+    };
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,20 +104,22 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		// TODO Auto-generated method stub
 		   mAdapter = new FileAdapter(this, null);
 	       listView = (ListView)this.findViewById(android.R.id.list);
-	       repeatScanner=(Button) this.findViewById(R.id.repeatScanner);
+	       swip=(SwipeRefreshLayout) this.findViewById(R.id.swip);
 	       listView.setAdapter(mAdapter);
 	       listView.setOnItemClickListener(this);
 	       new ScanVideoTask().execute();
-	       repeatScanner.setOnClickListener(new View.OnClickListener() {
+	       swip.setOnRefreshListener(new OnRefreshListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onRefresh() {
 				// TODO Auto-generated method stub
 				mAdapter.clear();
 			    new ScanVideoTask().execute();
-			    
+			    handler.sendEmptyMessageDelayed(1, 5000);  
+			   Toast.makeText(MainActivity.this, "正在刷新本地列表，请稍后...", Toast.LENGTH_LONG).show();
 			}
 		});
+	      
 	      
 	      
 	}

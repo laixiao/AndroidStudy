@@ -224,8 +224,7 @@ public class laoluoActivity extends Activity {
 				}
 			});
 			//title.setText(childData.get(groupPosition).get(childPosition).get("child_text1").toString());
-			final TextView title2 = (TextView) view.findViewById(R.id.child_text2);
-			title2.setText(entity.getContent());
+	
 			//title2.setText(childData.get(groupPosition).get(childPosition).get("child_text2").toString());
 			return view;//返回子布局
 		}

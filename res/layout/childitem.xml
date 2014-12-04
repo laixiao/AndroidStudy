@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/laoluo_itemico"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/video_file"
        >
     </ImageView>
 
@@ -28,17 +29,8 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:text="name"
-            android:textSize="16dip" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/child_text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:text="content"
-            android:textSize="12dip" >
+            android:layout_marginLeft="3dp"
+             >
         </TextView>
     </LinearLayout>
 
