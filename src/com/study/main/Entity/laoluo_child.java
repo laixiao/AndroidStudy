@@ -8,8 +8,15 @@ public class laoluo_child extends BmobObject{
 	private String name;
 	private String content;
 	private String url;
+	private String sortid;
 	private laoluo_parent parent;
 	
+	public String getSortid() {
+		return sortid;
+	}
+	public void setSortid(String sortid) {
+		this.sortid = sortid;
+	}
 	public String getUrl() {
 		return url;
 	}

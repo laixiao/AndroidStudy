@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
-         android:layout_centerInParent="true"
+        android:layout_centerInParent="true"
         android:orientation="horizontal" >
 
         <ProgressBar
@@ -85,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="#040fa0"
             android:text="" />
 
         <TextView
@@ -92,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="#040fa0"
             android:text="" />
     </LinearLayout>
     

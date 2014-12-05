@@ -11,7 +11,22 @@ public class laoluo_parent extends BmobObject{
 	
 	private String  name;
 	private String count;
+	private String sortid;
 	private BmobRelation child;
+	
+	public String getSortid() {
+		return sortid;
+	}
+	public void setSortid(String sortid) {
+		this.sortid = sortid;
+	}
+	public BmobRelation getChild() {
+		return child;
+	}
+	public void setChild(BmobRelation child) {
+		this.child = child;
+	}
+	
 	
 	public String getName() {
 		return name;
