@@ -845,6 +845,7 @@ int string exit 0x7f070029
 int string girl 0x7f07002c
 int string loadinfo 0x7f07002f
 int string login 0x7f070028
+int string login_alert_msg01 0x7f070043
 int string mediacontroller_play_pause 0x7f070010
 int string menu_item01 0x7f070036
 int string menu_item02 0x7f070037
@@ -858,6 +859,7 @@ int string permission_receive_messages_description 0x7f070009
 int string permission_receive_messages_label 0x7f070008
 int string permission_write_providers_description 0x7f07000b
 int string permission_write_providers_label 0x7f07000a
+int string please_check 0x7f070042
 int string pull_to_refresh_bottom_pull 0x7f070033
 int string pull_to_refresh_bottom_refreshing 0x7f070035
 int string pull_to_refresh_bottom_release 0x7f070034

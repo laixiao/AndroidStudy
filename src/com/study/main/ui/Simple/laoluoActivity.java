@@ -51,7 +51,7 @@ public class laoluoActivity extends Activity {
 	private ExpandableListView expandableListView1;
 	ExpandableAdapter expandableAdapter;
 	private DownloadManager downloadManager;
-	private Button laoluo_back;  
+	private ImageView laoluo_back;  
 	private SwipeRefreshLayout laoluo_swip;
 	BmobQuery.CachePolicy cachePolicy;
 	Handler handler = new Handler(){
@@ -73,7 +73,7 @@ public class laoluoActivity extends Activity {
 	private void init() {
 		// TODO Auto-generated method stub
 		expandableListView1 = (ExpandableListView) this.findViewById(R.id.expandableListView1);
-		laoluo_back=(Button) this.findViewById(R.id.laoluo_back);
+		laoluo_back=(ImageView) this.findViewById(R.id.laoluo_back);
 		laoluo_swip=(SwipeRefreshLayout) this.findViewById(R.id.laoluo_swip);
 		View v=new View(this);
 		expandableListView1.addHeaderView(v);

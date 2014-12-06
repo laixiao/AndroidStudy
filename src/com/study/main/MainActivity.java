@@ -251,8 +251,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		menu_item03 = new ResideMenuItem(this, R.drawable.residebutton3,R.string.menu_item03);
 		menu_item04 = new ResideMenuItem(this, R.drawable.residebutton4,R.string.menu_item04);
 		menu_item05 = new ResideMenuItem(this, R.drawable.residebutton2,R.string.menu_item05);
-		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4,
-		// "子菜单1");
+		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4, "子菜单1");
 
 		info = new ResideMenuInfo(this, R.drawable.icon_profile, "name", "money");
 		setting = new ResideMenuSetting(this, "setting", "");

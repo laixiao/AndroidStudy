@@ -116,7 +116,6 @@ public class UserInfo extends Activity {
 			startActivity(intent);
 			finish();
 		}
-
 	}
 
 	// 鍒濆鍖栭〉闈㈠唴瀹�
@@ -125,27 +124,23 @@ public class UserInfo extends Activity {
 		BmobQuery<User> userQuery = new BmobQuery<User>();
 		userQuery.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		// userQuery.setMaxCacheAge(100000L);
-		userQuery.getObject(UserInfo.this,currentUser.getObjectId(), new GetListener<User>() {
-			
-			public void onSuccess(User arg0) {
+		userQuery.getObject(UserInfo.this,currentUser.getObjectId(), new GetListener<User>() {			
+			public void onSuccess(User arg0) {	
 				
-					
+				if(arg0.getAvatar()!=null){
 					ImageLoader.getInstance().displayImage(
 							arg0.getAvatar().getFileUrl(),
 							personico,
-							MyApplication.getInstance().getOptions(
-									R.drawable.icon_profile),
+							MyApplication.getInstance().getOptions(R.drawable.icon_profile),
 							new SimpleImageLoadingListener() {
-
 								@Override
 								public void onLoadingComplete(String imageUri, View view,
 										Bitmap loadedImage) {
 									// TODO Auto-generated method stub
 									super.onLoadingComplete(imageUri, view, loadedImage);
 								}
-
 							});
-					
+				}
 					isSex = arg0.isSex();
 					if (isSex) {
 						user_infosex.setImageResource(R.drawable.user_infosex2);

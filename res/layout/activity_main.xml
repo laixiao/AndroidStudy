@@ -196,7 +196,7 @@
             android:drawablePadding="2dp"
             android:drawableTop="@drawable/bottombutton3"
             android:paddingTop="7dp"
-            android:text="动态"
+            android:text="辅助开发"
             android:textColor="@drawable/bottombuttoncolor"
             android:textSize="13sp" />
     </LinearLayout>

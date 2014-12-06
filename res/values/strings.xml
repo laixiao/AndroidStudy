@@ -20,17 +20,20 @@
     <string name="pull_to_refresh_bottom_release">正在加载更多..</string>
     <string name="pull_to_refresh_bottom_refreshing">正在获取..</string>
 
-    <string name="menu_item01">老罗系列</string>
-  <string name="menu_item02">黑马系列</string>
-  <string name="menu_item03">..系列</string>
-  <string name="menu_item04">..系列</string>
-  <string name="menu_item05">辅助开发</string>
+    <string name="menu_item01">老 罗系列</string>
+  <string name="menu_item02">张泽华系列</string>
+  <string name="menu_item03">黑马JavaWeb</string>
+  <string name="menu_item04">黑马Android</string>
+  <string name="menu_item05">黑马就业课程</string>
   
-   <string name="download_label">Download Address</string>
-    <string name="download">Download</string>
-    <string name="stop">Stop</string>
-    <string name="resume">Resume</string>
-    <string name="retry">Retry</string>
-    <string name="remove">Stop</string>
-    <string name="test">Test</string>
+   <string name="download_label">下载地址</string>
+    <string name="download">下载</string>
+    <string name="stop">暂停</string>
+    <string name="resume">继续</string>
+    <string name="retry">重新下在</string>
+    <string name="remove">移除</string>
+    <string name="test">测试</string>
+    
+    <string name="please_check">请检查</string>
+    <string name="login_alert_msg01">账号长度：5至20\n密码长度：5至20\n两次输出的密码必须相同</string>
 </resources>

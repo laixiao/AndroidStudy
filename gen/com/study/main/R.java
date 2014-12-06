@@ -2368,6 +2368,7 @@ containing a value of this type.
         public static final int girl=0x7f07002c;
         public static final int loadinfo=0x7f07002f;
         public static final int login=0x7f070028;
+        public static final int login_alert_msg01=0x7f070043;
         public static final int mediacontroller_play_pause=0x7f070010;
         public static final int menu_item01=0x7f070036;
         public static final int menu_item02=0x7f070037;
@@ -2381,6 +2382,7 @@ containing a value of this type.
         public static final int permission_receive_messages_label=0x7f070008;
         public static final int permission_write_providers_description=0x7f07000b;
         public static final int permission_write_providers_label=0x7f07000a;
+        public static final int please_check=0x7f070042;
         public static final int pull_to_refresh_bottom_pull=0x7f070033;
         public static final int pull_to_refresh_bottom_refreshing=0x7f070035;
         public static final int pull_to_refresh_bottom_release=0x7f070034;
