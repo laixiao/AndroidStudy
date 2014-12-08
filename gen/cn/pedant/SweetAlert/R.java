@@ -50,25 +50,25 @@ public final class R {
 		public static final int warning_sigh = 0x7f0200af;
 	}
 	public static final class id {
-		public static final int cancel_button = 0x7f0a0075;
-		public static final int confirm_button = 0x7f0a0076;
-		public static final int content_text = 0x7f0a0065;
-		public static final int custom_image = 0x7f0a006c;
-		public static final int error_frame = 0x7f0a006d;
-		public static final int error_x = 0x7f0a006e;
-		public static final int loading = 0x7f0a006b;
-		public static final int mask_left = 0x7f0a0071;
-		public static final int mask_right = 0x7f0a0070;
-		public static final int success_frame = 0x7f0a006f;
-		public static final int success_tick = 0x7f0a0072;
-		public static final int title_text = 0x7f0a0074;
-		public static final int warning_frame = 0x7f0a0073;
+		public static final int cancel_button = 0x7f0a006d;
+		public static final int confirm_button = 0x7f0a006e;
+		public static final int content_text = 0x7f0a006c;
+		public static final int custom_image = 0x7f0a0063;
+		public static final int error_frame = 0x7f0a0064;
+		public static final int error_x = 0x7f0a0065;
+		public static final int loading = 0x7f0a0062;
+		public static final int mask_left = 0x7f0a0068;
+		public static final int mask_right = 0x7f0a0067;
+		public static final int success_frame = 0x7f0a0066;
+		public static final int success_tick = 0x7f0a0069;
+		public static final int title_text = 0x7f0a006b;
+		public static final int warning_frame = 0x7f0a006a;
 		public static final int x = 0x7f0a000c;
 		public static final int y = 0x7f0a000d;
 		public static final int z = 0x7f0a000e;
 	}
 	public static final class layout {
-		public static final int alert_dialog = 0x7f030019;
+		public static final int alert_dialog = 0x7f030018;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f070000;

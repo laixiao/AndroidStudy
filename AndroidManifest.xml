@@ -49,6 +49,8 @@
         
         <activity android:name="com.study.main.ui.User.LoginAndRegister"></activity>
         <activity android:name="com.study.main.ui.User.UserInfo"></activity>
+         <activity android:name="com.study.main.ui.User.otherInfo"></activity>
+          <activity android:name="com.study.main.ui.User.commentActivity"></activity>
         <activity android:name="com.study.main.ui.media.LocalList" >
         </activity>
         <activity android:name="com.study.main.ui.media.localVideoView"
@@ -66,6 +68,7 @@
         </activity>
         <activity android:name="com.study.main.ui.Simple.DownloadListActivity"></activity>
         <activity android:name="com.study.main.test.test1"></activity>
+        
     </application>
 
 </manifest>

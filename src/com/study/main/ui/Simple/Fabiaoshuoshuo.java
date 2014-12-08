@@ -8,6 +8,7 @@ import java.util.Date;
 
 import com.study.main.R;
 import com.study.main.Entity.QiangYu;
+import com.study.main.Entity.User;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.utils.CacheUtils;
 
@@ -153,7 +154,7 @@ public class Fabiaoshuoshuo extends Activity {
 	}
 
 	private void publishWithoutFigure(final String commitContent,final BmobFile figureFile) {
-		BmobUser user = BmobUser.getCurrentUser(this);
+		User user = (User) BmobUser.getCurrentUser(this);
 		if(user != null){
 		    // 允许用户使用应用
 		

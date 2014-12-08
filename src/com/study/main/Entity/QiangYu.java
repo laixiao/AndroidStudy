@@ -3,7 +3,6 @@ package com.study.main.Entity;
 import java.io.Serializable;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
@@ -14,9 +13,8 @@ public class QiangYu extends BmobObject implements Serializable{
 	 * 2014/4/27
 	 */
 	private static final long serialVersionUID = -6280656428527540320L;
-	//1.×÷Õß
-	private BmobUser author;
-
+	
+	private User author;
 	private String content;
 	private BmobFile Contentfigureurl;
 	private int love;
@@ -26,28 +24,20 @@ public class QiangYu extends BmobObject implements Serializable{
 	private boolean isPass;
 	private boolean myFav;//ÊÕ²Ø
 	private boolean myLove;//ÔÞ
-	
 	private BmobRelation relation;
 
-	
-	
-	
-	
-	
 	public BmobRelation getRelation() {
 		return relation;
 	}
 	public void setRelation(BmobRelation relation) {
 		this.relation = relation;
 	}
-	
-	public BmobUser getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
-	public void setAuthor(BmobUser author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
-	
 	public String getContent() {
 		return content;
 	}
