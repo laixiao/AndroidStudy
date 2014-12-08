@@ -21,7 +21,9 @@ import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.study.main.R;
 import com.study.main.Entity.QiangYu;
@@ -39,9 +41,19 @@ public class AIContentAdapter extends BaseContentAdapter<QiangYu>{
 	
 	public static final String TAG = "AIContentAdapter";
 	public static final int SAVE_FAVOURITE = 2;
+	DisplayImageOptions options;
 
 	public AIContentAdapter(Context context, List<QiangYu> list) {
 		super(context, list);
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+	//	.displayer(new RoundedBitmapDisplayer(90))
+		.build();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -78,11 +90,9 @@ public class AIContentAdapter extends BaseContentAdapter<QiangYu>{
 		if(user.getAvatar()!=null){
 			avatarUrl = user.getAvatar().getFileUrl();
 		}
-		ImageLoader.getInstance()
-		.displayImage(avatarUrl, viewHolder.userLogo, 
-				MyApplication.getInstance().getOptions(R.drawable.user_icon_default_main),
+		
+		ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.userLogo, options,
 				new SimpleImageLoadingListener(){
-
 					@Override
 					public void onLoadingComplete(String imageUri, View view,
 							Bitmap loadedImage) {
@@ -91,11 +101,11 @@ public class AIContentAdapter extends BaseContentAdapter<QiangYu>{
 					}
 			
 		});
-//		viewHolder.userLogo.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
+		viewHolder.userLogo.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
 //				if(MyApplication.getInstance().getCurrentUser()==null){
 //					ActivityUtil.show(mContext, "请先登录�?");
 //					Intent intent = new Intent();
@@ -115,8 +125,8 @@ public class AIContentAdapter extends BaseContentAdapter<QiangYu>{
 ////					intent.setClass(MyApplication.getInstance().getTopActivity(), RegisterAndLoginActivity.class);
 ////					MyApplication.getInstance().getTopActivity().startActivityForResult(intent, Constant.GO_SETTINGS);
 ////				}
-//			}
-//		});
+			}
+		});
 //		viewHolder.userName.setText(entity.getAuthor().getUsername());
 //		viewHolder.contentText.setText(entity.getContent());
 //		if(null == entity.getContentfigureurl()){

@@ -1,14 +1,22 @@
 package com.study.main.test;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.study.main.R;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -16,17 +24,10 @@ import android.widget.Toast;
 //isRefreshing(): 检查是否处于刷新状态 
 //setColorScheme(): 设置进度条的颜色主题，最多能设置四种 默认是黑灰色 具体要和APP的整体配色融合
 
-public class test1 extends Activity implements OnRefreshListener {
-	private SwipeRefreshLayout swip;
-	Handler handler = new Handler(){  
-	        @Override  
-	        public void handleMessage(Message msg) {  
-	            super.handleMessage(msg); 
-	          //当更新完数据后，调用setRefreshing(false);来关闭刷新。
-	            swip.setRefreshing(false);  
-	        }  
-	    };  
-	
+public class test1 extends Activity{
+	 DisplayImageOptions options;
+	 private ImageView imageView1;
+	String url="http://file.bmob.cn/M00/D7/A0/oYYBAFSDBkiATQ3rAAA2S60H7pA2786353";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -34,19 +35,22 @@ public class test1 extends Activity implements OnRefreshListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.test1);
 
-		swip = (SwipeRefreshLayout) this.findViewById(R.id.swip);
-		swip.setOnRefreshListener(this);
+		imageView1=(ImageView) this.findViewById(R.id.imageView1);
+		
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+		//.displayer(new RoundedBitmapDisplayer(90))
+		.build();
+		// TODO Auto-generated constructor stub
+		
+		ImageLoader.getInstance().displayImage(url, imageView1,options);
 		
 	}
 
-	// 刷新操作
-	@Override
-	public void onRefresh() {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "我刷新了一次", Toast.LENGTH_LONG).show();
-		  handler.sendEmptyMessageDelayed(1, 5000);  
-		  
-		  
-	}
 
 }

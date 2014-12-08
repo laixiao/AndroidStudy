@@ -1,113 +1,35 @@
 package com.study.main.adapter;
-
-import java.io.File;
-
-import android.app.Activity;
+import android.annotation.TargetApi;
 import android.app.Application;
-import android.graphics.Bitmap;
-
-import cn.bmob.v3.BmobUser;
-
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import android.content.Context;
+import android.os.Build;
+import android.os.StrictMode;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
-import com.nostra13.universalimageloader.utils.StorageUtils;
-import com.study.main.Entity.QiangYu;
-import com.study.main.Entity.User;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
-public class MyApplication extends Application{
-
-	public static String TAG;
-	
-	private static MyApplication myApplication = null;
-	
-	private QiangYu currentQiangYu = null;
-	
-	public static MyApplication getInstance(){
-		return myApplication;
-	}
-	public User getCurrentUser() {
-		User user = BmobUser.getCurrentUser(myApplication, User.class);
-		if(user!=null){
-			return user;
-		}
-		return null;
-	}
+public class MyApplication extends Application {
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	@SuppressWarnings("unused")
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
-		TAG = this.getClass().getSimpleName();
-		//鐢变簬Application绫绘湰韬凡缁忓崟渚嬶紝鎵?浠ョ洿鎺ユ寜浠ヤ笅澶勭悊鍗冲彲銆?
-		myApplication = this;
-		initImageLoader();
+		initImageLoader(getApplicationContext());
 	}
 
-	
-	
-	public QiangYu getCurrentQiangYu() {
-		return currentQiangYu;
-	}
-
-	public void setCurrentQiangYu(QiangYu currentQiangYu) {
-		this.currentQiangYu = currentQiangYu;
-	}
-
-//	public void addActivity(Activity ac){
-//		ActivityManagerUtils.getInstance().addActivity(ac);
-//	}
-//	
-//	public void exit(){
-//		ActivityManagerUtils.getInstance().removeAllActivity();
-//	}
-//	
-//	public Activity getTopActivity(){
-//		return ActivityManagerUtils.getInstance().getTopActivity();
-//	}
-	
-
-	public void initImageLoader(){
-		File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext());
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-										.memoryCache(new LruMemoryCache(5*1024*1024))//设置内存缓存
-										.memoryCacheSize(10*1024*1024)
-//										.discCache(new UnlimitedDiscCache(cacheDir))
-//										.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
-										.build();
+	public static void initImageLoader(Context context) {
+		//1. This configuration tuning is custom. You can tune every option, you may tune some of them,or you can create default configuration by  ImageLoaderConfiguration.createDefault(this); method.
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+				.threadPriority(Thread.NORM_PRIORITY - 2)
+				.denyCacheImageMultipleSizesInMemory()
+				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
+				.diskCacheSize(50 * 1024 * 1024) // 50 Mb
+				.tasksProcessingOrder(QueueProcessingType.LIFO)
+				.writeDebugLogs() // Remove for release app
+				.build();
+		//2. Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
-	}
-	
-	public DisplayImageOptions getOptions(int drawableId){
-		return new DisplayImageOptions.Builder()
-		.showImageOnLoading(drawableId)// 设置图片在下载期间显示的图片
-		.showImageForEmptyUri(drawableId)// 设置图片Uri为空或是错误的时候显示的图片
-		.showImageOnFail(drawableId)// 设置图片加载/解码过程中错误时候显示的图片
-		.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
-		.cacheInMemory(true)// 设置下载的图片是否缓存在内存中
-		.cacheOnDisc(true)// 设置下载的图片是否缓存在SD卡中
-		.imageScaleType(ImageScaleType.NONE)// EXACTLY :图像将完全按比例缩小的目标大小  * EXACTLY_STRETCHED:图片会缩放到目标大小完全 IN_SAMPLE_INT:图像将被二次采样的整数倍  * IN_SAMPLE_POWER_OF_2:图片将降低2倍，直到下一减少步骤，使图像更小的目标大小 *  NONE:图片不会调整 
-		.bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型,默认值——Bitmap.Config.ARGB_8888
-		//.displayer(new RoundedBitmapDisplayer(10)) // RoundedBitmapDisplayer（int roundPixels）设置圆角图片 *            FakeBitmapDisplayer（）这个类什么都没做  *            FadeInBitmapDisplayer（int durationMillis）设置图片渐显的时间  *             SimpleBitmapDisplayer()正常显示一张图片　
-		//.postProcessor(null)//设置图片加入缓存前，对bitmap进行设置 BitmapProcessor preProcessor 
-		.build();
-	
-	
-			/**
-			 *  设置图片的解码配置 android.graphics.BitmapFactory.Options
-			 *  注意:选择inSampleSize将不考虑的选项
-			 * 会根据imageScaleType(imageScaleType)选项设置大小
-			 *  注意:这个选项重叠bitmapConfig()选项。
-			 */
-
-		
-		
-		
 	}
 }
 

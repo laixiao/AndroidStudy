@@ -50,8 +50,8 @@ public final class R {
 	}
 	public static final class id {
 		public static final int both = 0x7f0a000f;
-		public static final int column1 = 0x7f0a00eb;
-		public static final int column2 = 0x7f0a00ec;
+		public static final int column1 = 0x7f0a00ea;
+		public static final int column2 = 0x7f0a00eb;
 		public static final int disabled = 0x7f0a0010;
 		public static final int fl_inner = 0x7f0a00ba;
 		public static final int flip = 0x7f0a0016;

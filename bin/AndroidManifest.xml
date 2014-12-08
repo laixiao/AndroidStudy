@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.study.main.adapter.MyApplication"
+        android:name="com.study.main.UILApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -65,6 +65,7 @@
         <activity android:name="com.study.main.ui.Simple.laoluoActivity" >
         </activity>
         <activity android:name="com.study.main.ui.Simple.DownloadListActivity"></activity>
+        <activity android:name="com.study.main.test.test1"></activity>
     </application>
 
 </manifest>

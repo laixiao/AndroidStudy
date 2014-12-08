@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.study.main.R;
 import com.study.main.Entity.User;
@@ -77,14 +79,23 @@ public class UserInfo extends Activity {
 		}
 
 	};
-
+	DisplayImageOptions options;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.user_info);
-		// fb=FinalBitmap.create(UserInfo.this);
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+	//	.displayer(new RoundedBitmapDisplayer(90))
+		.build();
+		// TODO Auto-generated constructor stub
 		init();
 
 	}
@@ -128,18 +139,16 @@ public class UserInfo extends Activity {
 			public void onSuccess(User arg0) {	
 				
 				if(arg0.getAvatar()!=null){
-					ImageLoader.getInstance().displayImage(
-							arg0.getAvatar().getFileUrl(),
-							personico,
-							MyApplication.getInstance().getOptions(R.drawable.icon_profile),
-							new SimpleImageLoadingListener() {
+					ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(), personico, options,
+							new SimpleImageLoadingListener(){
 								@Override
 								public void onLoadingComplete(String imageUri, View view,
 										Bitmap loadedImage) {
 									// TODO Auto-generated method stub
 									super.onLoadingComplete(imageUri, view, loadedImage);
 								}
-							});
+						
+					});
 				}
 					isSex = arg0.isSex();
 					if (isSex) {
@@ -175,7 +184,6 @@ public class UserInfo extends Activity {
 		
 		//2.set  signature
 		signatureEdit.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				LayoutInflater inflater = getLayoutInflater();
