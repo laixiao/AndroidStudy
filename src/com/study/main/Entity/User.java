@@ -15,10 +15,7 @@ public class User extends BmobUser{
 	
 	private BmobFile avatar;
 	private Integer favourcount;
-	
-	private BmobRelation wallet;
-	private BmobRelation favorite;
-	private BmobRelation movie;
+
 	
 	
 	
@@ -48,24 +45,14 @@ public class User extends BmobUser{
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
-	public BmobRelation getMovie() {
-		return movie;
-	}
-	public void setMovie(BmobRelation movie) {
-		this.movie = movie;
-	}
+
 	public String getSignature() {
 		return signature;
 	}
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
-	public BmobRelation getFavorite() {
-		return favorite;
-	}
-	public void setFavorite(BmobRelation favorite) {
-		this.favorite = favorite;
-	}
+
 	public Integer getFavourcount() {
 		return favourcount;
 	}
@@ -95,12 +82,7 @@ public class User extends BmobUser{
 	public void setAvatar(BmobFile avatar) {
 		this.avatar = avatar;
 	}
-	public BmobRelation getWallet() {
-		return wallet;
-	}
-	public void setWallet(BmobRelation wallet) {
-		this.wallet = wallet;
-	}
+
 
 
 }

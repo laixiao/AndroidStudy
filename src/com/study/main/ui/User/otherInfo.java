@@ -1,7 +1,7 @@
 package com.study.main.ui.User;
  
 import com.study.main.R;
-import com.study.main.Entity.QiangYu;
+import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 
 import android.app.Activity;

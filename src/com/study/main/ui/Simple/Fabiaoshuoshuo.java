@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import com.study.main.R;
-import com.study.main.Entity.QiangYu;
+import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.utils.CacheUtils;
@@ -16,6 +16,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadFileListener;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -85,11 +86,12 @@ public class Fabiaoshuoshuo extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String commitContent = content.getText().toString().trim();
-				if (TextUtils.isEmpty(commitContent)) {
-					// ActivityUtil.show(mContext, "内容不能为空");
-					return;
-				}
-				if (targeturl == null) {
+				if (TextUtils.isEmpty(commitContent)&&targeturl == null) {
+					new SweetAlertDialog(Fabiaoshuoshuo.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("亲，内容不能为空")
+                    .setContentText("")
+                    .show();
+				}else if (targeturl == null) {
 					publishWithoutFigure(commitContent, null);
 				} else {
 					publish(commitContent);
@@ -154,40 +156,38 @@ public class Fabiaoshuoshuo extends Activity {
 	}
 
 	private void publishWithoutFigure(final String commitContent,final BmobFile figureFile) {
-		User user = (User) BmobUser.getCurrentUser(this);
+		BmobUser user =BmobUser.getCurrentUser(this);
 		if(user != null){
 		    // 允许用户使用应用
 		
-		final QiangYu qiangYu = new QiangYu();
-		qiangYu.setAuthor(user);
-		qiangYu.setContent(commitContent);
+		final ShuoShuo shuoshuo = new ShuoShuo();
+	//	shuoshuo.setAuthor(user);
+		shuoshuo.setContent(commitContent);
 		// 图片文件的路径
 		if (figureFile != null) {
-			qiangYu.setContentfigureurl(figureFile);
+			shuoshuo.setContentfigureurl(figureFile);
 		}
-		qiangYu.setLove(0);
-		qiangYu.setHate(0);
-		qiangYu.setShare(0);
-		qiangYu.setComment(0);
-		qiangYu.setPass(true);
-		qiangYu.save(this, new SaveListener() {
+		shuoshuo.setLove(0);
+		shuoshuo.setHate(0);
+		shuoshuo.setShare(0);
+		shuoshuo.setComment(0);
+		shuoshuo.setPass(true);
+		
+		shuoshuo.save(this, new SaveListener() {
 
 			@Override
 			public void onSuccess() {
-				// TODO Auto-generated method stub
-				// ActivityUtil.show(EditActivity.this, "发表成功！");
-				// LogUtils.i(TAG,"创建成功。");
-				Log.e("信息","发表成功");
+				
 				setResult(RESULT_OK);
 				finish();
 			}
 
 			@Override
 			public void onFailure(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				// ActivityUtil.show(EditActivity.this, "发表失败！yg"+arg1);
-				// LogUtils.i(TAG,"创建失败。"+arg1);
-				Log.e("错误码和错误信息", arg1+arg0);
+				new SweetAlertDialog(Fabiaoshuoshuo.this, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("发表失败")
+                .setContentText("原因"+arg1)
+                .show();
 			}
 		});
 		}else{
@@ -222,9 +222,10 @@ public class Fabiaoshuoshuo extends Activity {
 
 			@Override
 			public void onFailure(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				// LogUtils.i(TAG, "上传文件失败。"+arg1);
-				Log.e("错误码和错误信息", arg1+arg0);
+				new SweetAlertDialog(Fabiaoshuoshuo.this, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("上传失败")
+                .setContentText("原因"+arg1)
+                .show();
 			}
 		});
 

@@ -2,7 +2,6 @@ package com.study.main.ui.Simple;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
-
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -36,12 +34,11 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.study.main.R;
-import com.study.main.Entity.QiangYu;
+import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.commentActivity;
 import com.study.main.ui.User.otherInfo;
-
 
 public class mainActivity01 extends Activity{
 	PullToRefreshListView list;
@@ -49,7 +46,7 @@ public class mainActivity01 extends Activity{
 	ListView listview;
 	DisplayImageOptions options;
 	//1.get data
-	List<QiangYu> userMovieList = new ArrayList<QiangYu>();
+	List<ShuoShuo> shuoshuoList = new ArrayList<ShuoShuo>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +57,7 @@ public class mainActivity01 extends Activity{
 		
 		queryData(0, STATE_REFRESH);
 		init();
+		
 	}
 	private void init() {
 		// TODO Auto-generated method stub
@@ -73,6 +71,7 @@ public class mainActivity01 extends Activity{
 		.considerExifParams(true)
 	//	.displayer(new RoundedBitmapDisplayer(90))
 		.build();
+		
 		list.setMode(Mode.BOTH);
 		loadingLayout = list.getLoadingLayoutProxy();
 		loadingLayout.setLastUpdatedLabel("");
@@ -129,8 +128,7 @@ public class mainActivity01 extends Activity{
 	
 	//3.查询获得真实数据
 	private static final int STATE_REFRESH = 0;// 下拉刷新
-	private static final int STATE_MORE = 1;// 加载更多
-	
+	private static final int STATE_MORE = 1;// 加载更多	
 	private int limit = 10;		// 每页的数据是10条
 	private int curPage = 0;		// 当前页的编号，从0开始
 	
@@ -142,25 +140,25 @@ public class mainActivity01 extends Activity{
 	private void queryData(final int page, final int actionType){
 		//Log.i("bmob", "pageN:"+page+" limit:"+limit+" actionType:"+actionType);
 		
-		BmobQuery<QiangYu> query = new BmobQuery<QiangYu>();
+		BmobQuery<ShuoShuo> query = new BmobQuery<ShuoShuo>();
 		query.setLimit(limit);			// 1.设置每页多少条数据
 		query.setSkip(page*limit);		// 2.从第几条数据开始，
-		query.findObjects(this, new FindListener<QiangYu>() {
+		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override
-			public void onSuccess(List<QiangYu> arg0) {
+			public void onSuccess(List<ShuoShuo> arg0) {
 				// TODO Auto-generated method stub
 				
 				if(arg0.size()>0){
 					//1.初始化	（ 当是下拉刷新操作时，将当前页的编号重置为0，并把bankCards清空，重新添加）
 					if(actionType == STATE_REFRESH){
 						curPage = 0;
-						userMovieList.clear();
+						shuoshuoList.clear();
 					}
 					
 					// 将本次查询的数据添加到bankCards中
-					for (QiangYu td : arg0) {
-						userMovieList.add(td);
+					for (ShuoShuo td : arg0) {
+						shuoshuoList.add(td);
 					}
 					
 					// 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
@@ -168,10 +166,10 @@ public class mainActivity01 extends Activity{
 				//	showToast("第"+(page+1)+"页数据加载完成");
 				}else if(actionType == STATE_MORE){
 					//上拉操作，没有更多数据了
-					//showToast("没有更多数据了");
+					Toast.makeText(mainActivity01.this, "not data", Toast.LENGTH_LONG).show();
 				}else if(actionType == STATE_REFRESH){
 					//下拉操作，没有更多数据了
-					//showToast("没有数据");
+					Toast.makeText(mainActivity01.this, "not data", Toast.LENGTH_LONG).show();
 				}
 				list.onRefreshComplete();
 			}
@@ -179,26 +177,22 @@ public class mainActivity01 extends Activity{
 			@Override
 			public void onError(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-			//	showToast("查询失败:"+arg1);
+				Toast.makeText(mainActivity01.this, arg0+"error"+arg1, Toast.LENGTH_LONG).show();
 				//完成一次下拉刷新
 				list.onRefreshComplete();
 			}
 		});
 	}
 	
-	private class firstListAdapter extends BaseAdapter  {
-		
-		Context context;
-		
+	private class firstListAdapter extends BaseAdapter  {		
+		Context context;		
 		public firstListAdapter(Context context){
 			this.context = context;
 		}
-
 		@SuppressLint("InflateParams") @Override
 		public View getView(final int position, View convertView,ViewGroup parent) {
 			ViewHolder holder = null;
-			if (convertView == null) {
-				
+			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
 				holder.userName = (TextView)convertView.findViewById(R.id.user_name);
@@ -215,40 +209,34 @@ public class mainActivity01 extends Activity{
 				holder = (ViewHolder) convertView.getTag();
 			}
 			//1.Get QiangYu
-			final QiangYu qiangYu = (QiangYu) getItem(position);	
-			final User user=(User) qiangYu.getAuthor();
+			final ShuoShuo shuoshuo = (ShuoShuo) getItem(position);	
+			final User user=shuoshuo.getAuthor();
 			if(user==null){
 				Toast.makeText(mainActivity01.this, "user is null", Toast.LENGTH_LONG).show();
 			}
 			if(user.getAvatar()==null){
 				Toast.makeText(mainActivity01.this, "Avatar is null", Toast.LENGTH_LONG).show();
 			}else {	
-				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options,null);
-				
+				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options,null);				
 			}
 			//2.userName
-			holder.userName.setText(qiangYu.getAuthor().getUsername());
+			holder.userName.setText(shuoshuo.getAuthor().getNickname());
 			//3.userLogo
 			holder.userLogo.setOnClickListener(new OnClickListener() {				
 				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					if(BmobUser.getCurrentUser(context) == null){
-						Intent intent=new Intent(mainActivity01.this,LoginAndRegister.class);
-						startActivity(intent);
-					}else {
+				public void onClick(View v) {									
 						Intent intent=new Intent(mainActivity01.this, otherInfo.class);
 						intent.putExtra("data",user);
 						startActivity(intent);
-					}
+						
 				}
 			});
 			//4.contentText
-			holder.contentText.setText(qiangYu.getContent());
+			holder.contentText.setText(shuoshuo.getContent());
 			//5.Contentfigureurl
-			if(qiangYu.getContentfigureurl()!=null){
+			if(shuoshuo.getContentfigureurl()!=null){
 				holder.contentImage.setVisibility(View.VISIBLE);
-				ImageLoader.getInstance().displayImage(qiangYu.getContentfigureurl().getFileUrl(), holder.contentImage, options,null);			
+				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.contentImage, options,null);			
 			}else {
 				holder.contentImage.setVisibility(View.GONE);
 			}
@@ -259,7 +247,7 @@ public class mainActivity01 extends Activity{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent intent=new Intent(mainActivity01.this, commentActivity.class);
-					intent.putExtra("data",qiangYu);
+					intent.putExtra("data",shuoshuo);
 					startActivity(intent);
 				}
 			});
@@ -287,13 +275,13 @@ public class mainActivity01 extends Activity{
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return userMovieList.size();
+			return shuoshuoList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return userMovieList.get(position);
+			return shuoshuoList.get(position);
 		}
 
 		@Override

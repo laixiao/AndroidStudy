@@ -5,9 +5,14 @@
     android:orientation="vertical"
  
     tools:context="com.laixiao.main.ui.Simple.mainActivity01" >
- 
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg"
+         >
+    </LinearLayout>
+<com.handmark.pulltorefresh.library.PullToRefreshListView
         xmlns:ptr="http://schemas.android.com/apk/res/com.laixiao.main.ui.Simple"
         android:id="@+id/list"
         android:layout_width="match_parent"
@@ -17,6 +22,4 @@
         android:smoothScrollbar="true" 
         
         />
-    
-
 </LinearLayout>
