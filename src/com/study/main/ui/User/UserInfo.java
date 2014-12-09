@@ -29,6 +29,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -176,19 +177,18 @@ public class UserInfo extends Activity {
 				LayoutInflater inflater = getLayoutInflater();
 				View layout = inflater.inflate(R.layout.dialog01,(ViewGroup) findViewById(R.id.dialog));
 				final EditText dialog_qianming=(EditText) layout.findViewById(R.id.dialog_qianming);
-				Button dialog_button1=(Button) layout.findViewById(R.id.dialog_button1);
-				dialog_button1.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
+				 new AlertDialog.Builder(UserInfo.this)
+				 .setTitle("设置个性签名")
+				 .setView(layout)
+				 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
 						Signature=dialog_qianming.getText().toString().trim();
 						signatureEdit.setText(Signature);
-						Toast.makeText(UserInfo.this, "个性签名修改成功，请返回。",Toast.LENGTH_SHORT).show();
-						
+						Toast.makeText(UserInfo.this, "个性签名修改成功",Toast.LENGTH_SHORT).show();
 					}
-				});
-				 new AlertDialog.Builder(UserInfo.this).setTitle("设置个性签名").setView(layout)
-			     .setNegativeButton("返回",null)
+				})
+			     .setNegativeButton("取消",null)
 				 .show();
 
 			}

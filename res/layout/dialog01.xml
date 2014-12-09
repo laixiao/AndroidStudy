@@ -13,12 +13,6 @@
      android:hint="输入新的个性签名"
      android:minWidth="100dip" />
 
- <Button
-     android:layout_weight="1"
-     android:background="@drawable/login_registerbutton1"
-     android:id="@+id/dialog_button1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:text="tijiao" />
+ 
 
 </LinearLayout>
