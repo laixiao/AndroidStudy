@@ -133,7 +133,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		.cacheInMemory(true)
 		.cacheOnDisk(true)
 		.considerExifParams(true)
-		.displayer(new RoundedBitmapDisplayer(10))
+	//	.displayer(new RoundedBitmapDisplayer(10))
 		.build();
 		
 		list.setMode(Mode.BOTH);
