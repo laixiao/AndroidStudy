@@ -15,13 +15,15 @@
         android:scaleType="centerCrop" 
         android:src="@drawable/user_icon_default_main"
         />
-	<TextView 
+
+	<TextView
 	    android:id="@+id/list_item_content_text"
 	    style="@style/TextTheme"
-	    android:text="十年之前，我不认识你 你不属于我，我们还是一样，陪在一个陌生人左右，走过渐渐熟悉的街头;十年之后，我们是朋友， 还可以问候，只是那种温柔，再也找不到拥抱的理由，情人最后难免沦为朋友。"
+	    android:layout_alignLeft="@+id/list_item_user_name"
 	    android:layout_below="@id/list_item_user_logo"
 	    android:layout_margin="4dp"
-	    />
+	    android:text="十年之前，我不认识你 你不属于我，我们还是一样，陪在一个陌生人左右，走过渐渐熟悉的街头;十年之后，我们是朋友， 还可以问候，只是那种温柔，再也找不到拥抱的理由，情人最后难免沦为朋友。" />
+
 	<ImageView 
 	    android:id="@+id/list_item_content_image"
 	    android:layout_width="wrap_content"
@@ -46,46 +48,20 @@
 	    android:gravity="center"
 	    android:text="评论"
 	    android:textColor="#888888"
-	    android:layout_marginTop="4dip"
-	    android:layout_marginBottom="4dip"
-	    android:layout_marginLeft="8dip"
-	    android:layout_marginRight="8dip"
+	    
 	    />
-	<TextView 
-	    android:id="@+id/list_item_action_hate"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	   
-	    android:layout_below="@id/list_item_content_image"
-	    android:drawableLeft="@drawable/action_hate"
-	    android:text="100"
-	    android:layout_marginTop="4dip"
-	    android:layout_marginBottom="4dip"
-	    android:layout_marginLeft="8dip"
-	    android:layout_marginRight="8dip"
-	    android:gravity="center"
-	    android:visibility="gone"
-	    />
-
-	<TextView
-	    android:id="@+id/list_item_action_love"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignTop="@+id/list_item_action_fav"
-	    android:layout_centerHorizontal="true"
-	    android:drawableLeft="@drawable/ic_action_love"
-	    android:gravity="center"
-	    android:text="985赞"
-	    android:textColor="#888888" />
 	
-	<ImageView
+	<TextView
 	    android:id="@+id/list_item_action_fav"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignTop="@+id/list_item_action_comment"
 	    android:layout_toLeftOf="@+id/list_item_action_comment"
 	    android:scaleType="centerInside"
-	    android:src="@drawable/ic_action_fav_normal" />
+	    android:gravity="center"
+	    android:text="收藏"
+	    android:textColor="#888888"
+	    android:drawableLeft="@drawable/ic_action_fav_normal" />
 
 	<TextView
 	    android:id="@+id/list_item_user_name"
@@ -97,23 +73,35 @@
 	    android:text="name" />
 
 	<TextView
-	    android:id="@+id/list_item_action_share"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignBaseline="@+id/list_item_action_love"
-	    android:layout_alignBottom="@+id/list_item_action_love"
-	    android:layout_toLeftOf="@+id/list_item_action_love"
-	    android:drawableLeft="@drawable/ic_action_share"
-	    android:gravity="center"
-	    android:text="分享"
-	    android:textColor="#888888" />
-
-	<TextView
 	    android:id="@+id/list_item_time"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentRight="true"
 	    android:layout_alignTop="@+id/list_item_user_name"
 	    android:text="time" />
+
+	<TextView
+	    android:id="@+id/list_item_action_share"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/list_item_action_fav"
+	    android:layout_alignBottom="@+id/list_item_action_fav"
+	    android:layout_toLeftOf="@+id/list_item_action_fav"
+	    android:drawableLeft="@drawable/ic_action_share"
+	    android:gravity="center"
+	    android:text="分享"
+	    android:textColor="#888888" />
+
+	<TextView
+	    android:id="@+id/list_item_action_love"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/list_item_action_share"
+	    android:layout_alignBottom="@+id/list_item_action_share"
+	    android:layout_toLeftOf="@+id/list_item_action_share"
+	    android:drawableLeft="@drawable/ic_action_love"
+	    android:gravity="center"
+	    android:text="985赞"
+	    android:textColor="#888888" />
 
 </RelativeLayout>

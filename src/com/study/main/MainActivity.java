@@ -559,11 +559,11 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder = new ViewHolder();	
 				holder.list_item_user_name = (TextView)convertView.findViewById(R.id.list_item_user_name);
 				holder.list_item_user_logo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
-				holder.list_item_action_fav = (ImageView)convertView.findViewById(R.id.list_item_action_fav);
+				holder.list_item_action_fav = (TextView)convertView.findViewById(R.id.list_item_action_fav);
 				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
 				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);
 				holder.list_item_action_love = (TextView)convertView.findViewById(R.id.list_item_action_love);
-				holder.list_item_action_hate = (TextView)convertView.findViewById(R.id.list_item_action_hate);
+			
 				holder.list_item_action_share = (TextView)convertView.findViewById(R.id.list_item_action_share);
 				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
 				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
@@ -624,12 +624,12 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		class ViewHolder {
 			public TextView list_item_action_share,list_item_time;
 			public TextView list_item_action_comment;
-			public TextView list_item_action_hate;
+		
 			public TextView list_item_action_love;
 			public ImageView list_item_content_image;
 			public TextView list_item_content_text;
 			public TextView list_item_user_name;
-			public ImageView list_item_action_fav;
+			public TextView list_item_action_fav;
 			public ImageView list_item_user_logo;
 			TextView list_item_textView1;			
 		}
