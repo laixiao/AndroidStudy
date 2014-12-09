@@ -661,6 +661,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		query.setLimit(limit);			// 1.设置每页多少条数据
 		query.setSkip(page*limit);		// 2.从第几条数据开始
 		query.order("-createdAt");
+		query.include("author");
 		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override

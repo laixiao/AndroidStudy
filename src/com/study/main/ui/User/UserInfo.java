@@ -116,11 +116,11 @@ public class UserInfo extends Activity {
 
 		currentUser = BmobUser.getCurrentUser(this, User.class);
 		if (currentUser != null) {
-			// 鎵ц涓�绯诲垪鎿嶄綔鍟�
+			
 			setListener();
 			initView();
 		} else {
-			Toast.makeText(UserInfo.this, "璇峰厛鐧诲綍鍟�", Toast.LENGTH_SHORT)
+			Toast.makeText(UserInfo.this, "please login", Toast.LENGTH_SHORT)
 					.show();
 			Intent intent = new Intent();
 			intent.setClass(UserInfo.this, LoginAndRegister.class);
@@ -129,7 +129,7 @@ public class UserInfo extends Activity {
 		}
 	}
 
-	// 鍒濆鍖栭〉闈㈠唴瀹�
+	
 	private void initView() {
 		// TODO Auto-generated method stub
 		BmobQuery<User> userQuery = new BmobQuery<User>();
@@ -156,7 +156,7 @@ public class UserInfo extends Activity {
 					} else {
 						user_infosex.setImageResource(R.drawable.user_infosex1);
 					}
-					Message msg = Message.obtain(handler);// 33鏄爣璇嗙
+					Message msg = Message.obtain(handler);
 					Bundle bundle = new Bundle();
 					bundle.putString("Signature", arg0.getSignature());
 
@@ -179,7 +179,7 @@ public class UserInfo extends Activity {
 
 	}
 
-	// 浜嬩欢鐩戝惉
+	
 	private void setListener() {
 		
 		//2.set  signature
@@ -338,8 +338,7 @@ public class UserInfo extends Activity {
 				@Override
 				public void onSuccess() {
 					// TODO Auto-generated method stub
-					Toast.makeText(UserInfo.this, "鍥剧墖鏂囦欢涓婁紶--鎴愬姛",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(UserInfo.this, "成功",Toast.LENGTH_LONG).show();
 
 					currentUser.setAvatar(file);
 					// 1.signature
@@ -349,13 +348,10 @@ public class UserInfo extends Activity {
 					// 2.sex
 					currentUser.setSex(isSex);
 					// 3.phonenumber
-					if (userinfo_phonenumber.getText().toString().trim()
-							.length() == 11) {
-						currentUser.setPhonenumber(userinfo_phonenumber
-								.getText().toString().trim());
+					if (userinfo_phonenumber.getText().toString().trim().length() == 11) {
+						currentUser.setPhonenumber(userinfo_phonenumber.getText().toString().trim());
 					} else {
-						Toast.makeText(UserInfo.this, "璇锋鏌ユ墜鏈哄彿鐮佺殑闀垮害",
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(UserInfo.this, "please check phonenumber！",Toast.LENGTH_LONG).show();
 					}
 					// 4.璁剧疆鏄电О
 					currentUser.setNickname(userinfo_nickname.getText()
@@ -373,7 +369,7 @@ public class UserInfo extends Activity {
 									UserInfo.this, User.class);
 
 							setResult(RESULT_OK);
-							Toast.makeText(UserInfo.this, "淇濆瓨鎴愬姛",
+							Toast.makeText(UserInfo.this, "Success",
 									Toast.LENGTH_LONG).show();
 						}
 
@@ -381,7 +377,7 @@ public class UserInfo extends Activity {
 						public void onFailure(int arg0, String arg1) {
 							// TODO Auto-generated method stub
 
-							Toast.makeText(UserInfo.this, "淇濆瓨澶辫触",
+							Toast.makeText(UserInfo.this, "erro"+arg1,
 									Toast.LENGTH_LONG).show();
 						}
 					});
@@ -398,7 +394,7 @@ public class UserInfo extends Activity {
 					// TODO Auto-generated method stub
 					// LogUtils.i(TAG, "涓婁紶鏂囦欢澶辫触銆�"+arg1);
 					Toast.makeText(UserInfo.this,
-							arg0 + "鍥剧墖鏂囦欢涓婁紶--澶辫触" + arg1, Toast.LENGTH_LONG)
+							arg0 + "Failure" + arg1, Toast.LENGTH_LONG)
 							.show();
 				}
 			});
@@ -411,12 +407,12 @@ public class UserInfo extends Activity {
 			// 2.sex
 
 			currentUser.setSex(isSex);
-			// 3.璁剧疆鎵嬫満鍙风爜
+			// 3.
 			if (userinfo_phonenumber.getText().toString().trim().length() == 11) {
 				currentUser.setPhonenumber(userinfo_phonenumber.getText()
 						.toString().trim());
 			} else {
-				Toast.makeText(UserInfo.this, "璇锋鏌ユ墜鏈哄彿鐮佺殑闀垮害",
+				Toast.makeText(UserInfo.this, "please check phonenumber！",
 						Toast.LENGTH_LONG).show();
 			}
 			// 4.璁剧疆鏄电О
@@ -433,14 +429,14 @@ public class UserInfo extends Activity {
 					// TODO Auto-generated method stub
 
 					setResult(RESULT_OK);
-					Toast.makeText(UserInfo.this, "淇濆瓨鎴愬姛", Toast.LENGTH_LONG)
+					Toast.makeText(UserInfo.this, "seccess", Toast.LENGTH_LONG)
 							.show();
 				}
 
 				@Override
 				public void onFailure(int arg0, String arg1) {
 					// TODO Auto-generated method stub
-					Toast.makeText(UserInfo.this, "淇濆瓨澶辫触" + arg1,
+					Toast.makeText(UserInfo.this, "failure" + arg1,
 							Toast.LENGTH_LONG).show();
 				}
 			});

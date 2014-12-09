@@ -2,6 +2,7 @@ package com.study.main.Entity;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobRelation;
 
 public class User extends BmobUser{
 	private boolean sex;
@@ -11,13 +12,22 @@ public class User extends BmobUser{
 	private String signature;
 	private BmobFile avatar;
 	private Integer favourcount;
+	private BmobRelation shuoshuo;
+
 	
 	@Override
 	public String toString() {
 		return "User [sex=" + sex + ", phonenumber=" + phonenumber
 				+ ", nickname=" + nickname + ", birthday=" + birthday
 				+ ", signature=" + signature + ", avatar=" + avatar
-				+ ", favourcount=" + favourcount + "]";
+				+ ", favourcount=" + favourcount + ", shuoshuo=" + shuoshuo
+				+ "]";
+	}
+	public BmobRelation getShuoshuo() {
+		return shuoshuo;
+	}
+	public void setShuoshuo(BmobRelation shuoshuo) {
+		this.shuoshuo = shuoshuo;
 	}
 	public boolean isSex() {
 		return sex;
