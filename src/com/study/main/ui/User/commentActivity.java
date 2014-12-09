@@ -29,7 +29,6 @@ import com.study.main.R;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.Entity.Comment;
-import com.study.main.ui.Simple.mainActivity01;
 
 public class commentActivity extends Activity {
 

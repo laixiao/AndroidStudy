@@ -140,13 +140,14 @@
         android:background="@drawable/login_bg"
         android:visibility="gone" >
 
-        <Button
-            android:id="@+id/button035"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="显示说说界面" />
+       
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:smoothScrollbar="false" />
     </RelativeLayout>
     <!-- 2.底部导航==== 底部导航=====底部导航 -->
 

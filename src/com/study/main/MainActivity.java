@@ -2,7 +2,19 @@ package com.study.main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.FindListener;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.study.main.Entity.ShuoShuo;
+import com.study.main.Entity.User;
 import com.study.main.ResideMenu.ResideMenu;
 import com.study.main.ResideMenu.ResideMenuInfo;
 import com.study.main.ResideMenu.ResideMenuItem;
@@ -11,12 +23,14 @@ import com.study.main.test.test1;
 import com.study.main.ui.Simple.Fabiaoshuoshuo;
 import com.study.main.ui.Simple.SettingActivity;
 import com.study.main.ui.Simple.laoluoActivity;
-import com.study.main.ui.Simple.mainActivity01;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.UserInfo;
+import com.study.main.ui.User.commentActivity;
+import com.study.main.ui.User.otherInfo;
 import com.study.main.ui.media.ArrayAdapter;
 import com.study.main.ui.media.FileUtils;
 import com.study.main.ui.media.localVideoView;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,10 +50,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,9 +63,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener, OnItemClickListener {
-	private RelativeLayout titlelayout01, titlelayout02, titlelayout03,
-			middlelayout1, middlelayout2, middlelayout3;
+public class MainActivity extends Activity implements OnClickListener,OnItemClickListener {
+	private RelativeLayout titlelayout01, titlelayout02, titlelayout03,middlelayout1, middlelayout2, middlelayout3;
 	private ListView listView01;
 	private Button button1, button2, button3;
 	private Button fabiaoshuoshuo;
@@ -72,72 +86,189 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	private long mExitTime;
 	private TextView shezhi;
 
-	
-	
-	 private FileAdapter mAdapter;
-	 private ListView listView;
+	private FileAdapter mAdapter;
+	private ListView listView;
 
 	private SwipeRefreshLayout swip;
-	Handler handler = new Handler(){  
-        @Override  
-        public void handleMessage(Message msg) {  
-            super.handleMessage(msg); 
-          //当更新完数据后，调用setRefreshing(false);来关闭刷新。
-            swip.setRefreshing(false);  
-        }  
-    };
+	Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			// 当更新完数据后，调用setRefreshing(false);来关闭刷新。
+			swip.setRefreshing(false);
+		}
+	};
+
 	
-	
+	PullToRefreshListView list;
+	private ILoadingLayout loadingLayout;
+	ListView listview;
+	DisplayImageOptions options;
+	//1.get data
+	List<ShuoShuo> shuoshuoList = new ArrayList<ShuoShuo>();
+	firstListAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-
-		setUpMenu();
-		setListener();
 		init();
-		init2();
+		init3();
 	}
 
-	private void init2() {
+	private void init3() {
 		// TODO Auto-generated method stub
-		   mAdapter = new FileAdapter(this, null);
-	       listView = (ListView)this.findViewById(android.R.id.list);
-	       swip=(SwipeRefreshLayout) this.findViewById(R.id.swip);
-	       listView.setAdapter(mAdapter);
-	       listView.setOnItemClickListener(this);
-	       new ScanVideoTask().execute();
-	       swip.setOnRefreshListener(new OnRefreshListener() {
+		list=(PullToRefreshListView)findViewById(R.id.list);
+		adapter=new firstListAdapter(this);
+		
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+	//	.displayer(new RoundedBitmapDisplayer(90))
+		.build();
+		
+		list.setMode(Mode.BOTH);
+		loadingLayout = list.getLoadingLayoutProxy();
+		loadingLayout.setLastUpdatedLabel("");
+		loadingLayout.setPullLabel(getString(R.string.pull_to_refresh_bottom_pull));
+		loadingLayout.setRefreshingLabel(getString(R.string.pull_to_refresh_bottom_refreshing));
+		loadingLayout.setReleaseLabel(getString(R.string.pull_to_refresh_bottom_release));
+		//1.滑动监听
+		list.setOnScrollListener(new OnScrollListener() {
 			
 			@Override
-			public void onRefresh() {
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				// TODO Auto-generated method stub
-				mAdapter.clear();
-			    new ScanVideoTask().execute();
-			    handler.sendEmptyMessageDelayed(1, 5000);  
-			   Toast.makeText(MainActivity.this, "正在刷新本地列表，请稍后...", Toast.LENGTH_LONG).show();
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,int visibleItemCount, int totalItemCount) {
+				// TODO Auto-generated method stub
+				//初始化：上拉和下拉
+				if (firstVisibleItem == 0) {
+					loadingLayout.setLastUpdatedLabel("");
+					loadingLayout.setPullLabel(getString(R.string.pull_to_refresh_top_pull));
+					loadingLayout.setRefreshingLabel(getString(R.string.pull_to_refresh_top_refreshing));
+					loadingLayout.setReleaseLabel(getString(R.string.pull_to_refresh_top_release));
+				} else if (firstVisibleItem + visibleItemCount + 1 == totalItemCount) {
+					loadingLayout.setLastUpdatedLabel("");
+					loadingLayout.setPullLabel(getString(R.string.pull_to_refresh_bottom_pull));
+					loadingLayout.setRefreshingLabel(getString(R.string.pull_to_refresh_bottom_refreshing));
+					loadingLayout.setReleaseLabel(getString(R.string.pull_to_refresh_bottom_release));
+				}
 			}
 		});
-	      
-	      
-	      
+		//2. fresh listener
+		list.setOnRefreshListener(new OnRefreshListener2<ListView>() {
+
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				// 0.下拉刷新(从第一页开始装载数据)
+				queryData(0, STATE_REFRESH);
+			}
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				// 0.上拉加载更多(加载下一页数据)
+				queryData(curPage, STATE_MORE);
+			}
+		});
+		listview=list.getRefreshableView();		
+		listview.setAdapter(adapter);
+		queryData(0, STATE_REFRESH);
 	}
 
 	private void init() {
-
 		titlelayout01 = (RelativeLayout) this.findViewById(R.id.titlelayout01);
 		titlelayout02 = (RelativeLayout) this.findViewById(R.id.titlelayout02);
 		titlelayout03 = (RelativeLayout) this.findViewById(R.id.titlelayout03);
 		middlelayout1 = (RelativeLayout) this.findViewById(R.id.middlelayout1);
 		middlelayout2 = (RelativeLayout) this.findViewById(R.id.middlelayout2);
 		middlelayout3 = (RelativeLayout) this.findViewById(R.id.middlelayout3);
-		button1 = (Button) this.findViewById(R.id.button1);button1.setSelected(true);
+		button1 = (Button) this.findViewById(R.id.button1);
+		button1.setSelected(true);
 		button2 = (Button) this.findViewById(R.id.button2);
 		button3 = (Button) this.findViewById(R.id.button3);
 		listView01 = (ListView) this.findViewById(R.id.listView01);
-
 		fabiaoshuoshuo = (Button) this.findViewById(R.id.fabiaoshuoshuo);
+		mAdapter = new FileAdapter(this, null);
+		listView = (ListView) this.findViewById(android.R.id.list);
+		swip = (SwipeRefreshLayout) this.findViewById(R.id.swip);
+		listView.setAdapter(mAdapter);
+		listView.setOnItemClickListener(this);
+		new ScanVideoTask().execute();
+		swip.setOnRefreshListener(new OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// TODO Auto-generated method stub
+				mAdapter.clear();
+				new ScanVideoTask().execute();
+				handler.sendEmptyMessageDelayed(1, 5000);
+				Toast.makeText(MainActivity.this, "正在刷新本地列表，请稍后...",
+						Toast.LENGTH_LONG).show();
+			}
+		});
+
+		imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
+		// attach to current activity;
+		resideMenu = new ResideMenu(this);
+		resideMenu.setBackground(R.drawable.residebackground1);
+		resideMenu.attachToActivity(this);
+		resideMenu.setMenuListener(menuListener);
+		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
+		// 150dip.
+		resideMenu.setScaleValue(0.6f);
+		// 禁止使用右侧菜单
+		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+		// resideMenu.setDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+		// create menu items;
+		menu_item01 = new ResideMenuItem(this, R.drawable.residebutton1,
+				R.string.menu_item01);
+		menu_item02 = new ResideMenuItem(this, R.drawable.residebutton5,
+				R.string.menu_item02);
+		menu_item03 = new ResideMenuItem(this, R.drawable.residebutton3,
+				R.string.menu_item03);
+		menu_item04 = new ResideMenuItem(this, R.drawable.residebutton4,
+				R.string.menu_item04);
+		menu_item05 = new ResideMenuItem(this, R.drawable.residebutton2,
+				R.string.menu_item05);
+		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4,
+		// "子菜单1");
+		info = new ResideMenuInfo(this, R.drawable.icon_profile, "name",
+				"money");
+		setting = new ResideMenuSetting(this, "setting", "");
+
+		resideMenu.addMenuItem(menu_item01, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(menu_item02, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(menu_item03, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(menu_item04, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(menu_item05, ResideMenu.DIRECTION_LEFT);
+		// resideMenu.addMenuItem(itemFile, ResideMenu.DIRECTION_LEFT);
+
+		resideMenu.addMenuInfo(info);
+		resideMenu.addMenuSetting(setting);
+		//设置事件监听者
+		menu_item01.setOnClickListener(this);
+		menu_item02.setOnClickListener(this);
+		menu_item03.setOnClickListener(this);
+		menu_item04.setOnClickListener(this);
+		menu_item05.setOnClickListener(this);
+		info.setOnClickListener(this);
+		setting.setOnClickListener(this);
+		imageButton1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+			}
+		});
+		
 		buttonListener();
 
 	}
@@ -145,8 +276,6 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	private void buttonListener() {
 		// TODO Auto-generated method stub
 		button1.setOnClickListener(new View.OnClickListener() {
-
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				titlelayout01.setVisibility(View.VISIBLE);
@@ -158,7 +287,6 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 				button1.setSelected(true);
 				button2.setSelected(false);
 				button3.setSelected(false);
-				
 
 			}
 		});
@@ -172,7 +300,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 				middlelayout1.setVisibility(View.INVISIBLE);
 				middlelayout2.setVisibility(View.VISIBLE);
 				middlelayout3.setVisibility(View.INVISIBLE);
-				
+
 				button1.setSelected(false);
 				button2.setSelected(true);
 				button3.setSelected(false);
@@ -225,72 +353,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		});
 	}
 
-	private void setUpMenu() {
-		imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
-		//
-		//
-		// text1 = (TextView) findViewById(R.id.text1);
-		// text2 = (TextView) findViewById(R.id.text2);
-		// text3 = (TextView) findViewById(R.id.text3);
 
-		// attach to current activity;
-		resideMenu = new ResideMenu(this);
-		resideMenu.setBackground(R.drawable.residebackground1);
-		resideMenu.attachToActivity(this);
-		resideMenu.setMenuListener(menuListener);
-		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
-		// 150dip.
-		resideMenu.setScaleValue(0.6f);
-		// 禁止使用右侧菜单
-		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-		// resideMenu.setDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-
-		// create menu items;
-		menu_item01 = new ResideMenuItem(this, R.drawable.residebutton1, R.string.menu_item01);
-		menu_item02 = new ResideMenuItem(this, R.drawable.residebutton5, R.string.menu_item02);
-		menu_item03 = new ResideMenuItem(this, R.drawable.residebutton3,R.string.menu_item03);
-		menu_item04 = new ResideMenuItem(this, R.drawable.residebutton4,R.string.menu_item04);
-		menu_item05 = new ResideMenuItem(this, R.drawable.residebutton2,R.string.menu_item05);
-		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4, "子菜单1");
-
-		info = new ResideMenuInfo(this, R.drawable.icon_profile, "name", "money");
-		setting = new ResideMenuSetting(this, "setting", "");
-
-		resideMenu.addMenuItem(menu_item01, ResideMenu.DIRECTION_LEFT);
-		resideMenu.addMenuItem(menu_item02, ResideMenu.DIRECTION_LEFT);
-		resideMenu.addMenuItem(menu_item03, ResideMenu.DIRECTION_LEFT);
-		resideMenu.addMenuItem(menu_item04, ResideMenu.DIRECTION_LEFT);
-		resideMenu.addMenuItem(menu_item05, ResideMenu.DIRECTION_LEFT);
-		// resideMenu.addMenuItem(itemFile, ResideMenu.DIRECTION_LEFT);
-
-		resideMenu.addMenuInfo(info);
-		resideMenu.addMenuSetting(setting);
-
-	}
-
-	private void setListener() {
-
-		menu_item01.setOnClickListener(this);
-		menu_item02.setOnClickListener(this);
-		menu_item03.setOnClickListener(this);
-		menu_item04.setOnClickListener(this);
-		menu_item05.setOnClickListener(this);
-		// itemFile.setOnClickListener(this);
-
-		// text1.setOnClickListener(this);
-		// text2.setOnClickListener(this);
-		// text3.setOnClickListener(this);
-
-		info.setOnClickListener(this);
-		setting.setOnClickListener(this);
-
-		imageButton1.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
-			}
-		});
-	}
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -299,47 +362,28 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 
 	@Override
 	public void onClick(View view) {
-		// if (view.getId() == R.id.text1) {
-		// changeFragment(new NewsFragment());
-		// } else if (view.getId() == R.id.text2) {
-		// changeFragment(new ContactsFragment());
-		// } else if (view.getId() == R.id.text3) {
-		// changeFragment(new DongtaiFragment());
-		// } else
 		if (view == menu_item01) {
-			Intent intent = new Intent();
-			// intent.putExtra("flag", "MainActivity");
+			Intent intent = new Intent();		
 			intent.setClass(getApplicationContext(), laoluoActivity.class);
 			startActivity(intent);
 		} else if (view == menu_item02) {
-			Toast.makeText(MainActivity.this, "menu_item02", Toast.LENGTH_LONG)
-			.show();
-			// Intent intent = new Intent();
-			// intent.putExtra("flog", "钱包");
-			// intent.setClass(getApplicationContext(), mediaActivity01.class);
-			// startActivity(intent);
+			Toast.makeText(MainActivity.this, "menu_item02", Toast.LENGTH_LONG).show();
 		} else if (view == menu_item03) {
-			Intent intent = new Intent();
+			//Intent intent = new Intent();
 			// intent.putExtra("flog", "装扮");
-			//intent.setClass(getApplicationContext(), LocalList.class);
-			//startActivity(intent);
+			// intent.setClass(getApplicationContext(), LocalList.class);
+			// startActivity(intent);
 		} else if (view == menu_item04) {
-			Intent intent = new Intent();
-			// intent.putExtra("flog", "收藏");
-			intent.setClass(getApplicationContext(), mainActivity01.class);
-			startActivity(intent);
+//			Intent intent = new Intent();
+//			// intent.putExtra("flog", "收藏");
+//			intent.setClass(getApplicationContext(), text1.class);
+//			startActivity(intent);
 		} else if (view == menu_item05) {
 			Intent intent = new Intent();
 			// intent.putExtra("flog", "相册");
 			intent.setClass(getApplicationContext(), test1.class);
 			startActivity(intent);
 		}
-		// else if (view == itemFile) {
-		// Intent intent = new Intent();
-		// intent.putExtra("flog", "文件");
-		// intent.setClass(getApplicationContext(), SettingActivity.class);
-		// startActivity(intent);
-		// }
 		else if (view == info) {
 			Intent intent = new Intent();
 			intent.setClass(getApplicationContext(), UserInfo.class);
@@ -427,76 +471,231 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
-	
-	
-	
-	
-	
-	//1.listView点击事件
-    @Override
+
+	// 1.listView点击事件
+	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-    	 final File f = mAdapter.getItem(position);
-    	
- 			 Intent intent = new Intent(MainActivity.this, localVideoView.class);
- 	         intent.putExtra("path", f.getPath());
- 	         startActivity(intent);
- 	    	
+		final File f = mAdapter.getItem(position);
+
+		Intent intent = new Intent(MainActivity.this, localVideoView.class);
+		intent.putExtra("path", f.getPath());
+		startActivity(intent);
 
 	}
-    /** 2.扫描SD卡 */
-    private class ScanVideoTask extends AsyncTask<Void, File, Void> {
 
-        @Override
-        protected Void doInBackground(Void... params) {
-        	//判断SD卡是否存在
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+	/** 2.扫描SD卡 */
+	private class ScanVideoTask extends AsyncTask<Void, File, Void> {
 
-          eachAllMedias(Environment.getExternalStorageDirectory());
-           
-        }
-            return null;
-        }
+		@Override
+		protected Void doInBackground(Void... params) {
+			// 判断SD卡是否存在
+			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+				eachAllMedias(Environment.getExternalStorageDirectory());
+			}
+			return null;
+		}
 
-        @Override
-        protected void onProgressUpdate(File... values) {
-            mAdapter.add(values[0]);
-            mAdapter.notifyDataSetChanged();
-        }
+		@Override
+		protected void onProgressUpdate(File... values) {
+			mAdapter.add(values[0]);
+			mAdapter.notifyDataSetChanged();
+		}
 
-        /** 遍历所有文件夹，查找出视频文件 */
-        public void eachAllMedias(File f) {
-            if (f != null && f.exists() && f.isDirectory()) {
-                File[] files = f.listFiles();
-                if (files != null) {
-                    for (File file : f.listFiles()) {
-                        if (file.isDirectory()) {
-                            eachAllMedias(file);
-                        } else if (file.exists() && file.canRead() && FileUtils.isVideoOrAudio(file)) {
-                            publishProgress(file);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    //3.listView适配器
-    public class FileAdapter extends ArrayAdapter<File> {
+		/** 遍历所有文件夹，查找出视频文件 */
+		public void eachAllMedias(File f) {
+			if (f != null && f.exists() && f.isDirectory()) {
+				File[] files = f.listFiles();
+				if (files != null) {
+					for (File file : f.listFiles()) {
+						if (file.isDirectory()) {
+							eachAllMedias(file);
+						} else if (file.exists() && file.canRead()
+								&& FileUtils.isVideoOrAudio(file)) {
+							publishProgress(file);
+						}
+					}
+				}
+			}
+		}
+	}
 
-        public FileAdapter(Context ctx, ArrayList<File> l) {
-            super(ctx, l);
-        }
+	// 3.listView适配器
+	public class FileAdapter extends ArrayAdapter<File> {
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            final File f = getItem(position);
-            if (convertView == null) {
-                final LayoutInflater mInflater =getLayoutInflater();
-                convertView = mInflater.inflate(R.layout.fragment_file_item, null);
-            }
-            ((TextView) convertView.findViewById(R.id.title)).setText(f.getName());
-            return convertView;
-        }
-    }
+		public FileAdapter(Context ctx, ArrayList<File> l) {
+			super(ctx, l);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			final File f = getItem(position);
+			if (convertView == null) {
+				final LayoutInflater mInflater = getLayoutInflater();
+				convertView = mInflater.inflate(R.layout.fragment_file_item,
+						null);
+			}
+			((TextView) convertView.findViewById(R.id.title)).setText(f
+					.getName());
+			return convertView;
+		}
+	}
+	//适配器
+	private class firstListAdapter extends BaseAdapter  {		
+		Context context;		
+		public firstListAdapter(Context context){
+			this.context = context;
+		}
+		@SuppressLint("InflateParams") @Override
+		public View getView(final int position, View convertView,ViewGroup parent) {
+			ViewHolder holder = null;
+			if (convertView == null) {				
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+				holder = new ViewHolder();	
+				holder.userName = (TextView)convertView.findViewById(R.id.user_name);
+				holder.userLogo = (ImageView)convertView.findViewById(R.id.user_logo);
+				holder.favMark = (ImageView)convertView.findViewById(R.id.item_action_fav);
+				holder.contentText = (TextView)convertView.findViewById(R.id.content_text);
+				holder.contentImage = (ImageView)convertView.findViewById(R.id.content_image);
+				holder.love = (TextView)convertView.findViewById(R.id.item_action_love);
+				holder.hate = (TextView)convertView.findViewById(R.id.item_action_hate);
+				holder.share = (TextView)convertView.findViewById(R.id.item_action_share);
+				holder.comment = (TextView)convertView.findViewById(R.id.item_action_comment);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			//1.Get QiangYu
+			final ShuoShuo shuoshuo = (ShuoShuo) getItem(position);	
+			final User user=shuoshuo.getAuthor();
+			if(user==null){
+				Toast.makeText(MainActivity.this, "user is null", Toast.LENGTH_LONG).show();
+			}
+			if(user.getAvatar()==null){
+				Toast.makeText(MainActivity.this, "Avatar is null", Toast.LENGTH_LONG).show();
+			}else {	
+				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options,null);				
+			}
+			//2.userName
+			holder.userName.setText(shuoshuo.getAuthor().getNickname());
+			//3.userLogo
+			holder.userLogo.setOnClickListener(new OnClickListener() {				
+				@Override
+				public void onClick(View v) {									
+						Intent intent=new Intent(MainActivity.this, otherInfo.class);
+						intent.putExtra("data",user);
+						startActivity(intent);					
+				}
+			});
+			//4.contentText
+			holder.contentText.setText(shuoshuo.getContent());
+			//5.Contentfigureurl
+			if(shuoshuo.getContentfigureurl()!=null){
+				holder.contentImage.setVisibility(View.VISIBLE);
+				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.contentImage, options,null);			
+			}else {
+				holder.contentImage.setVisibility(View.GONE);
+			}
+			//6.comment
+			holder.comment.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent(MainActivity.this, commentActivity.class);
+					intent.putExtra("data",shuoshuo);
+					startActivity(intent);
+				}
+			});
+			
+			return convertView;
+		}
+		class ViewHolder {
+			public TextView share;
+			public TextView comment;
+			public TextView hate;
+			public TextView love;
+			public ImageView contentImage;
+			public TextView contentText;
+			public TextView userName;
+			public ImageView favMark;
+			public ImageView userLogo;
+			TextView list_item_textView1;			
+		}
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return shuoshuoList.size();
+		}
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return shuoshuoList.get(position);
+		}
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+	}
+	
+	
+	//3.下拉刷新获取数据
+	private static final int STATE_REFRESH = 0;// 下拉刷新
+	private static final int STATE_MORE = 1;// 加载更多	
+	private int limit = 10;		// 每页的数据是10条
+	private int curPage = 0;		// 当前页的编号，从0开始
+	
+	/**
+	 * 分页获取数据
+	 * @param page	页码
+	 * @param actionType	ListView的操作类型（下拉刷新、上拉加载更多）
+	 */
+	private void queryData(final int page, final int actionType){
+		//Log.i("bmob", "pageN:"+page+" limit:"+limit+" actionType:"+actionType);
+		
+		BmobQuery<ShuoShuo> query = new BmobQuery<ShuoShuo>();
+		query.setLimit(limit);			// 1.设置每页多少条数据
+		query.setSkip(page*limit);		// 2.从第几条数据开始，
+		query.findObjects(this, new FindListener<ShuoShuo>() {
+			
+			@Override
+			public void onSuccess(List<ShuoShuo> arg0) {
+				// TODO Auto-generated method stub
+				
+				if(arg0.size()>0){
+					//1.初始化	（ 当是下拉刷新操作时，将当前页的编号重置为0，并把bankCards清空，重新添加）
+					if(actionType == STATE_REFRESH){
+						curPage = 0;
+						shuoshuoList.clear();
+					}
+					
+					// 将本次查询的数据添加到bankCards中
+					for (ShuoShuo td : arg0) {
+						shuoshuoList.add(td);
+						adapter.notifyDataSetChanged();
+					}
+					
+					// 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
+					curPage++;
+				//	showToast("第"+(page+1)+"页数据加载完成");
+				}else if(actionType == STATE_MORE){
+					//上拉操作，没有更多数据了
+					Toast.makeText(MainActivity.this, "not data", Toast.LENGTH_LONG).show();
+				}else if(actionType == STATE_REFRESH){
+					//下拉操作，没有更多数据了
+					Toast.makeText(MainActivity.this, "not data", Toast.LENGTH_LONG).show();
+				}
+				list.onRefreshComplete();
+			}		
+			@Override
+			public void onError(int arg0, String arg1) {
+				// TODO Auto-generated method stub
+				Toast.makeText(MainActivity.this, arg0+"error"+arg1, Toast.LENGTH_LONG).show();
+				//完成一次下拉刷新
+				list.onRefreshComplete();
+			}
+		});
+	}
 
 }
