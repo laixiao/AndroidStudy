@@ -5,8 +5,10 @@
 
       <ImageView
         android:id="@+id/text_image"
-        android:layout_width="64dip"
-        android:layout_height="64dip"
+       	android:layout_marginTop="200dp"
+       	android:layout_marginLeft="100dp"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
  

@@ -99,7 +99,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	PullToRefreshListView list;
 	private ILoadingLayout loadingLayout;
 	ListView listview;
-	DisplayImageOptions options;
+	private DisplayImageOptions options01,options02;
 	//1.get data
 	List<ShuoShuo> shuoshuoList = new ArrayList<ShuoShuo>();
 	firstListAdapter adapter;
@@ -117,14 +117,23 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		list=(PullToRefreshListView)findViewById(R.id.list);
 		adapter=new firstListAdapter(this);
 		
-		options = new DisplayImageOptions.Builder()
+		options01 = new DisplayImageOptions.Builder()
 		.showImageOnLoading(R.drawable.icon_profile)
 		.showImageForEmptyUri(R.drawable.icon_profile)
 		.showImageOnFail(R.drawable.icon_profile)
 		.cacheInMemory(true)
 		.cacheOnDisk(true)
 		.considerExifParams(true)
-//		.displayer(new RoundedBitmapDisplayer(90))
+		.displayer(new RoundedBitmapDisplayer(90))
+		.build();
+		options02 = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+		.displayer(new RoundedBitmapDisplayer(10))
 		.build();
 		
 		list.setMode(Mode.BOTH);
@@ -570,7 +579,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
 			}else {	
 			
-				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options,null);				
+				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options01,null);				
 			}
 			//2.userName
 			if(user!=null){
@@ -590,7 +599,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			//5.Contentfigureurl
 			if(shuoshuo.getContentfigureurl()!=null){
 				holder.contentImage.setVisibility(View.VISIBLE);
-				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.contentImage, options,null);			
+				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.contentImage, options02,null);			
 			}else {
 				holder.contentImage.setVisibility(View.GONE);
 			}
