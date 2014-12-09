@@ -15,9 +15,7 @@ public class ShuoShuo extends BmobObject implements Serializable{
 	private static final long serialVersionUID = -6280656428527540320L;
 	
 	private User author;
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	private String content;
 	private BmobFile Contentfigureurl;
 	private int love;
@@ -29,6 +27,9 @@ public class ShuoShuo extends BmobObject implements Serializable{
 	private boolean myLove;//до
 	private BmobRelation relation;
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public BmobRelation getRelation() {
 		return relation;
 	}

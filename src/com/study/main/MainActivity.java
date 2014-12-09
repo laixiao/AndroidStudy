@@ -13,6 +13,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.ResideMenu.ResideMenu;
@@ -128,7 +129,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		.cacheInMemory(true)
 		.cacheOnDisk(true)
 		.considerExifParams(true)
-	//	.displayer(new RoundedBitmapDisplayer(90))
+//		.displayer(new RoundedBitmapDisplayer(90))
 		.build();
 		
 		list.setMode(Mode.BOTH);
@@ -569,14 +570,15 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			final ShuoShuo shuoshuo = (ShuoShuo) getItem(position);	
 			final User user=shuoshuo.getAuthor();
 			if(user==null){
-				Toast.makeText(MainActivity.this, "user is null", Toast.LENGTH_LONG).show();
-			}
-			if(user.getAvatar()==null){
-				Toast.makeText(MainActivity.this, "Avatar is null", Toast.LENGTH_LONG).show();
+				Toast.makeText(MainActivity.this, position+"user is null", Toast.LENGTH_LONG).show();
+			}else if(user.getAvatar()==null){
+				Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
 			}else {	
+			
 				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options,null);				
 			}
 			//2.userName
+			if(user!=null){
 			holder.userName.setText(shuoshuo.getAuthor().getNickname());
 			//3.userLogo
 			holder.userLogo.setOnClickListener(new OnClickListener() {				
@@ -587,6 +589,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 						startActivity(intent);					
 				}
 			});
+			}
 			//4.contentText
 			holder.contentText.setText(shuoshuo.getContent());
 			//5.Contentfigureurl
@@ -656,7 +659,8 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		
 		BmobQuery<ShuoShuo> query = new BmobQuery<ShuoShuo>();
 		query.setLimit(limit);			// 1.设置每页多少条数据
-		query.setSkip(page*limit);		// 2.从第几条数据开始，
+		query.setSkip(page*limit);		// 2.从第几条数据开始
+		query.order("-createdAt");
 		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override
