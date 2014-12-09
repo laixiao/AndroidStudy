@@ -557,15 +557,16 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
-				holder.userName = (TextView)convertView.findViewById(R.id.list_item_user_name);
-				holder.userLogo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
-				holder.favMark = (ImageView)convertView.findViewById(R.id.list_item_action_fav);
-				holder.contentText = (TextView)convertView.findViewById(R.id.list_item_content_text);
-				holder.contentImage = (ImageView)convertView.findViewById(R.id.list_item_content_image);
-				holder.love = (TextView)convertView.findViewById(R.id.list_item_action_love);
-				holder.hate = (TextView)convertView.findViewById(R.id.list_item_action_hate);
-				holder.share = (TextView)convertView.findViewById(R.id.list_item_action_share);
-				holder.comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
+				holder.list_item_user_name = (TextView)convertView.findViewById(R.id.list_item_user_name);
+				holder.list_item_user_logo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
+				holder.list_item_action_fav = (ImageView)convertView.findViewById(R.id.list_item_action_fav);
+				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
+				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);
+				holder.list_item_action_love = (TextView)convertView.findViewById(R.id.list_item_action_love);
+				holder.list_item_action_hate = (TextView)convertView.findViewById(R.id.list_item_action_hate);
+				holder.list_item_action_share = (TextView)convertView.findViewById(R.id.list_item_action_share);
+				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
+				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -577,15 +578,14 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				Toast.makeText(MainActivity.this, position+"user is null", Toast.LENGTH_LONG).show();
 			}else if(user.getAvatar()==null){
 				Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
-			}else {	
-			
-				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.userLogo, options01,null);				
+			}else {				
+				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.list_item_user_logo, options01,null);				
 			}
 			//2.userName
 			if(user!=null){
-			holder.userName.setText(shuoshuo.getAuthor().getNickname());
+			holder.list_item_user_name.setText(shuoshuo.getAuthor().getNickname());
 			//3.userLogo
-			holder.userLogo.setOnClickListener(new OnClickListener() {				
+			holder.list_item_user_logo.setOnClickListener(new OnClickListener() {				
 				@Override
 				public void onClick(View v) {									
 						Intent intent=new Intent(MainActivity.this, otherInfo.class);
@@ -595,16 +595,16 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			});
 			}
 			//4.contentText
-			holder.contentText.setText(shuoshuo.getContent());
+			holder.list_item_content_text.setText(shuoshuo.getContent());
 			//5.Contentfigureurl
 			if(shuoshuo.getContentfigureurl()!=null){
-				holder.contentImage.setVisibility(View.VISIBLE);
-				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.contentImage, options02,null);			
+				holder.list_item_content_image.setVisibility(View.VISIBLE);
+				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.list_item_content_image, options02,null);			
 			}else {
-				holder.contentImage.setVisibility(View.GONE);
+				holder.list_item_content_image.setVisibility(View.GONE);
 			}
 			//6.comment
-			holder.comment.setOnClickListener(new View.OnClickListener() {
+			holder.list_item_action_comment.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -614,19 +614,23 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 					startActivity(intent);
 				}
 			});
+			//7.time 
+			holder.list_item_time.setText(shuoshuo.getCreatedAt());
+			
+			
 			
 			return convertView;
 		}
 		class ViewHolder {
-			public TextView share;
-			public TextView comment;
-			public TextView hate;
-			public TextView love;
-			public ImageView contentImage;
-			public TextView contentText;
-			public TextView userName;
-			public ImageView favMark;
-			public ImageView userLogo;
+			public TextView list_item_action_share,list_item_time;
+			public TextView list_item_action_comment;
+			public TextView list_item_action_hate;
+			public TextView list_item_action_love;
+			public ImageView list_item_content_image;
+			public TextView list_item_content_text;
+			public TextView list_item_user_name;
+			public ImageView list_item_action_fav;
+			public ImageView list_item_user_logo;
 			TextView list_item_textView1;			
 		}
 		@Override

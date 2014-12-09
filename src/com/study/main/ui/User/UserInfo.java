@@ -51,27 +51,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class UserInfo extends Activity {
-	// private FinalBitmap fb;
 	private Button submit01, userinfo_quit;
-
 	private String dateTime,iconUrl,Signature;
-
-
 	private ImageView personico, user_infosex;
 	User currentUser;
-	private EditText userinfo_phonenumber, userinfo_nickname;
-	private TextView userinfo_birthday, signatureEdit;
-
+	private TextView userinfo_birthday, signatureEdit,userinfo_phonenumber, userinfo_nickname;
 	boolean isSex;
 	private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
-			Bundle bundle = msg.getData();
-			
+			Bundle bundle = msg.getData();			
 			signatureEdit.setText(bundle.getString("Signature"));
-
 			userinfo_phonenumber.setText(bundle.getString("PhoneNumber"));
 			userinfo_nickname.setText(bundle.getString("Nickname"));
 			userinfo_birthday.setText(bundle.getString("Birthday"));
@@ -93,7 +85,7 @@ public class UserInfo extends Activity {
 		.cacheInMemory(true)
 		.cacheOnDisk(true)
 		.considerExifParams(true)
-	//	.displayer(new RoundedBitmapDisplayer(90))
+		.displayer(new RoundedBitmapDisplayer(90))
 		.build();
 		// TODO Auto-generated constructor stub
 		init();
@@ -101,18 +93,14 @@ public class UserInfo extends Activity {
 	}
 
 	private void init() {
-
 		userinfo_quit = (Button) this.findViewById(R.id.userinfo_quit);
 		submit01 = (Button) this.findViewById(R.id.submit01);
 		personico = (ImageView) this.findViewById(R.id.personico);
 		user_infosex = (ImageView) this.findViewById(R.id.user_infosex);
 		signatureEdit = (TextView) this.findViewById(R.id.signatureEdit);
-
-		userinfo_phonenumber = (EditText) this
-				.findViewById(R.id.userinfo_phonenumber);
-		userinfo_nickname = (EditText) this.findViewById(R.id.userinfo_nickname);
-		userinfo_birthday = (TextView) this
-				.findViewById(R.id.userinfo_birthday);
+		userinfo_phonenumber = (TextView) this.findViewById(R.id.userinfo_phonenumber);
+		userinfo_nickname = (TextView) this.findViewById(R.id.userinfo_nickname);
+		userinfo_birthday = (TextView) this.findViewById(R.id.userinfo_birthday);
 
 		currentUser = BmobUser.getCurrentUser(this, User.class);
 		if (currentUser != null) {
@@ -136,8 +124,7 @@ public class UserInfo extends Activity {
 		userQuery.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		// userQuery.setMaxCacheAge(100000L);
 		userQuery.getObject(UserInfo.this,currentUser.getObjectId(), new GetListener<User>() {			
-			public void onSuccess(User arg0) {	
-				
+			public void onSuccess(User arg0) {					
 				if(arg0.getAvatar()!=null){
 					ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(), personico, options,
 							new SimpleImageLoadingListener(){
