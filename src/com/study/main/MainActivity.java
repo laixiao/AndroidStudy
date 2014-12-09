@@ -557,15 +557,15 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
-				holder.userName = (TextView)convertView.findViewById(R.id.user_name);
-				holder.userLogo = (ImageView)convertView.findViewById(R.id.user_logo);
-				holder.favMark = (ImageView)convertView.findViewById(R.id.item_action_fav);
-				holder.contentText = (TextView)convertView.findViewById(R.id.content_text);
-				holder.contentImage = (ImageView)convertView.findViewById(R.id.content_image);
-				holder.love = (TextView)convertView.findViewById(R.id.item_action_love);
-				holder.hate = (TextView)convertView.findViewById(R.id.item_action_hate);
-				holder.share = (TextView)convertView.findViewById(R.id.item_action_share);
-				holder.comment = (TextView)convertView.findViewById(R.id.item_action_comment);
+				holder.userName = (TextView)convertView.findViewById(R.id.list_item_user_name);
+				holder.userLogo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
+				holder.favMark = (ImageView)convertView.findViewById(R.id.list_item_action_fav);
+				holder.contentText = (TextView)convertView.findViewById(R.id.list_item_content_text);
+				holder.contentImage = (ImageView)convertView.findViewById(R.id.list_item_content_image);
+				holder.love = (TextView)convertView.findViewById(R.id.list_item_action_love);
+				holder.hate = (TextView)convertView.findViewById(R.id.list_item_action_hate);
+				holder.share = (TextView)convertView.findViewById(R.id.list_item_action_share);
+				holder.comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
