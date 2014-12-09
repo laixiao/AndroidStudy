@@ -595,7 +595,12 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			});
 			}
 			//4.contentText
+			if(shuoshuo.getContent()!=null){
+				holder.list_item_content_text.setVisibility(View.VISIBLE);
 			holder.list_item_content_text.setText(shuoshuo.getContent());
+			}else{
+				holder.list_item_content_text.setVisibility(View.INVISIBLE);
+			}
 			//5.Contentfigureurl
 			if(shuoshuo.getContentfigureurl()!=null){
 				holder.list_item_content_image.setVisibility(View.VISIBLE);
