@@ -25,30 +25,25 @@ import android.widget.Toast;
 //setColorScheme(): 设置进度条的颜色主题，最多能设置四种 默认是黑灰色 具体要和APP的整体配色融合
 
 public class test1 extends Activity{
-	 DisplayImageOptions options;
+	private DisplayImageOptions options;//1.
+	ImageLoader imageLoader = ImageLoader.getInstance();//2.
+	
+	
 	 private ImageView imageView1;
-	String url="http://file.bmob.cn/M00/D7/A0/oYYBAFSDBkiATQ3rAAA2S60H7pA2786353";
+	String url="http://file.bmob.cn/M00/D9/C0/oYYBAFSGnaWAay9AAACcMWNHV6k7828490";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.test1);
-
-		imageView1=(ImageView) this.findViewById(R.id.imageView1);
+		 //3.
+        options = new DisplayImageOptions.Builder()
+		.displayer(new RoundedBitmapDisplayer(90)).build();
+		imageView1=(ImageView) this.findViewById(R.id.text_image);
 		
-		options = new DisplayImageOptions.Builder()
-		.showImageOnLoading(R.drawable.icon_profile)
-		.showImageForEmptyUri(R.drawable.icon_profile)
-		.showImageOnFail(R.drawable.icon_profile)
-		.cacheInMemory(true)
-		.cacheOnDisk(true)
-		.considerExifParams(true)
-		//.displayer(new RoundedBitmapDisplayer(90))
-		.build();
-		// TODO Auto-generated constructor stub
-		
-		ImageLoader.getInstance().displayImage(url, imageView1,options);
+		//4.
+		imageLoader.displayImage("http://file.bmob.cn/M00/D9/C0/oYYBAFSGnaWAay9AAACcMWNHV6k7828490",imageView1, options);
 		
 	}
 

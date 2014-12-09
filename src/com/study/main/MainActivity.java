@@ -71,25 +71,20 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	private Button fabiaoshuoshuo;
 	private ImageButton imageButton1;
 	private ResideMenu resideMenu;
-
 	private ResideMenuItem menu_item01;
 	private ResideMenuItem menu_item02;
 	private ResideMenuItem menu_item03;
 	private ResideMenuItem menu_item04;
 	private ResideMenuItem menu_item05;
 	// private ResideMenuItem itemFile;
-
 	private ResideMenuInfo info;
 	private ResideMenuSetting setting;
 	private TextView text1, text2, text3;
-
 	private boolean is_closed = false;
 	private long mExitTime;
 	private TextView shezhi;
-
 	private FileAdapter mAdapter;
 	private ListView listView;
-
 	private SwipeRefreshLayout swip;
 	Handler handler = new Handler() {
 		@Override
