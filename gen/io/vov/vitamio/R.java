@@ -13,18 +13,18 @@ public final class R {
 		public static final int transparent = 0x7f06000d;
 	}
 	public static final class drawable {
-		public static final int mediacontroller_button = 0x7f020078;
-		public static final int mediacontroller_pause = 0x7f020079;
-		public static final int mediacontroller_play = 0x7f02007a;
-		public static final int scrubber_control_disabled_holo = 0x7f02008a;
-		public static final int scrubber_control_focused_holo = 0x7f02008b;
-		public static final int scrubber_control_normal_holo = 0x7f02008c;
-		public static final int scrubber_control_pressed_holo = 0x7f02008d;
-		public static final int scrubber_control_selector_holo = 0x7f02008e;
-		public static final int scrubber_primary_holo = 0x7f02008f;
-		public static final int scrubber_progress_horizontal_holo_dark = 0x7f020090;
-		public static final int scrubber_secondary_holo = 0x7f020091;
-		public static final int scrubber_track_holo_dark = 0x7f020092;
+		public static final int mediacontroller_button = 0x7f020079;
+		public static final int mediacontroller_pause = 0x7f02007a;
+		public static final int mediacontroller_play = 0x7f02007b;
+		public static final int scrubber_control_disabled_holo = 0x7f02008b;
+		public static final int scrubber_control_focused_holo = 0x7f02008c;
+		public static final int scrubber_control_normal_holo = 0x7f02008d;
+		public static final int scrubber_control_pressed_holo = 0x7f02008e;
+		public static final int scrubber_control_selector_holo = 0x7f02008f;
+		public static final int scrubber_primary_holo = 0x7f020090;
+		public static final int scrubber_progress_horizontal_holo_dark = 0x7f020091;
+		public static final int scrubber_secondary_holo = 0x7f020092;
+		public static final int scrubber_track_holo_dark = 0x7f020093;
 	}
 	public static final class id {
 		public static final int mediacontroller_file_name = 0x7f0a00c1;

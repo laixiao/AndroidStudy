@@ -167,11 +167,6 @@ public class Fabiaoshuoshuo extends Activity {
 		if (figureFile != null) {
 			shuoshuo.setContentfigureurl(figureFile);
 		}
-		shuoshuo.setLove(0);
-		shuoshuo.setHate(0);
-		shuoshuo.setShare(0);
-		shuoshuo.setComment(0);
-		shuoshuo.setPass(true);
 		
 		shuoshuo.save(this, new SaveListener() {
 

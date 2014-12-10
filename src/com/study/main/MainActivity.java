@@ -2,10 +2,14 @@ package com.study.main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
+
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -86,6 +90,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	private FileAdapter mAdapter;
 	private ListView listView;
 	private SwipeRefreshLayout swip;
+	User currentUser;
 	Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -108,6 +113,15 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		
+		currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);
+		if(currentUser==null){
+			Intent intent=new Intent();
+			intent.setClass(MainActivity.this, LoginAndRegister.class);
+			startActivity(intent);
+		
+		}	
+		
 		init();
 		init3();
 	}
@@ -548,12 +562,16 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	//适配器
 	private class firstListAdapter extends BaseAdapter  {		
 		Context context;		
+		ViewHolder holder = null;
+		ShuoShuo shuoshuo;
 		public firstListAdapter(Context context){
 			this.context = context;
 		}
 		@SuppressLint("InflateParams") @Override
 		public View getView(final int position, View convertView,ViewGroup parent) {
-			ViewHolder holder = null;
+			
+			
+			
 			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
@@ -563,7 +581,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
 				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);
 				holder.list_item_action_love = (TextView)convertView.findViewById(R.id.list_item_action_love);
-			
+				
 				holder.list_item_action_share = (TextView)convertView.findViewById(R.id.list_item_action_share);
 				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
 				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
@@ -572,24 +590,24 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder = (ViewHolder) convertView.getTag();
 			}
 			//1.Get QiangYu
-			final ShuoShuo shuoshuo = (ShuoShuo) getItem(position);	
-			final User user=shuoshuo.getAuthor();
-			if(user==null){
+			shuoshuo= (ShuoShuo) getItem(position);	
+			final User author=shuoshuo.getAuthor();
+			if(author==null){
 				Toast.makeText(MainActivity.this, position+"user is null", Toast.LENGTH_LONG).show();
-			}else if(user.getAvatar()==null){
+			}else if(author.getAvatar()==null){
 				Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
 			}else {				
-				ImageLoader.getInstance().displayImage(user.getAvatar().getFileUrl(), holder.list_item_user_logo, options01,null);				
+				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(), holder.list_item_user_logo, options01,null);				
 			}
 			//2.userName
-			if(user!=null){
+			if(author!=null){
 			holder.list_item_user_name.setText(shuoshuo.getAuthor().getNickname());
 			//3.userLogo
 			holder.list_item_user_logo.setOnClickListener(new OnClickListener() {				
 				@Override
 				public void onClick(View v) {									
 						Intent intent=new Intent(MainActivity.this, otherInfo.class);
-						intent.putExtra("data",user);
+						intent.putExtra("data",author);
 						startActivity(intent);					
 				}
 			});
@@ -621,16 +639,49 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			});
 			//7.time 
 			holder.list_item_time.setText(shuoshuo.getCreatedAt());
-			
-			
+			//8.love
+//			
+//			boolean isLove=false;
+//			
+//			if(shuoshuo.getFavourUser()!=null){
+//				 Favour favour=shuoshuo.getFavourUser();
+//				 	
+//			}
+//			
+//			
+//			holder.list_item_action_love.setOnClickListener(new OnClickListener() {				
+//				@Override
+//				public void onClick(View v) {	
+//					//ShuoShuo shuoshuo01=new ShuoShuo();
+////					ShuoShuo shuoshuo1=new ShuoShuo();
+////					shuoshuo1.setObjectId(shuoshuo.getObjectId());
+////					shuoshuo1.addUnique("loveList",currentUser.getObjectId());
+////					shuoshuo1.update(context,new UpdateListener() {					
+////						
+////						public void onSuccess() {
+////							
+////							Toast.makeText(MainActivity.this, "赞成功", Toast.LENGTH_LONG).show();
+////							
+////						}
+////						
+////						@Override
+////						public void onFailure(int arg0, String arg1) {
+////							
+////							Toast.makeText(MainActivity.this, "赞失败:"+arg1, Toast.LENGTH_LONG).show();
+////							
+////						}
+////					});
+//					
+//					 holder.list_item_action_love.setText("已赞");
+//				}
+//			});
+
 			
 			return convertView;
 		}
 		class ViewHolder {
-			public TextView list_item_action_share,list_item_time;
+			public TextView list_item_action_share,list_item_time,list_item_action_love;
 			public TextView list_item_action_comment;
-		
-			public TextView list_item_action_love;
 			public ImageView list_item_content_image;
 			public TextView list_item_content_text;
 			public TextView list_item_user_name;
@@ -675,6 +726,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		query.setSkip(page*limit);		// 2.从第几条数据开始
 		query.order("-createdAt");
 		query.include("author");
+		query.include("favour");
 		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override

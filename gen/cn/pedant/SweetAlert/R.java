@@ -43,11 +43,11 @@ public final class R {
 		public static final int error_center_x = 0x7f020059;
 		public static final int error_circle = 0x7f02005a;
 		public static final int gray_button_background = 0x7f02005c;
-		public static final int red_button_background = 0x7f020081;
-		public static final int success_bow = 0x7f020098;
-		public static final int success_circle = 0x7f020099;
-		public static final int warning_circle = 0x7f0200b5;
-		public static final int warning_sigh = 0x7f0200b6;
+		public static final int red_button_background = 0x7f020082;
+		public static final int success_bow = 0x7f020099;
+		public static final int success_circle = 0x7f02009a;
+		public static final int warning_circle = 0x7f0200b6;
+		public static final int warning_sigh = 0x7f0200b7;
 	}
 	public static final class id {
 		public static final int cancel_button = 0x7f0a006d;

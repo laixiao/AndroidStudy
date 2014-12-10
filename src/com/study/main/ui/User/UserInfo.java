@@ -62,7 +62,7 @@ public class UserInfo extends Activity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
+			
 			Bundle bundle = msg.getData();			
 			signatureEdit.setText(bundle.getString("Signature"));
 			userinfo_phonenumber.setText(bundle.getString("PhoneNumber"));
@@ -104,13 +104,11 @@ public class UserInfo extends Activity {
 		userinfo_birthday = (TextView) this.findViewById(R.id.userinfo_birthday);
 
 		currentUser = BmobUser.getCurrentUser(this, User.class);
-		if (currentUser != null) {
-			
+		if (currentUser != null) {			
 			setListener();
 			initView();
 		} else {
-			Toast.makeText(UserInfo.this, "please login", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(UserInfo.this, "please login", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent();
 			intent.setClass(UserInfo.this, LoginAndRegister.class);
 			startActivity(intent);
@@ -134,8 +132,7 @@ public class UserInfo extends Activity {
 										Bitmap loadedImage) {
 									// TODO Auto-generated method stub
 									super.onLoadingComplete(imageUri, view, loadedImage);
-								}
-						
+								}						
 					});
 				}
 					isSex = arg0.isSex();
@@ -147,7 +144,6 @@ public class UserInfo extends Activity {
 					Message msg = Message.obtain(handler);
 					Bundle bundle = new Bundle();
 					bundle.putString("Signature", arg0.getSignature());
-
 					bundle.putString("Birthday", arg0.getBirthday());
 					bundle.putString("PhoneNumber", arg0.getPhonenumber());
 					bundle.putString("Nickname", arg0.getNickname());
