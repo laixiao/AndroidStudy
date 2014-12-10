@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
+import com.study.main.Entity.Favour;
 import com.study.main.ResideMenu.ResideMenu;
 import com.study.main.ResideMenu.ResideMenuInfo;
 import com.study.main.ResideMenu.ResideMenuItem;
@@ -597,7 +598,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			}else if(author.getAvatar()==null){
 				Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
 			}else {				
-				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(), holder.list_item_user_logo, options01,null);				
+				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(MainActivity.this), holder.list_item_user_logo, options01,null);				
 			}
 			//2.userName
 			if(author!=null){
@@ -622,7 +623,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			//5.Contentfigureurl
 			if(shuoshuo.getContentfigureurl()!=null){
 				holder.list_item_content_image.setVisibility(View.VISIBLE);
-				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(), holder.list_item_content_image, options02,null);			
+				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(MainActivity.this), holder.list_item_content_image, options02,null);			
 			}else {
 				holder.list_item_content_image.setVisibility(View.GONE);
 			}
@@ -675,6 +676,58 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 //					 holder.list_item_action_love.setText("已赞");
 //				}
 //			});
+			
+			//9.favour
+			
+			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+					BmobQuery<Favour> query=new BmobQuery<Favour>();
+					query.addWhereEqualTo("shuoshuo", shuoshuo);
+					query.findObjects(context, new FindListener<Favour>() {
+						
+						@Override
+						public void onSuccess(List<Favour> arg0) {
+							boolean isFavour=false;
+							for(Favour i:arg0){
+								if(i.getUserId().equals(currentUser.getObjectId())){
+									Toast.makeText(MainActivity.this, "亲已经收藏过了哦", Toast.LENGTH_LONG).show();	
+									isFavour=true;
+								}
+							}
+							if(isFavour){								
+								
+							}else{
+								Favour favour=new Favour();
+								favour.setShuoshuo(shuoshuo);
+								favour.setUserId(currentUser.getObjectId());
+								favour.save(context, new SaveListener() {
+									
+									@Override
+									public void onSuccess() {
+										// TODO Auto-generated method stub
+										Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();	
+									}
+									
+									@Override
+									public void onFailure(int arg0, String arg1) {
+										// TODO Auto-generated method stub
+										Toast.makeText(MainActivity.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
+									}
+								});
+							}
+						}
+						
+						@Override
+						public void onError(int arg0, String arg1) {
+							// TODO Auto-generated method stub
+							Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+						}
+					});
+					
+					
+				}
+			});
 
 			
 			return convertView;
@@ -726,7 +779,6 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		query.setSkip(page*limit);		// 2.从第几条数据开始
 		query.order("-createdAt");
 		query.include("author");
-		query.include("favour");
 		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override

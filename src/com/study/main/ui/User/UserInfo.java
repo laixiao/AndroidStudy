@@ -125,7 +125,7 @@ public class UserInfo extends Activity {
 		userQuery.getObject(UserInfo.this,currentUser.getObjectId(), new GetListener<User>() {			
 			public void onSuccess(User arg0) {					
 				if(arg0.getAvatar()!=null){
-					ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(), personico, options,
+					ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(UserInfo.this), personico, options,
 							new SimpleImageLoadingListener(){
 								@Override
 								public void onLoadingComplete(String imageUri, View view,
