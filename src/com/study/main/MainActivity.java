@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -47,6 +49,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -563,16 +567,15 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	//适配器
 	private class firstListAdapter extends BaseAdapter  {		
 		Context context;		
-		ViewHolder holder = null;
-		ShuoShuo shuoshuo;
+		
 		public firstListAdapter(Context context){
 			this.context = context;
 		}
 		@SuppressLint("InflateParams") @Override
 		public View getView(final int position, View convertView,ViewGroup parent) {
-			
-			
-			
+			ViewHolder holder = null;
+			final ShuoShuo shuoshuo;
+				
 			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
@@ -641,7 +644,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			//7.time 
 			holder.list_item_time.setText(shuoshuo.getCreatedAt());
 			//8.love
-//			
+			
 //			boolean isLove=false;
 //			
 //			if(shuoshuo.getFavourUser()!=null){
@@ -678,55 +681,74 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 //			});
 			
 			//9.favour
-//			final String currenUserid=currentUser.getObjectId();
-//			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
-//				@Override
-//				public void onClick(View v) {
-//					BmobQuery<Favour> query=new BmobQuery<Favour>();
-//					query.addWhereEqualTo("shuoshuo", shuoshuo);
-//					query.findObjects(context, new FindListener<Favour>() {
-//						
-//						@Override
-//						public void onSuccess(List<Favour> arg0) {
-//							boolean isFavour=false;
-//							for(Favour i:arg0){
-//								if(i.getUserId().equals(currenUserid)){
-//									Toast.makeText(MainActivity.this, "亲已经收藏过了哦", Toast.LENGTH_LONG).show();	
-//									isFavour=true;
-//								}
-//							}
-//							if(isFavour){																
-//							}else{
-//								Favour favour=new Favour();
-//								favour.setShuoshuo(shuoshuo);
-//								favour.setUserId(currenUserid);
-//								favour.save(context, new SaveListener() {
-//									
-//									@Override
-//									public void onSuccess() {
-//										// TODO Auto-generated method stub
-//										Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();	
-//									}
-//									
-//									@Override
-//									public void onFailure(int arg0, String arg1) {
-//										// TODO Auto-generated method stub
-//										Toast.makeText(MainActivity.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
-//									}
-//								});
-//							}
-//						}
-//						
-//						@Override
-//						public void onError(int arg0, String arg1) {
-//							// TODO Auto-generated method stub
-//							Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
-//						}
-//					});
-//					
-//					
-//				}
-//			});
+			
+			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+					BmobQuery<Favour> query=new BmobQuery<Favour>();
+					query.addWhereRelatedTo("favour", new BmobPointer(shuoshuo));
+					query.include("user");
+					query.findObjects(context, new FindListener<Favour>() {						
+						@Override
+						public void onSuccess(List<Favour> arg0) {
+							boolean isFavour=false;
+							for(Favour i:arg0){								
+								if(i.getUser()!=null&&currentUser!=null){
+									if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
+										isFavour=true;										
+									}
+								}
+							}
+							Log.e("=",""+isFavour);
+							if(isFavour==true){	
+								Toast.makeText(MainActivity.this, "亲，已经收藏过啦", Toast.LENGTH_LONG).show();
+							}else if(isFavour==false){
+								currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);
+								final Favour favour=new Favour();								
+								favour.setShuoshuo(shuoshuo);
+								favour.setUser(currentUser);
+								favour.save(context, new SaveListener() {									
+									@Override
+									public void onSuccess() {
+										BmobRelation favours=new BmobRelation();
+										favours.add(favour);
+										shuoshuo.setFavour(favours);
+										shuoshuo.update(context,new UpdateListener() {
+											
+											@Override
+											public void onSuccess() {
+												// TODO Auto-generated method stub
+												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();
+											}
+											
+											@Override
+											public void onFailure(int arg0, String arg1) {
+												// TODO Auto-generated method stub
+												Toast.makeText(MainActivity.this, "收藏失败2："+arg1, Toast.LENGTH_LONG).show();
+											}
+										});
+									}
+									
+									@Override
+									public void onFailure(int arg0, String arg1) {
+										// TODO Auto-generated method stub
+										Toast.makeText(MainActivity.this, "收藏失败1："+arg1, Toast.LENGTH_LONG).show();
+									}
+								});
+							}
+							
+						}
+						
+						@Override
+						public void onError(int arg0, String arg1) {
+							// TODO Auto-generated method stub
+							Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+						}
+					});
+					
+					
+				}
+			});
 
 			
 			return convertView;

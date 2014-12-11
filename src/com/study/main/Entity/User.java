@@ -13,22 +13,6 @@ public class User extends BmobUser{
 	private BmobFile avatar;
 	private Integer favourcount;
 	private BmobRelation shuoshuo;
-
-	
-	@Override
-	public String toString() {
-		return "User [sex=" + sex + ", phonenumber=" + phonenumber
-				+ ", nickname=" + nickname + ", birthday=" + birthday
-				+ ", signature=" + signature + ", avatar=" + avatar
-				+ ", favourcount=" + favourcount + ", shuoshuo=" + shuoshuo
-				+ "]";
-	}
-	public BmobRelation getShuoshuo() {
-		return shuoshuo;
-	}
-	public void setShuoshuo(BmobRelation shuoshuo) {
-		this.shuoshuo = shuoshuo;
-	}
 	public boolean isSex() {
 		return sex;
 	}
@@ -71,8 +55,22 @@ public class User extends BmobUser{
 	public void setFavourcount(Integer favourcount) {
 		this.favourcount = favourcount;
 	}
+	public BmobRelation getShuoshuo() {
+		return shuoshuo;
+	}
+	public void setShuoshuo(BmobRelation shuoshuo) {
+		this.shuoshuo = shuoshuo;
+	}
+	@Override
+	public String toString() {
+		return "User [sex=" + sex + ", phonenumber=" + phonenumber
+				+ ", nickname=" + nickname + ", birthday=" + birthday
+				+ ", signature=" + signature + ", avatar=" + avatar
+				+ ", favourcount=" + favourcount + ", shuoshuo=" + shuoshuo
+				+ "]";
+	}
 
-
+	
 	
 
 

@@ -5,7 +5,9 @@ import cn.bmob.v3.BmobObject;
 public class Favour extends BmobObject{
 
 	private ShuoShuo shuoshuo;
-	private String userId;
+	private User user;
+	
+	
 	
 	public ShuoShuo getShuoshuo() {
 		return shuoshuo;
@@ -13,17 +15,16 @@ public class Favour extends BmobObject{
 	public void setShuoshuo(ShuoShuo shuoshuo) {
 		this.shuoshuo = shuoshuo;
 	}
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
-
-
-
-	
+	@Override
+	public String toString() {
+		return "Favour [shuoshuo=" + shuoshuo + ", user=" + user + "]";
+	}
 	
 	
 }
