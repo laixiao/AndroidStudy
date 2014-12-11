@@ -15,8 +15,15 @@ public class ShuoShuo extends BmobObject implements Serializable{
 	private BmobFile Contentfigureurl;
 	private BmobRelation love;	
 	private BmobRelation favour;
+	private Boolean isFavour;
 
 	
+	public Boolean getIsFavour() {
+		return isFavour;
+	}
+	public void setIsFavour(Boolean isFavour) {
+		this.isFavour = isFavour;
+	}
 	public BmobRelation getLove() {
 		return love;
 	}

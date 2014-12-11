@@ -681,70 +681,76 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 //			});
 			
 			//9.favour
-			
+			if(shuoshuo.getIsFavour()!=null){
+			if(shuoshuo.getIsFavour()==true){
+				holder.list_item_action_fav.setText("已收藏");
+			}else if(shuoshuo.getIsFavour()==false){
+				holder.list_item_action_fav.setText("收藏");
+			}
+			}
 			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
 				@Override
 				public void onClick(View v) {
-					BmobQuery<Favour> query=new BmobQuery<Favour>();
-					query.addWhereRelatedTo("favour", new BmobPointer(shuoshuo));
-					query.include("user");
-					query.findObjects(context, new FindListener<Favour>() {						
-						@Override
-						public void onSuccess(List<Favour> arg0) {
-							boolean isFavour=false;
-							for(Favour i:arg0){								
-								if(i.getUser()!=null&&currentUser!=null){
-									if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
-										isFavour=true;										
-									}
-								}
-							}
-							Log.e("=",""+isFavour);
-							if(isFavour==true){	
-								Toast.makeText(MainActivity.this, "亲，已经收藏过啦", Toast.LENGTH_LONG).show();
-							}else if(isFavour==false){
-								currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);
-								final Favour favour=new Favour();								
-								favour.setShuoshuo(shuoshuo);
-								favour.setUser(currentUser);
-								favour.save(context, new SaveListener() {									
-									@Override
-									public void onSuccess() {
-										BmobRelation favours=new BmobRelation();
-										favours.add(favour);
-										shuoshuo.setFavour(favours);
-										shuoshuo.update(context,new UpdateListener() {
-											
-											@Override
-											public void onSuccess() {
-												// TODO Auto-generated method stub
-												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();
-											}
-											
-											@Override
-											public void onFailure(int arg0, String arg1) {
-												// TODO Auto-generated method stub
-												Toast.makeText(MainActivity.this, "收藏失败2："+arg1, Toast.LENGTH_LONG).show();
-											}
-										});
-									}
-									
-									@Override
-									public void onFailure(int arg0, String arg1) {
-										// TODO Auto-generated method stub
-										Toast.makeText(MainActivity.this, "收藏失败1："+arg1, Toast.LENGTH_LONG).show();
-									}
-								});
-							}
-							
-						}
-						
-						@Override
-						public void onError(int arg0, String arg1) {
-							// TODO Auto-generated method stub
-							Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
-						}
-					});
+//					BmobQuery<Favour> query=new BmobQuery<Favour>();
+//					query.addWhereRelatedTo("favour", new BmobPointer(shuoshuo));
+//					query.include("user");
+//					query.findObjects(context, new FindListener<Favour>() {						
+//						@Override
+//						public void onSuccess(List<Favour> arg0) {
+//							boolean isFavour=false;
+//							for(Favour i:arg0){								
+//								if(i.getUser()!=null&&currentUser!=null){
+//									if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
+//										isFavour=true;										
+//									}
+//								}
+//							}
+//							Log.e("=",""+isFavour);
+//							if(isFavour==true){	
+//								Toast.makeText(MainActivity.this, "亲，已经收藏过啦", Toast.LENGTH_LONG).show();
+//							}else if(isFavour==false){
+//								currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);
+//								final Favour favour=new Favour();								
+//								favour.setShuoshuo(shuoshuo);
+//								favour.setUser(currentUser);
+//								favour.save(context, new SaveListener() {									
+//									@Override
+//									public void onSuccess() {
+//										BmobRelation favours=new BmobRelation();
+//										favours.add(favour);
+//										shuoshuo.setFavour(favours);
+//										shuoshuo.update(context,new UpdateListener() {
+//											
+//											@Override
+//											public void onSuccess() {
+//												// TODO Auto-generated method stub
+//												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();
+//											}
+//											
+//											@Override
+//											public void onFailure(int arg0, String arg1) {
+//												// TODO Auto-generated method stub
+//												Toast.makeText(MainActivity.this, "收藏失败2："+arg1, Toast.LENGTH_LONG).show();
+//											}
+//										});
+//									}
+//									
+//									@Override
+//									public void onFailure(int arg0, String arg1) {
+//										// TODO Auto-generated method stub
+//										Toast.makeText(MainActivity.this, "收藏失败1："+arg1, Toast.LENGTH_LONG).show();
+//									}
+//								});
+//							}
+//							
+//						}
+//						
+//						@Override
+//						public void onError(int arg0, String arg1) {
+//							// TODO Auto-generated method stub
+//							Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+//						}
+//					});
 					
 					
 				}
@@ -804,8 +810,6 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			
 			@Override
 			public void onSuccess(List<ShuoShuo> arg0) {
-				// TODO Auto-generated method stub
-				
 				if(arg0.size()>0){
 					//1.初始化	（ 当是下拉刷新操作时，将当前页的编号重置为0，并把bankCards清空，重新添加）
 					if(actionType == STATE_REFRESH){
@@ -814,7 +818,31 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 					}
 					
 					// 将本次查询的数据添加到bankCards中
-					for (ShuoShuo td : arg0) {
+					for (final ShuoShuo td : arg0) {
+						BmobQuery<Favour> query=new BmobQuery<Favour>();
+						query.addWhereRelatedTo("favour", new BmobPointer(td));
+						query.include("user");
+						query.findObjects(MainActivity.this, new FindListener<Favour>() {						
+							@Override
+							public void onSuccess(List<Favour> arg0) {
+								for(Favour i:arg0){								
+									if(i.getUser()!=null&&currentUser!=null){
+										if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
+											td.setIsFavour(true);	
+											Log.e("", td.getContent()+":"+td.getIsFavour()+"");
+										}
+									}							
+								}	
+								Log.e("", td.getContent()+"="+td.getIsFavour()+"");
+							}
+							
+							@Override
+							public void onError(int arg0, String arg1) {
+								// TODO Auto-generated method stub
+								Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+							}
+						});		
+						Log.e("", td.getContent()+"*"+td.getIsFavour()+"");
 						shuoshuoList.add(td);
 						adapter.notifyDataSetChanged();
 					}
