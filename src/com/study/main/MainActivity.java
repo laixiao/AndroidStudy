@@ -829,11 +829,12 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 									if(i.getUser()!=null&&currentUser!=null){
 										if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
 											td.setIsFavour(true);	
-											Log.e("", td.getContent()+":"+td.getIsFavour()+"");
+										//	Log.e("", td.getContent()+":"+td.getIsFavour()+"");//通过
 										}
 									}							
 								}	
-								Log.e("", td.getContent()+"="+td.getIsFavour()+"");
+							//	Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
+								
 							}
 							
 							@Override
@@ -842,7 +843,8 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 								Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
 							}
 						});		
-						Log.e("", td.getContent()+"*"+td.getIsFavour()+"");
+						
+						//Log.e("", td.getContent()+"*"+td.getIsFavour()+"");
 						shuoshuoList.add(td);
 						adapter.notifyDataSetChanged();
 					}

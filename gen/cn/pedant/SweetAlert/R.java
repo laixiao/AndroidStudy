@@ -8,12 +8,12 @@ package cn.pedant.SweetAlert;
 
 public final class R {
 	public static final class anim {
-		public static final int error_frame_in = 0x7f040006;
-		public static final int error_x_in = 0x7f040007;
-		public static final int modal_in = 0x7f04000a;
-		public static final int modal_out = 0x7f04000b;
-		public static final int success_bow_roate = 0x7f040010;
-		public static final int success_mask_layout = 0x7f040011;
+		public static final int error_frame_in = 0x7f040000;
+		public static final int error_x_in = 0x7f040001;
+		public static final int modal_in = 0x7f040004;
+		public static final int modal_out = 0x7f040005;
+		public static final int success_bow_roate = 0x7f04000a;
+		public static final int success_mask_layout = 0x7f04000b;
 	}
 	public static final class attr {
 		public static final int fromDeg = 0x7f010001;
@@ -38,37 +38,37 @@ public final class R {
 		public static final int warning_stroke_color = 0x7f06000c;
 	}
 	public static final class drawable {
-		public static final int blue_button_background = 0x7f02003f;
-		public static final int dialog_background = 0x7f020054;
-		public static final int error_center_x = 0x7f020059;
-		public static final int error_circle = 0x7f02005a;
-		public static final int gray_button_background = 0x7f02005c;
-		public static final int red_button_background = 0x7f020082;
-		public static final int success_bow = 0x7f020099;
-		public static final int success_circle = 0x7f02009a;
-		public static final int warning_circle = 0x7f0200b6;
-		public static final int warning_sigh = 0x7f0200b7;
+		public static final int blue_button_background = 0x7f02000c;
+		public static final int dialog_background = 0x7f020021;
+		public static final int error_center_x = 0x7f020026;
+		public static final int error_circle = 0x7f020027;
+		public static final int gray_button_background = 0x7f020029;
+		public static final int red_button_background = 0x7f02004f;
+		public static final int success_bow = 0x7f020066;
+		public static final int success_circle = 0x7f020067;
+		public static final int warning_circle = 0x7f020083;
+		public static final int warning_sigh = 0x7f020084;
 	}
 	public static final class id {
-		public static final int cancel_button = 0x7f0a006d;
-		public static final int confirm_button = 0x7f0a006e;
-		public static final int content_text = 0x7f0a006c;
-		public static final int custom_image = 0x7f0a0063;
-		public static final int error_frame = 0x7f0a0064;
-		public static final int error_x = 0x7f0a0065;
-		public static final int loading = 0x7f0a0062;
-		public static final int mask_left = 0x7f0a0068;
-		public static final int mask_right = 0x7f0a0067;
-		public static final int success_frame = 0x7f0a0066;
-		public static final int success_tick = 0x7f0a0069;
-		public static final int title_text = 0x7f0a006b;
-		public static final int warning_frame = 0x7f0a006a;
-		public static final int x = 0x7f0a000c;
-		public static final int y = 0x7f0a000d;
-		public static final int z = 0x7f0a000e;
+		public static final int cancel_button = 0x7f0a002c;
+		public static final int confirm_button = 0x7f0a002d;
+		public static final int content_text = 0x7f0a002b;
+		public static final int custom_image = 0x7f0a0022;
+		public static final int error_frame = 0x7f0a0023;
+		public static final int error_x = 0x7f0a0024;
+		public static final int loading = 0x7f0a0021;
+		public static final int mask_left = 0x7f0a0027;
+		public static final int mask_right = 0x7f0a0026;
+		public static final int success_frame = 0x7f0a0025;
+		public static final int success_tick = 0x7f0a0028;
+		public static final int title_text = 0x7f0a002a;
+		public static final int warning_frame = 0x7f0a0029;
+		public static final int x = 0x7f0a0003;
+		public static final int y = 0x7f0a0004;
+		public static final int z = 0x7f0a0005;
 	}
 	public static final class layout {
-		public static final int alert_dialog = 0x7f030018;
+		public static final int alert_dialog = 0x7f030001;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f070000;
