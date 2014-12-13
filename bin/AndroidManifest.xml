@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.study.main"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取wifi状态 -->
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.study.main.UILApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+       >
+        <activity
+            android:name="com.study.main.SplashActivity"
+            
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.study.main.MainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- Don't forgot InitActivity -->
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar"
+           	android:windowSoftInputMode="stateAlwaysHidden" />
+        
+        <activity android:name="com.study.main.ui.User.LoginAndRegister"></activity>
+        <activity android:name="com.study.main.ui.User.UserInfo"></activity>
+         <activity android:name="com.study.main.ui.User.otherInfo"></activity>
+          <activity android:name="com.study.main.ui.User.commentActivity"></activity>
+        <activity android:name="com.study.main.ui.media.LocalList" >
+        </activity>
+        <activity android:name="com.study.main.ui.media.localVideoView"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity android:name="com.study.main.ui.media.uploadfile" >
+        </activity>
+        <activity android:name="com.study.main.ui.Simple.Fabiaoshuoshuo" >
+        </activity>
+        <activity android:name="com.study.main.ui.Simple.SettingActivity" >
+        </activity>
+        <activity android:name="com.study.main.ui.Simple.mainActivity01" >
+        </activity>
+        <activity android:name="com.study.main.ui.Simple.laoluoActivity" >
+        </activity>
+        <activity android:name="com.study.main.ui.Simple.DownloadListActivity"></activity>
+        <activity android:name="com.study.main.test.test1"></activity>
+        
+    </application>
+
+</manifest>

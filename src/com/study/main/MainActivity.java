@@ -833,7 +833,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 										}
 									}							
 								}	
-							//	Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
+								Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
 								
 							}
 							
@@ -844,11 +844,11 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 							}
 						});		
 						
-						//Log.e("", td.getContent()+"*"+td.getIsFavour()+"");
+						Log.e("", td.getContent()+"*"+td.getIsFavour()+"");
 						shuoshuoList.add(td);
-						adapter.notifyDataSetChanged();
+//						adapter.notifyDataSetChanged();
 					}
-					
+					adapter.notifyDataSetChanged();
 					// 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
 					curPage++;
 				//	showToast("第"+(page+1)+"页数据加载完成");
