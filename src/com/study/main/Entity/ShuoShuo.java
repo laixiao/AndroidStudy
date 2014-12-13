@@ -59,6 +59,12 @@ public class ShuoShuo extends BmobObject implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	@Override
+	public String toString() {
+		return "ShuoShuo [author=" + author + ", content=" + content
+				+ ", Contentfigureurl=" + Contentfigureurl + ", love=" + love
+				+ ", favour=" + favour + ", isFavour=" + isFavour + "]";
+	}
 	
 	
 	

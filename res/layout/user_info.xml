@@ -171,7 +171,7 @@
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:drawableTop="@drawable/user_infobutton02"
-                    android:text="发布的话题"
+                    android:text="动态列表"
                     android:textColor="#90000000" />
 
                 <Button
@@ -217,7 +217,7 @@
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:drawableTop="@drawable/user_infobutton06"
-                    android:text="信息"
+                    android:text="消息"
                     android:textColor="#90000000" />
             </LinearLayout>
         </LinearLayout>

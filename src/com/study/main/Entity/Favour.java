@@ -6,7 +6,7 @@ public class Favour extends BmobObject{
 
 	private ShuoShuo shuoshuo;
 	private User user;
-	
+	private String shuoshuoid;
 	
 	
 	public ShuoShuo getShuoshuo() {
@@ -21,10 +21,17 @@ public class Favour extends BmobObject{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public String getShuoshuoid() {
+		return shuoshuoid;
+	}
+	public void setShuoshuoid(String shuoshuoid) {
+		this.shuoshuoid = shuoshuoid;
+	}
 	@Override
 	public String toString() {
-		return "Favour [shuoshuo=" + shuoshuo + ", user=" + user + "]";
+		return "Favour [shuoshuo=" + shuoshuo + ", user=" + user
+				+ ", shuoshuoid=" + shuoshuoid + "]";
 	}
-	
+
 	
 }
