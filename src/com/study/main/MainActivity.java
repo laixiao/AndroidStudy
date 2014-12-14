@@ -702,9 +702,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
 				@Override
 				public void onClick(View v) {
-				
 							if(isfavourlist.get(position).getIsfavour()==true){
-								Toast.makeText(MainActivity.this, "取消收藏成功", Toast.LENGTH_LONG).show();
 								BmobQuery<Favour> query=new BmobQuery<Favour>();
 								query.addWhereEqualTo("shuoshuo", shuoshuo);
 								query.addWhereEqualTo("user", currentUser);								
@@ -724,9 +722,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 															shuoshuo.update(context, new UpdateListener() {										
 																@Override
 																public void onSuccess() {
-																	isfavourlist.get(position).setIsfavour(false);
-																	
+																	isfavourlist.get(position).setIsfavour(false);																	
 																	adapter.notifyDataSetChanged();
+																	Toast.makeText(MainActivity.this, "取消收藏成功", Toast.LENGTH_LONG).show();
 																}
 																
 																@Override
