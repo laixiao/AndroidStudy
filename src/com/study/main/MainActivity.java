@@ -654,9 +654,6 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		
 			//8.love			
 //			boolean isLove=false;
-			if(isfavourlist.size()>position){
-				Log.e("2:", ""+isfavourlist.get(position).getIsfavour());	
-			}
 				
 //			if(shuoshuo.getFavourUser()!=null){
 //				 Favour favour=shuoshuo.getFavourUser();
@@ -692,114 +689,114 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 //			});
 			
 			//9.favour
-//			try{
-//			if(isfavourlist.get(position).getIsfavour()==true){
-//				holder.list_item_action_fav.setText("已收藏");
-//			}else if(isfavourlist.get(position).getIsfavour()==false){
-//				holder.list_item_action_fav.setText("收藏");				
-//			}
-//			}catch(Exception e){
-//				Toast.makeText(MainActivity.this, "请刷新当前界面", Toast.LENGTH_LONG).show();
-//			}
+			if(isfavourlist.size()>position){
+			//	Log.e("2:", ""+isfavourlist.get(position).getIsfavour());	
+			
+			if(isfavourlist.get(position).getIsfavour()==true){
+				holder.list_item_action_fav.setText("已收藏");
+			}else if(isfavourlist.get(position).getIsfavour()==false){
+				holder.list_item_action_fav.setText("收藏");				
+			}
+			}
 //			Toast.makeText(MainActivity.this, ""+position, Toast.LENGTH_LONG).show();
-//			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
-//				@Override
-//				public void onClick(View v) {
-//				
-//							if(isfavourlist.get(position).getIsfavour()==true){
-//								Toast.makeText(MainActivity.this, "取消收藏成功", Toast.LENGTH_LONG).show();
-//								BmobQuery<Favour> query=new BmobQuery<Favour>();
-//								query.addWhereEqualTo("shuoshuo", shuoshuo);
-//								query.addWhereEqualTo("user", currentUser);								
-//								query.findObjects(context, new FindListener<Favour>() {
-//									public void onSuccess(List<Favour> arg0) {	
-//										//1.delete favour
-//										if(arg0.size()>0){
-//											final Favour favour=new Favour();
-//											favour.setObjectId(arg0.get(0).getObjectId());									
-//											favour.delete(context, new DeleteListener() {								
-//														@Override
-//														public void onSuccess() {
-//															//2.remove relation									
-//															BmobRelation relation=new BmobRelation();
-//															relation.remove(favour);
-//															shuoshuo.setFavour(relation);
-//															shuoshuo.update(context, new UpdateListener() {										
-//																@Override
-//																public void onSuccess() {
-//																	isfavourlist.get(position).setIsfavour(false);
-//																	
-//																	adapter.notifyDataSetChanged();
-//																}
-//																
-//																@Override
-//																public void onFailure(int arg0, String arg1) {
-//																	// TODO Auto-generated method stub
-//																	Toast.makeText(MainActivity.this, "取消收藏关系失败"+arg1, Toast.LENGTH_LONG).show();
-//																}
-//															});
-//														}
-//														
-//														@Override
-//														public void onFailure(int arg0, String arg1) {
-//															// TODO Auto-generated method stub
-//															Toast.makeText(MainActivity.this, "取消收藏失败"+arg1, Toast.LENGTH_LONG).show();
-//															//Log.e("", currentUser.toString()+"\n"+shuoshuo.toString());
-//														}
-//													});
-//										}
-//										
-//									}
-//									
-//									@Override
-//									public void onError(int arg0, String arg1) {
-//										// TODO Auto-generated method stub
-//										
-//									}
-//								});
-//							
-//							}else if(isfavourlist.get(position).getIsfavour()==false){
-//								if(currentUser==null){
-//									Intent intent=new Intent(MainActivity.this,LoginAndRegister.class);
-//									startActivity(intent);
-//								}
-//								final Favour favour=new Favour();								
-//								favour.setShuoshuo(shuoshuo);
-//								favour.setUser(currentUser);
-//								favour.save(context, new SaveListener() {									
-//									@Override
-//									public void onSuccess() {
-//										//把关联关系添加
-//										BmobRelation favours=new BmobRelation();
-//										favours.add(favour);
-//										shuoshuo.setFavour(favours);
-//								
-//										shuoshuo.update(context,new UpdateListener() {									
-//											@Override
-//											public void onSuccess() {
-//												// TODO Auto-generated method stub
-//												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();												
-//												isfavourlist.get(position).setIsfavour(true);
-//												adapter.notifyDataSetChanged();
-//											}
-//											
-//											@Override
-//											public void onFailure(int arg0, String arg1) {
-//												// TODO Auto-generated method stub
-//												Toast.makeText(MainActivity.this, "添加关联关系失败："+arg1, Toast.LENGTH_LONG).show();
-//											}
-//										});
-//									}
-//									
-//									@Override
-//									public void onFailure(int arg0, String arg1) {
-//										// TODO Auto-generated method stub
-//										Toast.makeText(MainActivity.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
-//									}
-//								});
-//							}			
-//				}
-//			});
+			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+				
+							if(isfavourlist.get(position).getIsfavour()==true){
+								Toast.makeText(MainActivity.this, "取消收藏成功", Toast.LENGTH_LONG).show();
+								BmobQuery<Favour> query=new BmobQuery<Favour>();
+								query.addWhereEqualTo("shuoshuo", shuoshuo);
+								query.addWhereEqualTo("user", currentUser);								
+								query.findObjects(context, new FindListener<Favour>() {
+									public void onSuccess(List<Favour> arg0) {	
+										//1.delete favour
+										if(arg0.size()>0){
+											final Favour favour=new Favour();
+											favour.setObjectId(arg0.get(0).getObjectId());									
+											favour.delete(context, new DeleteListener() {								
+														@Override
+														public void onSuccess() {
+															//2.remove relation									
+															BmobRelation relation=new BmobRelation();
+															relation.remove(favour);
+															shuoshuo.setFavour(relation);
+															shuoshuo.update(context, new UpdateListener() {										
+																@Override
+																public void onSuccess() {
+																	isfavourlist.get(position).setIsfavour(false);
+																	
+																	adapter.notifyDataSetChanged();
+																}
+																
+																@Override
+																public void onFailure(int arg0, String arg1) {
+																	// TODO Auto-generated method stub
+																	Toast.makeText(MainActivity.this, "取消收藏关系失败"+arg1, Toast.LENGTH_LONG).show();
+																}
+															});
+														}
+														
+														@Override
+														public void onFailure(int arg0, String arg1) {
+															// TODO Auto-generated method stub
+															Toast.makeText(MainActivity.this, "取消收藏失败"+arg1, Toast.LENGTH_LONG).show();
+															//Log.e("", currentUser.toString()+"\n"+shuoshuo.toString());
+														}
+													});
+										}
+										
+									}
+									
+									@Override
+									public void onError(int arg0, String arg1) {
+										// TODO Auto-generated method stub
+										
+									}
+								});
+							
+							}else if(isfavourlist.get(position).getIsfavour()==false){
+								if(currentUser==null){
+									Intent intent=new Intent(MainActivity.this,LoginAndRegister.class);
+									startActivity(intent);
+								}
+								final Favour favour=new Favour();								
+								favour.setShuoshuo(shuoshuo);
+								favour.setUser(currentUser);
+								favour.save(context, new SaveListener() {									
+									@Override
+									public void onSuccess() {
+										//把关联关系添加
+										BmobRelation favours=new BmobRelation();
+										favours.add(favour);
+										shuoshuo.setFavour(favours);
+								
+										shuoshuo.update(context,new UpdateListener() {									
+											@Override
+											public void onSuccess() {
+												// TODO Auto-generated method stub
+												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();												
+												isfavourlist.get(position).setIsfavour(true);
+												adapter.notifyDataSetChanged();
+											}
+											
+											@Override
+											public void onFailure(int arg0, String arg1) {
+												// TODO Auto-generated method stub
+												Toast.makeText(MainActivity.this, "添加关联关系失败："+arg1, Toast.LENGTH_LONG).show();
+											}
+										});
+									}
+									
+									@Override
+									public void onFailure(int arg0, String arg1) {
+										// TODO Auto-generated method stub
+										Toast.makeText(MainActivity.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
+									}
+								});
+							}			
+				}
+			});
 
 			
 			return convertView;
