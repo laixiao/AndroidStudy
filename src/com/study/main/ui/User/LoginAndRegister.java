@@ -1,5 +1,6 @@
 package com.study.main.ui.User;
 
+import com.study.main.MainActivity;
 import com.study.main.R;
 import com.study.main.Entity.User;
 
@@ -148,7 +149,7 @@ public class LoginAndRegister extends Activity {
 				    public void onSuccess() {
 				        // TODO Auto-generated method stub
 				      Toast.makeText(LoginAndRegister.this, "登陆成功，正在获取数据", Toast.LENGTH_LONG).show();
-				      Intent intent=new Intent(LoginAndRegister.this, UserInfo.class);
+				      Intent intent=new Intent(LoginAndRegister.this, MainActivity.class);
 				      startActivity(intent);
 				      finish();
 				    }

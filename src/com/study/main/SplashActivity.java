@@ -32,11 +32,20 @@ public class SplashActivity extends Activity{
 	private void ChangeUi() {
 		new Handler().postDelayed(new Runnable() {
 			@Override
-			public void run() {		
+			public void run() {
+				User currentUser=BmobUser.getCurrentUser(SplashActivity.this, User.class);
+				if(currentUser!=null){
 					Intent intent=new Intent();
 					intent.setClass(SplashActivity.this, MainActivity.class);
 					startActivity(intent);
 					finish();
+				}else{
+					Intent intent=new Intent();
+					intent.setClass(SplashActivity.this, LoginAndRegister.class);
+					startActivity(intent);
+					finish();
+				}
+					
 			}
 		
 		}, DELAY_TIME);

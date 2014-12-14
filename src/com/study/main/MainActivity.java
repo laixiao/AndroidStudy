@@ -21,6 +21,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.study.main.Entity.Isfavour;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.Entity.Favour;
@@ -113,6 +114,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	private DisplayImageOptions options01,options02;
 	//1.get data
 	List<ShuoShuo> shuoshuoList = new ArrayList<ShuoShuo>();
+	List<Isfavour> isfavourlist=new ArrayList<Isfavour>();
 	firstListAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -208,6 +210,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		listview=list.getRefreshableView();		
 		listview.setAdapter(adapter);
 		queryData(0, STATE_REFRESH);
+
 	}
 
 	private void init() {
@@ -346,6 +349,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				button1.setSelected(false);
 				button2.setSelected(false);
 				button3.setSelected(true);
+//				for(int i=0;i<isfavourlist.size();i++){
+//					Log.e("",i+":"+isfavourlist.get(i).getIsfavour());
+//				}
 			}
 		});
 
@@ -576,7 +582,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		public View getView(final int position, View convertView,ViewGroup parent) {
 			ViewHolder holder = null;
 			final ShuoShuo shuoshuo;
-				
+				Isfavour isfavour;
 			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
@@ -595,6 +601,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder = (ViewHolder) convertView.getTag();
 			}
 			//1.Get QiangYu
+			
 			shuoshuo= (ShuoShuo) getItem(position);	
 			final User author=shuoshuo.getAuthor();
 			if(author==null){
@@ -644,10 +651,13 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			});
 			//7.time 
 			holder.list_item_time.setText(shuoshuo.getCreatedAt());
-			//8.love
-			
+		
+			//8.love			
 //			boolean isLove=false;
-//			
+			if(isfavourlist.size()>position){
+				Log.e("2:", ""+isfavourlist.get(position).getIsfavour());	
+			}
+				
 //			if(shuoshuo.getFavourUser()!=null){
 //				 Favour favour=shuoshuo.getFavourUser();
 //				 	
@@ -682,91 +692,114 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 //			});
 			
 			//9.favour
-			if(shuoshuo.getIsFavour()!=null){
-			if(shuoshuo.getIsFavour()==true){
-				holder.list_item_action_fav.setText("已收藏");
-			}else if(shuoshuo.getIsFavour()==false){
-				holder.list_item_action_fav.setText("收藏");
-			}
-			}
-			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
-				@Override
-				public void onClick(View v) {					
-							if(shuoshuo.getIsFavour()==true){									
-								final Favour favour=new Favour();
-								favour.setUser(currentUser);
-						//		favour.setObjectId("cd43bbe846");
-					//			favour.setShuoshuoid(shuoshuo.getObjectId());
-								favour.delete(context, new DeleteListener() {								
-									@Override
-									public void onSuccess() {
-										// TODO Auto-generated method stub
-										Toast.makeText(MainActivity.this, "收藏成功", Toast.LENGTH_LONG).show();
-										BmobRelation relation=new BmobRelation();
-										relation.remove(favour);
-										shuoshuo.setFavour(relation);
-										shuoshuo.update(context, new UpdateListener() {										
-											@Override
-											public void onSuccess() {
-												// TODO Auto-generated method stub
-												Toast.makeText(MainActivity.this, "取消收藏关系成功", Toast.LENGTH_LONG).show();
-											}
-											
-											@Override
-											public void onFailure(int arg0, String arg1) {
-												// TODO Auto-generated method stub
-												Toast.makeText(MainActivity.this, "取消收藏关系失败"+arg1, Toast.LENGTH_LONG).show();
-											}
-										});
-									}
-									
-									@Override
-									public void onFailure(int arg0, String arg1) {
-										// TODO Auto-generated method stub
-										Toast.makeText(MainActivity.this, "取消收藏失败"+arg1, Toast.LENGTH_LONG).show();
-										//Log.e("", currentUser.toString()+"\n"+shuoshuo.toString());
-									}
-								});
-								
-								
-							}else if(shuoshuo.getIsFavour()==false){
-								
-								final Favour favour=new Favour();								
-								favour.setShuoshuo(shuoshuo);
-								favour.setUser(currentUser);
-								favour.setShuoshuoid(shuoshuo.getObjectId());
-								favour.save(context, new SaveListener() {									
-									@Override
-									public void onSuccess() {
-										//把关联关系添加
-										BmobRelation favours=new BmobRelation();
-										favours.add(favour);
-										shuoshuo.setFavour(favours);
-										
-										shuoshuo.update(context,new UpdateListener() {									
-											@Override
-											public void onSuccess() {
-												// TODO Auto-generated method stub
-												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();
-											}
-											
-											@Override
-											public void onFailure(int arg0, String arg1) {
-												// TODO Auto-generated method stub
-												Toast.makeText(MainActivity.this, "添加关联关系成功："+arg1, Toast.LENGTH_LONG).show();
-											}
-										});
-									}
-									
-									@Override
-									public void onFailure(int arg0, String arg1) {
-										// TODO Auto-generated method stub
-										Toast.makeText(MainActivity.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
-									}
-								});
-							}			
-				}
-			});
+//			try{
+//			if(isfavourlist.get(position).getIsfavour()==true){
+//				holder.list_item_action_fav.setText("已收藏");
+//			}else if(isfavourlist.get(position).getIsfavour()==false){
+//				holder.list_item_action_fav.setText("收藏");				
+//			}
+//			}catch(Exception e){
+//				Toast.makeText(MainActivity.this, "请刷新当前界面", Toast.LENGTH_LONG).show();
+//			}
+//			Toast.makeText(MainActivity.this, ""+position, Toast.LENGTH_LONG).show();
+//			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
+//				@Override
+//				public void onClick(View v) {
+//				
+//							if(isfavourlist.get(position).getIsfavour()==true){
+//								Toast.makeText(MainActivity.this, "取消收藏成功", Toast.LENGTH_LONG).show();
+//								BmobQuery<Favour> query=new BmobQuery<Favour>();
+//								query.addWhereEqualTo("shuoshuo", shuoshuo);
+//								query.addWhereEqualTo("user", currentUser);								
+//								query.findObjects(context, new FindListener<Favour>() {
+//									public void onSuccess(List<Favour> arg0) {	
+//										//1.delete favour
+//										if(arg0.size()>0){
+//											final Favour favour=new Favour();
+//											favour.setObjectId(arg0.get(0).getObjectId());									
+//											favour.delete(context, new DeleteListener() {								
+//														@Override
+//														public void onSuccess() {
+//															//2.remove relation									
+//															BmobRelation relation=new BmobRelation();
+//															relation.remove(favour);
+//															shuoshuo.setFavour(relation);
+//															shuoshuo.update(context, new UpdateListener() {										
+//																@Override
+//																public void onSuccess() {
+//																	isfavourlist.get(position).setIsfavour(false);
+//																	
+//																	adapter.notifyDataSetChanged();
+//																}
+//																
+//																@Override
+//																public void onFailure(int arg0, String arg1) {
+//																	// TODO Auto-generated method stub
+//																	Toast.makeText(MainActivity.this, "取消收藏关系失败"+arg1, Toast.LENGTH_LONG).show();
+//																}
+//															});
+//														}
+//														
+//														@Override
+//														public void onFailure(int arg0, String arg1) {
+//															// TODO Auto-generated method stub
+//															Toast.makeText(MainActivity.this, "取消收藏失败"+arg1, Toast.LENGTH_LONG).show();
+//															//Log.e("", currentUser.toString()+"\n"+shuoshuo.toString());
+//														}
+//													});
+//										}
+//										
+//									}
+//									
+//									@Override
+//									public void onError(int arg0, String arg1) {
+//										// TODO Auto-generated method stub
+//										
+//									}
+//								});
+//							
+//							}else if(isfavourlist.get(position).getIsfavour()==false){
+//								if(currentUser==null){
+//									Intent intent=new Intent(MainActivity.this,LoginAndRegister.class);
+//									startActivity(intent);
+//								}
+//								final Favour favour=new Favour();								
+//								favour.setShuoshuo(shuoshuo);
+//								favour.setUser(currentUser);
+//								favour.save(context, new SaveListener() {									
+//									@Override
+//									public void onSuccess() {
+//										//把关联关系添加
+//										BmobRelation favours=new BmobRelation();
+//										favours.add(favour);
+//										shuoshuo.setFavour(favours);
+//								
+//										shuoshuo.update(context,new UpdateListener() {									
+//											@Override
+//											public void onSuccess() {
+//												// TODO Auto-generated method stub
+//												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();												
+//												isfavourlist.get(position).setIsfavour(true);
+//												adapter.notifyDataSetChanged();
+//											}
+//											
+//											@Override
+//											public void onFailure(int arg0, String arg1) {
+//												// TODO Auto-generated method stub
+//												Toast.makeText(MainActivity.this, "添加关联关系失败："+arg1, Toast.LENGTH_LONG).show();
+//											}
+//										});
+//									}
+//									
+//									@Override
+//									public void onFailure(int arg0, String arg1) {
+//										// TODO Auto-generated method stub
+//										Toast.makeText(MainActivity.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
+//									}
+//								});
+//							}			
+//				}
+//			});
 
 			
 			return convertView;
@@ -781,6 +814,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			public ImageView list_item_user_logo;
 			TextView list_item_textView1;			
 		}
+		
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
@@ -791,6 +825,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			// TODO Auto-generated method stub
 			return shuoshuoList.get(position);
 		}
+		
 		@Override
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
@@ -822,30 +857,41 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			
 			@Override
 			public void onSuccess(List<ShuoShuo> arg0) {
+				
 				if(arg0.size()>0){
 					//1.初始化	（ 当是下拉刷新操作时，将当前页的编号重置为0，并把bankCards清空，重新添加）
 					if(actionType == STATE_REFRESH){
 						curPage = 0;
 						shuoshuoList.clear();
+						isfavourlist.clear();
 					}
 					
 					// 将本次查询的数据添加到bankCards中
+					
+					// 将本次查询的数据添加到bankCards中
 					for (final ShuoShuo td : arg0) {
+						
+						final Isfavour isfavour=new Isfavour();
 						BmobQuery<Favour> query=new BmobQuery<Favour>();
 						query.addWhereRelatedTo("favour", new BmobPointer(td));
 						query.include("user");
 						query.findObjects(MainActivity.this, new FindListener<Favour>() {						
 							@Override
 							public void onSuccess(List<Favour> arg0) {
+								boolean isorno=false;
 								for(Favour i:arg0){								
 									if(i.getUser()!=null&&currentUser!=null){
 										if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
-											td.setIsFavour(true);	
+											isorno=true;
+										//	td.setIsFavour(true);	
 										//	Log.e("", td.getContent()+":"+td.getIsFavour()+"");//通过
 										}
 									}							
-								}	
-								Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
+								}
+								isfavour.setIsfavour(isorno);
+								isfavourlist.add(isfavour);
+							//	Log.e("1:",""+isfavour.getIsfavour());
+							//	Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
 								
 							}
 							
@@ -856,11 +902,13 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 							}
 						});		
 						
-						//Log.e("", td.getContent()+"*"+td.getIsFavour()+"");
 						shuoshuoList.add(td);
-//						adapter.notifyDataSetChanged();
+					
 					}
+					
+					
 					adapter.notifyDataSetChanged();
+					
 					// 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
 					curPage++;
 				//	showToast("第"+(page+1)+"页数据加载完成");
