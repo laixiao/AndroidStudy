@@ -126,14 +126,7 @@
 
     </LinearLayout>
 
-    <ImageView 	
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/login_user_ico" />
-
-    <LinearLayout
-        android:layout_marginTop="25dp"      
+    <LinearLayout       
         android:id="@+id/loginlayout01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -143,7 +136,7 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:textSize="18sp"
             android:textColor="#ffffff"
@@ -152,7 +145,7 @@
             android:text="进入部落" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -172,7 +165,7 @@
             <EditText
                 android:layout_gravity="center"
                 android:id="@+id/username01"
-                android:layout_width="200dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
                 android:hint="账号"
@@ -187,15 +180,14 @@
                 android:id="@+id/loginclearbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="7dp"
+                android:layout_gravity="center_vertical"            
                 android:background="#00000000"
                 android:src="@drawable/login_clear_button"
                 android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
@@ -211,7 +203,8 @@
 
             <EditText
                 android:id="@+id/password01"
-                android:layout_width="160dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
                 android:hint="密码"
@@ -221,41 +214,19 @@
 
                 <requestFocus />
             </EditText>
-            <ImageButton 
-                android:background="@drawable/login_loginbutton"
+
+            <ImageButton
+                android:id="@+id/login01"
+                android:layout_weight="0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-              
-              	android:id="@+id/login01"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                
-                android:src="@drawable/login_checkbutton" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_marginLeft="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="记住密码" />
+                android:background="@drawable/login_loginbutton" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:gravity="right"
             android:background="@drawable/login_bg2"
             android:layout_height="wrap_content" >

@@ -137,7 +137,7 @@
         android:layout_above="@+id/bottomlayout"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/titlelayout03"
-        android:background="#ffffff"
+        android:background="#98eced"
         android:visibility="gone" >
 
        
