@@ -55,7 +55,7 @@ public class UserInfo extends Activity {
 	private String dateTime,iconUrl,Signature;
 	private ImageView personico, user_infosex,user_info_imageView5;
 	User currentUser;
-	private TextView userinfo_birthday, signatureEdit,userinfo_phonenumber, userinfo_nickname,user_info_birthday;
+	private TextView userinfo_birthday, signatureEdit,userinfo_phonenumber, userinfo_nickname,user_info_birthday,user_info_name,user_info_phonenumber;
 	boolean isSex;
 	private Handler handler = new Handler() {
 
@@ -101,8 +101,11 @@ public class UserInfo extends Activity {
 		user_info_birthday=(TextView) this.findViewById(R.id.user_info_birthday);
 		signatureEdit = (TextView) this.findViewById(R.id.signatureEdit);
 		userinfo_phonenumber = (TextView) this.findViewById(R.id.userinfo_phonenumber);
+		user_info_phonenumber = (TextView) this.findViewById(R.id.user_info_phonenumber);
 		userinfo_nickname = (TextView) this.findViewById(R.id.userinfo_nickname);
 		userinfo_birthday = (TextView) this.findViewById(R.id.userinfo_birthday);
+		user_info_name= (TextView) this.findViewById(R.id.user_info_name);
+		
 
 		currentUser = BmobUser.getCurrentUser(this, User.class);
 		if (currentUser != null) {			
@@ -166,6 +169,31 @@ public class UserInfo extends Activity {
 
 	
 	private void setListener() {
+		//1.set name
+		user_info_name.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				LayoutInflater inflater = getLayoutInflater();
+				View layout = inflater.inflate(R.layout.dialog01,(ViewGroup) findViewById(R.id.dialog));
+				final EditText dialog_qianming=(EditText) layout.findViewById(R.id.dialog_qianming);
+				 new AlertDialog.Builder(UserInfo.this)
+				 .setTitle("设置昵称")
+				 .setView(layout)
+				 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						Signature=dialog_qianming.getText().toString().trim();
+						userinfo_nickname.setText(Signature);
+						Toast.makeText(UserInfo.this, "昵称修改成功",Toast.LENGTH_SHORT).show();
+					}
+				 	})
+			     .setNegativeButton("取消",null)
+				 .show();
+				
+			}
+		});
+		
 		
 		//2.set  signature
 		user_info_imageView5.setOnClickListener(new OnClickListener() {
@@ -184,7 +212,7 @@ public class UserInfo extends Activity {
 						signatureEdit.setText(Signature);
 						Toast.makeText(UserInfo.this, "个性签名修改成功",Toast.LENGTH_SHORT).show();
 					}
-				})
+				 	})
 			     .setNegativeButton("取消",null)
 				 .show();
 
@@ -273,7 +301,7 @@ public class UserInfo extends Activity {
 			}
 		});
 
-		// 6.
+		// 6.persion_ico
 		personico.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -308,6 +336,30 @@ public class UserInfo extends Activity {
 								sweetAlertDialog.dismiss();
 							}
 						}).show();
+			}
+		});
+		
+		//7.set phonenumber
+		user_info_phonenumber.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				LayoutInflater inflater = getLayoutInflater();
+				View layout = inflater.inflate(R.layout.dialog01,(ViewGroup) findViewById(R.id.dialog));
+				final EditText dialog_qianming=(EditText) layout.findViewById(R.id.dialog_qianming);
+				 new AlertDialog.Builder(UserInfo.this)
+				 .setTitle("设置手机号码")
+				 .setView(layout)
+				 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						Signature=dialog_qianming.getText().toString().trim();
+						userinfo_phonenumber.setText(Signature);
+						Toast.makeText(UserInfo.this, "手机号码修改成功",Toast.LENGTH_SHORT).show();
+					}
+				 	})
+			     .setNegativeButton("取消",null)
+				 .show();
 			}
 		});
 
