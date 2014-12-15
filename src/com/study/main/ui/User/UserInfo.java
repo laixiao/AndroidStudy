@@ -53,7 +53,7 @@ import android.widget.Toast;
 public class UserInfo extends Activity {
 	private Button submit01, userinfo_quit;
 	private String dateTime,iconUrl,Signature;
-	private ImageView personico, user_infosex,user_info_imageView5;
+	private ImageView personico, user_infosex,user_info_imageView5,user_info_back;
 	User currentUser;
 	private TextView userinfo_birthday, signatureEdit,userinfo_phonenumber, userinfo_nickname,user_info_birthday,user_info_name,user_info_phonenumber;
 	boolean isSex;
@@ -97,6 +97,7 @@ public class UserInfo extends Activity {
 		submit01 = (Button) this.findViewById(R.id.submit01);
 		personico = (ImageView) this.findViewById(R.id.personico);
 		user_infosex = (ImageView) this.findViewById(R.id.user_infosex);
+		user_info_back= (ImageView) this.findViewById(R.id.user_info_back);
 		user_info_imageView5 = (ImageView) this.findViewById(R.id.user_info_imageView5);
 		user_info_birthday=(TextView) this.findViewById(R.id.user_info_birthday);
 		signatureEdit = (TextView) this.findViewById(R.id.signatureEdit);
@@ -169,6 +170,7 @@ public class UserInfo extends Activity {
 
 	
 	private void setListener() {
+		
 		//1.set name
 		user_info_name.setOnClickListener(new OnClickListener() {
 			
@@ -360,6 +362,16 @@ public class UserInfo extends Activity {
 				 	})
 			     .setNegativeButton("取消",null)
 				 .show();
+			}
+		});
+		
+		//8.back
+		user_info_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
 			}
 		});
 
