@@ -36,6 +36,9 @@ public class ResideMenuInfo extends LinearLayout {
 		iv_icon = (ImageView) findViewById(R.id.image_icon);
 		tv_username = (TextView) findViewById(R.id.tv_username);
 		tv_dengji = (TextView) findViewById(R.id.tv_dengji);
+		
+		
+		
 	}
 
 	/**

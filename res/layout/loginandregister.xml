@@ -170,7 +170,7 @@
                 android:background="#00000000"
                 android:hint="账号"
                 android:textColor="#ffffff"
-            
+            	
                 android:inputType="textPersonName" >
 
                 <requestFocus />
