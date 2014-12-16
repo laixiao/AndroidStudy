@@ -46,8 +46,8 @@ public final class R {
 		public static final int red_button_background = 0x7f02004e;
 		public static final int success_bow = 0x7f020065;
 		public static final int success_circle = 0x7f020066;
-		public static final int warning_circle = 0x7f020082;
-		public static final int warning_sigh = 0x7f020083;
+		public static final int warning_circle = 0x7f020084;
+		public static final int warning_sigh = 0x7f020085;
 	}
 	public static final class id {
 		public static final int cancel_button = 0x7f0a002c;

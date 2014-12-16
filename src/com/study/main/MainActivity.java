@@ -584,7 +584,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		public View getView(final int position, View convertView,ViewGroup parent) {
 			ViewHolder holder = null;
 			final ShuoShuo shuoshuo;
-				Isfavour isfavour;
+			Isfavour isfavour;
 			if (convertView == null) {				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
 				holder = new ViewHolder();	
@@ -592,9 +592,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder.list_item_user_logo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
 				holder.list_item_action_fav = (TextView)convertView.findViewById(R.id.list_item_action_fav);
 				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
-				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);
-			
-				
+				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);			
 				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
 				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
 				convertView.setTag(holder);
@@ -606,9 +604,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			shuoshuo= (ShuoShuo) getItem(position);	
 			final User author=shuoshuo.getAuthor();
 			if(author==null){
-				Toast.makeText(MainActivity.this, position+"user is null", Toast.LENGTH_LONG).show();
+				//Toast.makeText(MainActivity.this, position+"user is null", Toast.LENGTH_LONG).show();
 			}else if(author.getAvatar()==null){
-				Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
+				//Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
 			}else {				
 				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(MainActivity.this), holder.list_item_user_logo, options01,null);				
 			}
@@ -956,7 +954,6 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 					for (final ShuoShuo td : arg0) {
 						
 						final Isfavour isfavour=new Isfavour();
-						
 						BmobQuery<Favour> query=new BmobQuery<Favour>();
 						query.addWhereRelatedTo("favour", new BmobPointer(td));
 						query.include("user");
@@ -1014,10 +1011,6 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 								Toast.makeText(MainActivity.this, "≤È—Ø ’≤ÿ ß∞‹£∫"+arg1, Toast.LENGTH_LONG).show();
 							}
 						});	
-						
-						
-						
-						
 						
 						shuoshuoList.add(td);
 					

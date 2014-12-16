@@ -4,30 +4,39 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.study.main.MainActivity;
 import com.study.main.R;
+import com.study.main.Entity.Favour;
+import com.study.main.Entity.Isfavour;
+import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.utils.CacheUtils;
 import com.study.main.utils.DateTimePickDialogUtil;
-
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -44,22 +53,26 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class UserInfo extends Activity {
-	private Button submit01, userinfo_quit;
+	private Button submit01, userinfo_quit,user_info_favour;
 	private String dateTime,iconUrl,Signature;
 	private ImageView personico, user_infosex,user_info_imageView5,user_info_back;
 	User currentUser;
 	private TextView userinfo_birthday, signatureEdit,userinfo_phonenumber, userinfo_nickname,user_info_birthday,user_info_name,user_info_phonenumber;
 	boolean isSex;
+	private LinearLayout user_info_titlelayout;
 	private Handler handler = new Handler() {
-
-		@Override
 		public void handleMessage(Message msg) {
 			
 			Bundle bundle = msg.getData();			
@@ -71,7 +84,14 @@ public class UserInfo extends Activity {
 		}
 
 	};
-	DisplayImageOptions options;
+	
+	DisplayImageOptions options,options2;
+	private ListView user_info_listView1;
+	List<Isfavour> isfavourlist=new ArrayList<Isfavour>();
+	List<ShuoShuo> shuoshuoList=new ArrayList<ShuoShuo>();
+	UserInfoAdapter adapter;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -87,14 +107,24 @@ public class UserInfo extends Activity {
 		.considerExifParams(true)
 		.displayer(new RoundedBitmapDisplayer(90))
 		.build();
-		// TODO Auto-generated constructor stub
+		options2= new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+		//.displayer(new RoundedBitmapDisplayer(90))
+		.build();
+		
 		init();
 
 	}
 
 	private void init() {
-		userinfo_quit = (Button) this.findViewById(R.id.userinfo_quit);
-		submit01 = (Button) this.findViewById(R.id.submit01);
+		userinfo_quit = (Button) this.findViewById(R.id.user_info_quit);
+		submit01 = (Button) this.findViewById(R.id.user_info_submit01);
+		user_info_favour = (Button) this.findViewById(R.id.user_info_favour);
 		personico = (ImageView) this.findViewById(R.id.personico);
 		user_infosex = (ImageView) this.findViewById(R.id.user_infosex);
 		user_info_back= (ImageView) this.findViewById(R.id.user_info_back);
@@ -106,12 +136,18 @@ public class UserInfo extends Activity {
 		userinfo_nickname = (TextView) this.findViewById(R.id.userinfo_nickname);
 		userinfo_birthday = (TextView) this.findViewById(R.id.userinfo_birthday);
 		user_info_name= (TextView) this.findViewById(R.id.user_info_name);
+		user_info_titlelayout=(LinearLayout) this.findViewById(R.id.user_info_titlelayout);
+		adapter=new UserInfoAdapter(UserInfo.this);
+		user_info_listView1=(ListView) this.findViewById(R.id.user_info_listView1);	
+		user_info_listView1.setAdapter(adapter);
 		
-
+		//login	?
 		currentUser = BmobUser.getCurrentUser(this, User.class);
 		if (currentUser != null) {			
 			setListener();
 			initView();
+			initListView();
+			
 		} else {
 			Toast.makeText(UserInfo.this, "please login", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent();
@@ -119,9 +155,95 @@ public class UserInfo extends Activity {
 			startActivity(intent);
 			finish();
 		}
+		
 	}
 
 	
+	private void initListView() {
+		// TODO Auto-generated method stub
+		BmobQuery<ShuoShuo>  query=new BmobQuery<ShuoShuo>();
+		//query.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+		query.order("-createdAt");
+		query.include("author");
+		query.setLimit(999);
+		query.addWhereEqualTo("author", currentUser);
+		query.findObjects(UserInfo.this, new FindListener<ShuoShuo>() {
+			
+			@Override
+			public void onSuccess(List<ShuoShuo> arg0) {
+				for (final ShuoShuo td : arg0) {
+					
+					final Isfavour isfavour=new Isfavour();			
+					BmobQuery<Favour> query=new BmobQuery<Favour>();
+					query.addWhereRelatedTo("favour", new BmobPointer(td));
+					query.include("user");
+					query.findObjects(UserInfo.this, new FindListener<Favour>() {						
+						@Override
+						public void onSuccess(List<Favour> arg0) {
+							boolean isorno=false;
+							for(Favour i:arg0){								
+								if(i.getUser()!=null&&currentUser!=null){
+									if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
+										isorno=true;
+									}
+								}													
+							}
+							isfavour.setIsfavour(isorno);
+							isfavour.setFavourCount(arg0.size());
+							isfavourlist.add(isfavour);
+						}
+						
+						@Override
+						public void onError(int arg0, String arg1) {
+							// TODO Auto-generated method stub
+							Toast.makeText(UserInfo.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+						}
+					});	
+					
+					shuoshuoList.add(td);
+				
+				}
+				adapter.notifyDataSetChanged();
+			}
+			
+			@Override
+			public void onError(int arg0, String arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		//滑动监听
+		user_info_listView1.setOnScrollListener(new OnScrollListener() { 
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+			    switch (scrollState) {			  
+			    case OnScrollListener.SCROLL_STATE_IDLE:  // 当不滚动时		    	
+			    if (user_info_listView1.getLastVisiblePosition() == (user_info_listView1.getCount() - 1)) {// 判断滚动到底部  
+			    	//user_info_titlelayout.setVisibility(View.GONE);		    	
+			         }
+	
+			    if(user_info_listView1.getFirstVisiblePosition() == 0){ // 判断滚动到顶部
+			    	user_info_titlelayout.setVisibility(View.VISIBLE);
+			    }else {
+			    	user_info_titlelayout.setVisibility(View.GONE);	
+				}
+
+			     break;
+			       } 
+			   }  
+			public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {  
+
+//			            if (firstVisibleItem + visibleItemCount == totalItemCount && !flag) {  
+//			                flag = true;  
+//			            } else  
+//			                flag = false;  
+			        }  
+			    });  
+		
+		
+		
+	}
+
 	private void initView() {
 		// TODO Auto-generated method stub
 		BmobQuery<User> userQuery = new BmobQuery<User>();
@@ -375,6 +497,16 @@ public class UserInfo extends Activity {
 			}
 		});
 
+		//9.favour
+		user_info_favour.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(UserInfo.this,Favour.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	private void setAvata(String avataPath) {
@@ -626,5 +758,236 @@ public class UserInfo extends Activity {
 		// 鍏跺疄鏄棤鏁堢殑,澶у灏界灏濊瘯
 		return bitmap;
 	}
+	
+	
+
+	//adapter
+	private class UserInfoAdapter extends BaseAdapter  {		
+		Context context;		
+		
+		public UserInfoAdapter(Context context){
+			this.context = context;
+		}
+		@SuppressLint("InflateParams") @Override
+		public View getView(final int position, View convertView,ViewGroup parent) {
+			
+			ViewHolder holder = null;
+			final ShuoShuo shuoshuo;
+			Isfavour isfavour;
+			if (convertView == null) {				
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+				holder = new ViewHolder();	
+				holder.list_item_user_name = (TextView)convertView.findViewById(R.id.list_item_user_name);
+				holder.list_item_user_logo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
+				holder.list_item_action_fav = (TextView)convertView.findViewById(R.id.list_item_action_fav);
+				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
+				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);			
+				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
+				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			//1.Get QiangYu
+			
+			shuoshuo= (ShuoShuo) getItem(position);	
+			final User author=shuoshuo.getAuthor();
+			if(author==null){
+				//Toast.makeText(UserInfo.this, position+"user is null", Toast.LENGTH_LONG).show();
+			}else if(author.getAvatar()==null){
+				//Toast.makeText(UserInfo.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
+			}else {				
+				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(UserInfo.this), holder.list_item_user_logo, options,null);				
+			}
+			//2.userName
+			if(author!=null){
+			holder.list_item_user_name.setText(shuoshuo.getAuthor().getNickname());
+			//3.userLogo
+			holder.list_item_user_logo.setOnClickListener(new OnClickListener() {				
+				@Override
+				public void onClick(View v) {									
+						Intent intent=new Intent(UserInfo.this, otherInfo.class);
+						intent.putExtra("data",author);
+						startActivity(intent);					
+				}	
+			});
+			}
+			//4.contentText
+			if(shuoshuo.getContent()!=null){
+				holder.list_item_content_text.setVisibility(View.VISIBLE);
+			holder.list_item_content_text.setText(shuoshuo.getContent());
+			}else{
+				holder.list_item_content_text.setVisibility(View.INVISIBLE);
+			}
+			//5.Contentfigureurl
+			if(shuoshuo.getContentfigureurl()!=null){
+				holder.list_item_content_image.setVisibility(View.VISIBLE);
+				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(UserInfo.this), holder.list_item_content_image, options2,null);			
+			}else {
+				holder.list_item_content_image.setVisibility(View.GONE);
+			}
+			//6.comment
+			holder.list_item_action_comment.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent(UserInfo.this, commentActivity.class);
+					intent.putExtra("data",shuoshuo);
+					startActivity(intent);
+				}
+			});
+			//7.time 
+			holder.list_item_time.setText(shuoshuo.getCreatedAt());
+
+			//9.favour
+			if(isfavourlist.size()>position){
+			//	Log.e("2:", ""+isfavourlist.get(position).getIsfavour());				
+			if(isfavourlist.get(position).getIsfavour()==true){
+				holder.list_item_action_fav.setText("已收藏  "+isfavourlist.get(position).getFavourCount());
+			}else if(isfavourlist.get(position).getIsfavour()==false){
+				holder.list_item_action_fav.setText("收藏  "+isfavourlist.get(position).getFavourCount());				
+			}
+			}
+//			Toast.makeText(MainActivity.this, ""+position, Toast.LENGTH_LONG).show();
+			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+							if(isfavourlist.get(position).getIsfavour()==true){
+								final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(UserInfo.this).setTitleText("正在取消收藏，请稍后...").setContentText("");
+								sweetAlertDialog.show();
+								
+								BmobQuery<Favour> query=new BmobQuery<Favour>();
+								query.addWhereEqualTo("shuoshuo", shuoshuo);
+								query.addWhereEqualTo("user", currentUser);								
+								query.findObjects(context, new FindListener<Favour>() {
+									public void onSuccess(List<Favour> arg0) {	
+										//1.delete favour
+										if(arg0.size()>0){
+											final Favour favour=new Favour();
+											favour.setObjectId(arg0.get(0).getObjectId());									
+											favour.delete(context, new DeleteListener() {								
+														@Override
+														public void onSuccess() {
+															//2.remove relation									
+															BmobRelation relation=new BmobRelation();
+															relation.remove(favour);
+															shuoshuo.setFavour(relation);
+															shuoshuo.update(context, new UpdateListener() {										
+																@Override
+																public void onSuccess() {
+																	isfavourlist.get(position).setIsfavour(false);																	
+																	adapter.notifyDataSetChanged();
+																	sweetAlertDialog.dismiss();
+																	Toast.makeText(UserInfo.this, "取消收藏成功", Toast.LENGTH_LONG).show();
+																	
+																}
+																
+																@Override
+																public void onFailure(int arg0, String arg1) {
+																	sweetAlertDialog.dismiss();
+																	Toast.makeText(UserInfo.this, "取消收藏关系失败"+arg1, Toast.LENGTH_LONG).show();
+																}
+															});
+														}
+														
+														@Override
+														public void onFailure(int arg0, String arg1) {
+															sweetAlertDialog.dismiss();
+															Toast.makeText(UserInfo.this, "取消收藏失败"+arg1, Toast.LENGTH_LONG).show();
+															//Log.e("", currentUser.toString()+"\n"+shuoshuo.toString());
+														}
+													});
+										}
+										
+									}
+									
+									@Override
+									public void onError(int arg0, String arg1) {
+										// TODO Auto-generated method stub
+										
+									}
+								});
+							
+							}else if(isfavourlist.get(position).getIsfavour()==false){
+								final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(UserInfo.this).setTitleText("正在收藏，请稍后...").setContentText("");
+								sweetAlertDialog.show();
+								
+								final Favour favour=new Favour();								
+								favour.setShuoshuo(shuoshuo);
+								favour.setUser(currentUser);
+								favour.save(context, new SaveListener() {									
+									@Override
+									public void onSuccess() {
+										//把关联关系添加
+										BmobRelation favours=new BmobRelation();
+										favours.add(favour);
+										shuoshuo.setFavour(favours);
+								
+										shuoshuo.update(context,new UpdateListener() {									
+											@Override
+											public void onSuccess() {
+												sweetAlertDialog.dismiss();
+												Toast.makeText(UserInfo.this, "收藏成功啦", Toast.LENGTH_LONG).show();	
+												
+												isfavourlist.get(position).setIsfavour(true);
+												adapter.notifyDataSetChanged();
+											}
+											
+											@Override
+											public void onFailure(int arg0, String arg1) {
+												sweetAlertDialog.dismiss();
+												Toast.makeText(UserInfo.this, "添加关联关系失败："+arg1, Toast.LENGTH_LONG).show();
+											}
+										});
+									}
+									
+									@Override
+									public void onFailure(int arg0, String arg1) {
+										sweetAlertDialog.dismiss();
+										Toast.makeText(UserInfo.this, "收藏失败："+arg1, Toast.LENGTH_LONG).show();
+									}
+								});
+							}			
+				}
+			});
+			
+			return convertView;
+		}
+		class ViewHolder {
+			public TextView list_item_time;
+			public TextView list_item_action_comment;
+			public ImageView list_item_content_image;
+			public TextView list_item_content_text;
+			public TextView list_item_user_name;
+			public TextView list_item_action_fav;
+			public ImageView list_item_user_logo;
+			TextView list_item_textView1;			
+		}
+		
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return shuoshuoList.size();
+		}
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return shuoshuoList.get(position);
+		}
+		
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
