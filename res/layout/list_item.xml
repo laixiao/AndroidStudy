@@ -73,6 +73,7 @@
 	    android:layout_toLeftOf="@+id/list_item_action_comment"
 	    android:drawableLeft="@drawable/ic_action_fav_normal"
 	    android:gravity="center"
+	    android:layout_marginRight="10dp"
 	    android:scaleType="centerInside"
 	    android:text="收藏"
 	    android:textColor="#888888" />

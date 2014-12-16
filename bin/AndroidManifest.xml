@@ -51,6 +51,7 @@
         <activity android:name="com.study.main.ui.User.UserInfo"></activity>
          <activity android:name="com.study.main.ui.User.otherInfo"></activity>
           <activity android:name="com.study.main.ui.User.commentActivity"></activity>
+          <activity android:name="com.study.main.ui.User.FavourActivity"></activity>
         <activity android:name="com.study.main.ui.media.LocalList" >
         </activity>
         <activity android:name="com.study.main.ui.media.localVideoView"

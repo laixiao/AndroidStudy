@@ -503,7 +503,7 @@ public class UserInfo extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(UserInfo.this,Favour.class);
+				Intent intent=new Intent(UserInfo.this,FavourActivity.class);
 				startActivity(intent);
 			}
 		});
