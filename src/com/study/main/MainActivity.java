@@ -451,7 +451,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 判断菜单是否关闭
-			if (is_closed) {
+		//	if (is_closed) {
 				// // 判断两次点击的时间间隔（默认设置为2秒）
 				// if ((System.currentTimeMillis() - mExitTime) > 2000) {
 				// Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
@@ -467,9 +467,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.addCategory(Intent.CATEGORY_HOME);
 				startActivity(i);
-			} else {
-				resideMenu.closeMenu();
-			}
+//			} else {
+//				resideMenu.closeMenu();
+//			}
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
