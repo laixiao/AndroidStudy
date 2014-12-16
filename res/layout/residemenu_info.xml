@@ -7,8 +7,10 @@
     <ImageView
         android:id="@+id/image_icon"
         android:layout_width="40dp"
-        android:layout_height="fill_parent"
-        android:src="@drawable/ic_launcher" />
+        android:layout_height="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" 
+        android:src="@drawable/icon_profile" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,7 +24,7 @@
              android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QQ昵称" />
+            android:text="nickName" />
 
         <TextView
              android:textColor="@color/white"
@@ -30,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="QQ等级" />
+            android:text="money" />
     </LinearLayout>
 
 </LinearLayout>

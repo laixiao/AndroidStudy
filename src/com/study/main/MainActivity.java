@@ -272,8 +272,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				R.string.menu_item05);
 		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4,
 		// "子菜单1");
-		info = new ResideMenuInfo(this, R.drawable.icon_profile, "name",
-				"money");
+		info = new ResideMenuInfo(this);
 		setting = new ResideMenuSetting(this, "setting", "");
 
 		resideMenu.addMenuItem(menu_item01, ResideMenu.DIRECTION_LEFT);
@@ -594,7 +593,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder.list_item_action_fav = (TextView)convertView.findViewById(R.id.list_item_action_fav);
 				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
 				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);
-				holder.list_item_action_love = (TextView)convertView.findViewById(R.id.list_item_action_love);
+			
 				
 				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
 				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
@@ -655,131 +654,131 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			holder.list_item_time.setText(shuoshuo.getCreatedAt());
 		
 			//8.love			
-			if(isfavourlist.size()>position){
-				//	Log.e("2:", ""+isfavourlist.get(position).getIsfavour());				
-				if(isfavourlist.get(position).getIslove()==true){
-					holder.list_item_action_love.setText("已赞");
-				}else if(isfavourlist.get(position).getIslove()==false){
-					holder.list_item_action_love.setText("赞");				
-				}
-				}
-			
-			holder.list_item_action_love.setOnClickListener(new OnClickListener() {				
-				@Override
-				public void onClick(View v) {
-					
-					if(isfavourlist.get(position).getIslove()==true){
-						final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(MainActivity.this).setTitleText("正在取消赞，请稍后...").setContentText("");
-						sweetAlertDialog.show();
-						
-						BmobQuery<Love> query=new BmobQuery<Love>();
-						query.addWhereEqualTo("shuoshuo", shuoshuo);
-						query.addWhereEqualTo("user",currentUser);
-						query.findObjects(context, new FindListener<Love>() {
-							
-							@Override
-							public void onSuccess(List<Love> arg0) {
-								// TODO Auto-generated method stub
-								//1.delete love
-								if(arg0.size()>0){
-									final Love love=new Love();
-									love.setObjectId(arg0.get(0).getObjectId());
-									love.delete(context, new DeleteListener() {
-										
-										@Override
-										public void onSuccess() {
-											// TODO Auto-generated method stub
-											BmobRelation loves=new BmobRelation();
-											loves.remove(love);
-											shuoshuo.setLove(loves);
-											shuoshuo.update(context, new UpdateListener() {												
-												@Override
-												public void onSuccess() {
-													isfavourlist.get(position).setIslove(false);
-													adapter.notifyDataSetChanged();
-													sweetAlertDialog.dismiss();
-													Toast.makeText(MainActivity.this, "取消赞成功", Toast.LENGTH_LONG).show();	
-
-												}
-												
-												@Override
-												public void onFailure(int arg0, String arg1) {
-													sweetAlertDialog.dismiss();
-													Toast.makeText(MainActivity.this, "取消赞失败"+arg1, Toast.LENGTH_LONG).show();
-												}
-											});
-										}
-										
-										@Override
-										public void onFailure(int arg0, String arg1) {
-											sweetAlertDialog.dismiss();
-											Toast.makeText(MainActivity.this, "取消赞失败"+arg1, Toast.LENGTH_LONG).show();
-										}
-									});
-								}
-								
-							}
-							
-							@Override
-							public void onError(int arg0, String arg1) {
-								sweetAlertDialog.dismiss();
-								Toast.makeText(MainActivity.this, "取消赞失败"+arg1, Toast.LENGTH_LONG).show();
-							}
-						});
-		
-					}else if(isfavourlist.get(position).getIslove()==false){
-					final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(MainActivity.this).setTitleText("正在赞，请稍后...").setContentText("");
-					sweetAlertDialog.show();
-					
-					final Love love=new Love();
-					love.setUser(currentUser);
-					love.setShuoshuo(shuoshuo);
-					love.save(context, new SaveListener() {			
-						@Override
-						public void onSuccess() {
-						
-							//把关联关系添加
-							BmobRelation loves=new BmobRelation();
-							loves.add(love);
-							shuoshuo.setLove(loves);
-							shuoshuo.update(context, new UpdateListener() {
-								
-								@Override
-								public void onSuccess() {
-									sweetAlertDialog.dismiss();
-									Toast.makeText(MainActivity.this, "点赞成功啦", Toast.LENGTH_LONG).show();	
-									isfavourlist.get(position).setIslove(true);
-									adapter.notifyDataSetChanged();
-								}
-								
-								@Override
-								public void onFailure(int arg0, String arg1) {
-									sweetAlertDialog.dismiss();
-									Toast.makeText(MainActivity.this, "添加赞关联关系失败："+arg1, Toast.LENGTH_LONG).show();
-								}
-							});
-							
-						}
-						
-						@Override
-						public void onFailure(int arg0, String arg1) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
-					}
-					
-					
-				}
-			});
+//			if(isfavourlist.size()>position){
+//				//	Log.e("2:", ""+isfavourlist.get(position).getIsfavour());				
+//				if(isfavourlist.get(position).getIslove()==true){
+//					holder.list_item_action_love.setText("已赞");
+//				}else if(isfavourlist.get(position).getIslove()==false){
+//					holder.list_item_action_love.setText("赞");				
+//				}
+//				}
+//			
+//			holder.list_item_action_love.setOnClickListener(new OnClickListener() {				
+//				@Override
+//				public void onClick(View v) {
+//					
+//					if(isfavourlist.get(position).getIslove()==true){
+//						final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(MainActivity.this).setTitleText("正在取消赞，请稍后...").setContentText("");
+//						sweetAlertDialog.show();
+//						
+//						BmobQuery<Love> query=new BmobQuery<Love>();
+//						query.addWhereEqualTo("shuoshuo", shuoshuo);
+//						query.addWhereEqualTo("user",currentUser);
+//						query.findObjects(context, new FindListener<Love>() {
+//							
+//							@Override
+//							public void onSuccess(List<Love> arg0) {
+//								// TODO Auto-generated method stub
+//								//1.delete love
+//								if(arg0.size()>0){
+//									final Love love=new Love();
+//									love.setObjectId(arg0.get(0).getObjectId());
+//									love.delete(context, new DeleteListener() {
+//										
+//										@Override
+//										public void onSuccess() {
+//											// TODO Auto-generated method stub
+//											BmobRelation loves=new BmobRelation();
+//											loves.remove(love);
+//											shuoshuo.setLove(loves);
+//											shuoshuo.update(context, new UpdateListener() {												
+//												@Override
+//												public void onSuccess() {
+//													isfavourlist.get(position).setIslove(false);
+//													adapter.notifyDataSetChanged();
+//													sweetAlertDialog.dismiss();
+//													Toast.makeText(MainActivity.this, "取消赞成功", Toast.LENGTH_LONG).show();	
+//
+//												}
+//												
+//												@Override
+//												public void onFailure(int arg0, String arg1) {
+//													sweetAlertDialog.dismiss();
+//													Toast.makeText(MainActivity.this, "取消赞失败"+arg1, Toast.LENGTH_LONG).show();
+//												}
+//											});
+//										}
+//										
+//										@Override
+//										public void onFailure(int arg0, String arg1) {
+//											sweetAlertDialog.dismiss();
+//											Toast.makeText(MainActivity.this, "取消赞失败"+arg1, Toast.LENGTH_LONG).show();
+//										}
+//									});
+//								}
+//								
+//							}
+//							
+//							@Override
+//							public void onError(int arg0, String arg1) {
+//								sweetAlertDialog.dismiss();
+//								Toast.makeText(MainActivity.this, "取消赞失败"+arg1, Toast.LENGTH_LONG).show();
+//							}
+//						});
+//		
+//					}else if(isfavourlist.get(position).getIslove()==false){
+//					final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(MainActivity.this).setTitleText("正在赞，请稍后...").setContentText("");
+//					sweetAlertDialog.show();
+//					
+//					final Love love=new Love();
+//					love.setUser(currentUser);
+//					love.setShuoshuo(shuoshuo);
+//					love.save(context, new SaveListener() {			
+//						@Override
+//						public void onSuccess() {
+//						
+//							//把关联关系添加
+//							BmobRelation loves=new BmobRelation();
+//							loves.add(love);
+//							shuoshuo.setLove(loves);
+//							shuoshuo.update(context, new UpdateListener() {
+//								
+//								@Override
+//								public void onSuccess() {
+//									sweetAlertDialog.dismiss();
+//									Toast.makeText(MainActivity.this, "点赞成功啦", Toast.LENGTH_LONG).show();	
+//									isfavourlist.get(position).setIslove(true);
+//									adapter.notifyDataSetChanged();
+//								}
+//								
+//								@Override
+//								public void onFailure(int arg0, String arg1) {
+//									sweetAlertDialog.dismiss();
+//									Toast.makeText(MainActivity.this, "添加赞关联关系失败："+arg1, Toast.LENGTH_LONG).show();
+//								}
+//							});
+//							
+//						}
+//						
+//						@Override
+//						public void onFailure(int arg0, String arg1) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//					});
+//					}
+//					
+//					
+//				}
+//			});
 			
 			//9.favour
 			if(isfavourlist.size()>position){
 			//	Log.e("2:", ""+isfavourlist.get(position).getIsfavour());				
 			if(isfavourlist.get(position).getIsfavour()==true){
-				holder.list_item_action_fav.setText("已收藏");
+				holder.list_item_action_fav.setText("已收藏  "+isfavourlist.get(position).getFavourCount());
 			}else if(isfavourlist.get(position).getIsfavour()==false){
-				holder.list_item_action_fav.setText("收藏");				
+				holder.list_item_action_fav.setText("收藏  "+isfavourlist.get(position).getFavourCount());				
 			}
 			}
 //			Toast.makeText(MainActivity.this, ""+position, Toast.LENGTH_LONG).show();
@@ -889,7 +888,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			return convertView;
 		}
 		class ViewHolder {
-			public TextView list_item_time,list_item_action_love;
+			public TextView list_item_time;
 			public TextView list_item_action_comment;
 			public ImageView list_item_content_image;
 			public TextView list_item_content_text;
@@ -975,36 +974,37 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 									}													
 								}
 								isfavour.setIsfavour(isorno);
-								
+								isfavour.setFavourCount(arg0.size());
+								isfavourlist.add(isfavour);
 							//	Log.e("1:",""+isfavour.getIsfavour());
 							//	Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
 								
-								BmobQuery<Love> query2=new BmobQuery<Love>();
-								query2.addWhereEqualTo("love", new BmobPointer(td));
-								query2.include("user");
-								query2.findObjects(MainActivity.this, new FindListener<Love>() {				
-									public void onSuccess(List<Love> arg0) {
-										// TODO Auto-generated method stub
-										boolean isorno=false;
-										for(Love i:arg0){								
-											if(i.getUser()!=null&&currentUser!=null){
-												if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
-													isorno=true;
-												//	td.setIsFavour(true);	
-												//	Log.e("", td.getContent()+":"+td.getIsFavour()+"");//通过
-												}
-											}													
-										}
-										isfavour.setIslove(isorno);
-										isfavourlist.add(isfavour);
-									}
-									
-									@Override
-									public void onError(int arg0, String arg1) {
-										// TODO Auto-generated method stub
-										
-									}
-								});
+//								BmobQuery<Love> query2=new BmobQuery<Love>();
+//								query2.addWhereEqualTo("love", new BmobPointer(td));
+//								query2.include("user");
+//								query2.findObjects(MainActivity.this, new FindListener<Love>() {				
+//									public void onSuccess(List<Love> arg0) {
+//										// TODO Auto-generated method stub
+//										boolean isorno=false;
+//										for(Love i:arg0){								
+//											if(i.getUser()!=null&&currentUser!=null){
+//												if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
+//													isorno=true;
+//												//	td.setIsFavour(true);	
+//												//	Log.e("", td.getContent()+":"+td.getIsFavour()+"");//通过
+//												}
+//											}													
+//										}
+//										isfavour.setIslove(isorno);
+//										isfavourlist.add(isfavour);
+//									}
+//									
+//									@Override
+//									public void onError(int arg0, String arg1) {
+//										// TODO Auto-generated method stub
+//										
+//									}
+//								});
 								
 							}
 							

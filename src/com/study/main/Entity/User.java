@@ -5,14 +5,23 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
 public class User extends BmobUser{
-	private boolean sex;
-	private String phonenumber;
-	private String nickname;
-	private String birthday;
-	private String signature;
-	private BmobFile avatar;
-	private Integer favourcount;
-	private BmobRelation shuoshuo;
+	
+	private boolean sex;		//性别
+	private String phonenumber;	//手机号码
+	private String nickname;	//昵称
+	private String birthday;	//生日	
+	private String signature;	//签名
+	private BmobFile avatar;	//头像
+	private Integer favourcount;//点赞关注人数
+	private BmobRelation shuoshuo;//说说
+	private Integer money;
+	
+	public Integer getMoney() {
+		return money;
+	}
+	public void setMoney(Integer money) {
+		this.money = money;
+	}
 	public boolean isSex() {
 		return sex;
 	}
@@ -67,8 +76,9 @@ public class User extends BmobUser{
 				+ ", nickname=" + nickname + ", birthday=" + birthday
 				+ ", signature=" + signature + ", avatar=" + avatar
 				+ ", favourcount=" + favourcount + ", shuoshuo=" + shuoshuo
-				+ "]";
+				+ ", money=" + money + "]";
 	}
+
 
 	
 	
