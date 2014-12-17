@@ -6,19 +6,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
+import jdk.internal.org.objectweb.asm.Handle;
+
 import com.study.main.R;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.utils.CacheUtils;
-
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,6 +29,8 @@ import android.graphics.Bitmap.Config;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,24 +45,37 @@ public class Fabiaoshuoshuo extends Activity {
 
 	private static final int REQUEST_CODE_ALBUM = 1;
 	private static final int REQUEST_CODE_CAMERA = 2;
-
 	private EditText content;
 	private LinearLayout openLayout;
 	private LinearLayout takeLayout;
 	private ImageView albumPic;
 	private ImageView takePic;
 	private Button fabiao01, fanhui01;
-
 	String dateTime;
 	String targeturl = null;
+	User currentUser;
+	private ProgressDialog dialog;
+	private Handler handle=new Handler(){
 
+		@Override
+		public void handleMessage(Message msg) {
+			int what=msg.what;
+			int prog=msg.arg1;
+			if(what==100){
+				finish();
+			}
+		}
+		
+	};
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.fabiaoshuoshuo);
-
+		currentUser = BmobUser.getCurrentUser(Fabiaoshuoshuo.this,User.class);
 		init();
 	}
 
@@ -70,9 +86,9 @@ public class Fabiaoshuoshuo extends Activity {
 		takeLayout = (LinearLayout) findViewById(R.id.take_layout);
 		albumPic = (ImageView) findViewById(R.id.open_pic);
 		takePic = (ImageView) findViewById(R.id.take_pic);
-
 		fabiao01 = (Button) findViewById(R.id.fabiao01);
 		fanhui01 = (Button) findViewById(R.id.fanhui01);
+		
 
 		setListener();
 	}
@@ -91,7 +107,8 @@ public class Fabiaoshuoshuo extends Activity {
                     .setTitleText("亲，内容不能为空")
                     .setContentText("")
                     .show();
-				}else if (targeturl == null) {
+				}
+				if (targeturl == null) {
 					publishWithoutFigure(commitContent, null);
 				} else {
 					publish(commitContent);
@@ -136,7 +153,7 @@ public class Fabiaoshuoshuo extends Activity {
 				}
 				//3.根据路径获取Uri
 				Uri uri = Uri.fromFile(f);
-				Log.e("uri", uri + "");
+				//Log.e("uri", uri + "");
 				//4.开启相机
 				Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				camera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -155,13 +172,9 @@ public class Fabiaoshuoshuo extends Activity {
 
 	}
 
-	private void publishWithoutFigure(final String commitContent,final BmobFile figureFile) {
-		BmobUser user =BmobUser.getCurrentUser(this);
-		if(user != null){
-		    // 允许用户使用应用
-		
+	private void publishWithoutFigure(final String commitContent,final BmobFile figureFile) {		
 		final ShuoShuo shuoshuo = new ShuoShuo();
-	//	shuoshuo.setAuthor(user);
+		shuoshuo.setAuthor(currentUser);
 		shuoshuo.setContent(commitContent);
 		// 图片文件的路径
 		if (figureFile != null) {
@@ -185,52 +198,60 @@ public class Fabiaoshuoshuo extends Activity {
                 .show();
 			}
 		});
-		}else{
-		    //缓存用户对象为空时， 可打开用户注册界面…
-			Intent intent = new Intent();
-            intent.setClass(Fabiaoshuoshuo.this, LoginAndRegister.class);
-            startActivity(intent);
-		}
+		
 	}
 
 	/*
 	 * 发表带图片
 	 */
 	private void publish(final String commitContent) {
-
+		
+        
 		final BmobFile figureFile = new BmobFile(new File(targeturl));
-		figureFile.upload(this, new UploadFileListener() {
+		figureFile.uploadblock(Fabiaoshuoshuo.this, new UploadFileListener() {
+			
+			
 
 			@Override
 			public void onSuccess() {
 				// TODO Auto-generated method stub
-				// LogUtils.i(TAG, "上传文件成功。"+figureFile.getFileUrl());
 				publishWithoutFigure(commitContent, figureFile);
-
 			}
 
 			@Override
 			public void onProgress(Integer arg0) {
-				// TODO Auto-generated method stub
-
+					Message message=Message.obtain(handle, 100);
+					message.arg1=arg0;
+					message.sendToTarget();
 			}
-
-			@Override
+			
 			public void onFailure(int arg0, String arg1) {
+				// TODO Auto-generated method stub
 				new SweetAlertDialog(Fabiaoshuoshuo.this, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("上传失败")
-                .setContentText("原因"+arg1)
-                .show();
+	              .setTitleText("上传失败")
+	              .setContentText("原因"+arg1)
+	              .show();
 			}
 		});
-
+//		figureFile.upload(this, new UploadFileListener() {
+//			public void onSuccess() {			
+//				publishWithoutFigure(commitContent, figureFile);
+//				
+//			}
+//			public void onProgress(Integer arg0) {
+//			}
+//			public void onFailure(int arg0, String arg1) {
+//				new SweetAlertDialog(Fabiaoshuoshuo.this, SweetAlertDialog.ERROR_TYPE)
+//                .setTitleText("上传失败")
+//                .setContentText("原因"+arg1)
+//                .show();
+//			}
+//		});
 	}
 
 	// 2.获得图片源
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		// LogUtils.i(TAG,"get album:");
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {	
+		super.onActivityResult(requestCode, resultCode, data);		
 		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
 			case REQUEST_CODE_ALBUM:
@@ -273,7 +294,6 @@ public class Fabiaoshuoshuo extends Activity {
 		BitmapFactory.Options newOpts = new BitmapFactory.Options();
 		newOpts.inJustDecodeBounds = true;// 只读边,不读内容
 		Bitmap bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
-
 		newOpts.inJustDecodeBounds = false;
 		int w = newOpts.outWidth;
 		int h = newOpts.outHeight;

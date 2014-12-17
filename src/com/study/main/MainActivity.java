@@ -491,7 +491,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		case R.id.exit:
 			Toast.makeText(MainActivity.this, "触发了退出方法", Toast.LENGTH_LONG)
 					.show();
-			//finish();
+			finish();
 			System.exit(0);
 			super.onBackPressed();
 			break;
