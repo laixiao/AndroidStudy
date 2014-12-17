@@ -162,7 +162,7 @@ public class UserInfo extends Activity {
 	private void initListView() {
 		// TODO Auto-generated method stub
 		BmobQuery<ShuoShuo>  query=new BmobQuery<ShuoShuo>();
-		//query.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+		//query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		query.order("-createdAt");
 		query.include("author");
 		query.setLimit(999);
@@ -177,6 +177,7 @@ public class UserInfo extends Activity {
 					BmobQuery<Favour> query=new BmobQuery<Favour>();
 					query.addWhereRelatedTo("favour", new BmobPointer(td));
 					query.include("user");
+			//		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 					query.findObjects(UserInfo.this, new FindListener<Favour>() {						
 						@Override
 						public void onSuccess(List<Favour> arg0) {
@@ -247,16 +248,16 @@ public class UserInfo extends Activity {
 	private void initView() {
 		// TODO Auto-generated method stub
 		BmobQuery<User> userQuery = new BmobQuery<User>();
-		userQuery.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
-		// userQuery.setMaxCacheAge(100000L);
+	//	userQuery.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+	//	userQuery.setMaxCacheAge(1000*360*24*30L);//一天
 		userQuery.getObject(UserInfo.this,currentUser.getObjectId(), new GetListener<User>() {			
-			public void onSuccess(User arg0) {					
-				if(arg0.getAvatar()!=null){
+			public void onSuccess(User arg0) {
+				
+				if(arg0.getAvatar()!=null){		
 					ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(UserInfo.this), personico, options,
 							new SimpleImageLoadingListener(){
 								@Override
-								public void onLoadingComplete(String imageUri, View view,
-										Bitmap loadedImage) {
+								public void onLoadingComplete(String imageUri, View view,Bitmap loadedImage) {
 									// TODO Auto-generated method stub
 									super.onLoadingComplete(imageUri, view, loadedImage);
 								}						
@@ -362,10 +363,8 @@ public class UserInfo extends Activity {
 									SweetAlertDialog sweetAlertDialog) {
 								// TODO Auto-generated method stub
 								isSex = false;
-								user_infosex
-										.setImageResource(R.drawable.user_infosex1);
-								Toast.makeText(UserInfo.this, "修改成功",
-										Toast.LENGTH_SHORT).show();
+								user_infosex.setImageResource(R.drawable.user_infosex1);
+								Toast.makeText(UserInfo.this, "修改成功",Toast.LENGTH_SHORT).show();
 								sweetAlertDialog.dismiss();
 							}
 						}).setConfirmClickListener(new OnSweetClickListener() {

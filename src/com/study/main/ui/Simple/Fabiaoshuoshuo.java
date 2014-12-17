@@ -40,12 +40,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Fabiaoshuoshuo extends Activity {
 
 	private static final int REQUEST_CODE_ALBUM = 1;
 	private static final int REQUEST_CODE_CAMERA = 2;
 	private EditText content;
+	private TextView fabiaoshuoshuo_progress;
 	private LinearLayout openLayout;
 	private LinearLayout takeLayout;
 	private ImageView albumPic;
@@ -54,13 +56,13 @@ public class Fabiaoshuoshuo extends Activity {
 	String dateTime;
 	String targeturl = null;
 	User currentUser;
-	private ProgressDialog dialog;
 	private Handler handle=new Handler(){
 
 		@Override
 		public void handleMessage(Message msg) {
 			int what=msg.what;
 			int prog=msg.arg1;
+			fabiaoshuoshuo_progress.setText(prog+"%");
 			if(what==100){
 				finish();
 			}
@@ -84,6 +86,7 @@ public class Fabiaoshuoshuo extends Activity {
 		content = (EditText) findViewById(R.id.edit_content);
 		openLayout = (LinearLayout) findViewById(R.id.open_layout);
 		takeLayout = (LinearLayout) findViewById(R.id.take_layout);
+		fabiaoshuoshuo_progress=(TextView) this.findViewById(R.id.fabiaoshuoshuo_progress);
 		albumPic = (ImageView) findViewById(R.id.open_pic);
 		takePic = (ImageView) findViewById(R.id.take_pic);
 		fabiao01 = (Button) findViewById(R.id.fabiao01);

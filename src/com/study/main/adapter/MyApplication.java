@@ -1,153 +1,70 @@
-//package com.study.main.adapter;
-//import android.annotation.TargetApi;
-//import android.app.Application;
-//import android.content.Context;
-//import android.os.Build;
-//import android.os.StrictMode;
-//import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-//import com.nostra13.universalimageloader.core.ImageLoader;
-//import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-//import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+//File cacheDir = StorageUtils.getCacheDirectory(context,
+//"UniversalImageLoader/Cache");
 //
-//public class MyApplication extends Application {
-//	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-//	@SuppressWarnings("unused")
-//	@Override
-//	public void onCreate() {
-//		super.onCreate();
-//		initImageLoader(getApplicationContext());
-//	}
+//ImageLoaderConfiguration config = new
+//ImageLoaderConfiguration .Builder(getApplicationContext())
+//.maxImageWidthForMemoryCache(800)
+//.maxImageHeightForMemoryCache(480)
+//.httpConnectTimeout(5000)
+//.httpReadTimeout(20000)
+//.threadPoolSize(5)
+//.threadPriority(Thread.MIN_PRIORITY + 3)
+//.denyCacheImageMultipleSizesInMemory()
+//.memoryCache(new UsingFreqLimitedCache(2000000)) // You can pass your own memory cache implementation
+//.discCache(new UnlimitedDiscCache(cacheDir)) // You can pass your own disc cache implementation
+//.defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+//.build();
 //
-//	public static void initImageLoader(Context context) {
-//		//1. This configuration tuning is custom. You can tune every option, you may tune some of them,or you can create default configuration by  ImageLoaderConfiguration.createDefault(this); method.
-//		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-//				.threadPriority(Thread.NORM_PRIORITY - 2)
-//				.denyCacheImageMultipleSizesInMemory()
-//				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
-//				.diskCacheSize(50 * 1024 * 1024) // 50 Mb
-//				.tasksProcessingOrder(QueueProcessingType.LIFO)
-//				.writeDebugLogs() // Remove for release app
-//				.build();
-//		//2. Initialize ImageLoader with configuration.
-//		ImageLoader.getInstance().init(config);
-//	}
-//}
-
-
-
-
-
-
-
-//ageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)  
-//  
-//  
-///** 
-// * Äã¿ÉÒÔÉèÖÃÄã×Ô¼ºÊµÏÖµÄÄÚ´æ»º´æ 
-// */  
-//.memoryCache(new LruMemoryCache(2 * 1024 * 1024))  
-//    /** 
-//     * ÎªÎ»Í¼×î´óÄÚ´æ»º´æ´óĞ¡(ÒÔ×Ö½ÚÎªµ¥Î»),Ä¬ÈÏÖµ,¿ÉÓÃÓ¦ÓÃ³ÌĞòÄÚ´æµÄ1/8 
-//     * ×¢Òâ:Èç¹ûÄãÊ¹ÓÃÕâ¸ö·½·¨,ÄÇÃ´LruMemoryCache½«±»ÓÃ×÷ÄÚ´æ»º´æ¡£ 
-//     * Äú¿ÉÒÔÊ¹ÓÃmemoryCache(MemoryCacheAware)·½·¨À´ÉèÖÃ×Ô¼ºµÄMemoryCacheAwareµÄÊµÏÖ¡£    
-//     */  
-//.memoryCacheSize(2 * 1024 * 1024)  
-//  
-///** 
-// * µ±Í¬Ò»¸öUri»ñÈ¡²»Í¬´óĞ¡µÄÍ¼Æ¬£¬»º´æµ½ÄÚ´æÊ±£¬Ö»»º´æÒ»¸ö¡£Ä¬ÈÏ»á»º´æ¶à¸ö²»Í¬µÄ´óĞ¡µÄÏàÍ¬Í¼Æ¬ 
-// */  
-//.denyCacheImageMultipleSizesInMemory()  
-//  
-///** 
-// * ÉèÖÃ±¾µØÍ¼Æ¬»º´æ Ò²¿ÉÒÔÉèÖÃÄã×Ô¼ºÊµÏÖ ÅÌ»º´æ±ØĞèÊµÏÖ DiscCacheAware½Ó¿Ú 
-// * ÀàĞÍ£¨ÔÚcom.nostra13.universalimageloader.cache.disc.impl°üÏÂÄÜÕÒµ½ÈçÏÂµÄÀà£©£º 
-// * FileCountLimitedDiscCache(File cacheDir, int maxFileCount):ÉèÖÃ»º´æÂ·¾¶ºÍ»º´æÎÄ¼şµÄÊıÁ¿£¬³¬¹ıÊıÁ¿ºó£¬old½«±»É¾³ı 
-// *  
-// * FileCountLimitedDiscCache(File cacheDir,FileNameGenerator fileNameGenerator,int maxFileCount):µÚ¶ş¸ö²ÎÊıÊÇÍ¨¹ıÍ¼Æ¬µÄurlÉú³ÉµÄÎ¨Ò»ÎÄ¼şÃû¡£ 
-// *  
-// * LimitedAgeDiscCache(File cacheDir, FileNameGenerator fileNameGenerator, long maxAge) :µÚ¶ş¸ö²ÎÊıÍ¬ÉÏ 
-// *  
-// * LimitedAgeDiscCache(File cacheDir, long maxAge):maxAgeÎª¶¨ÒåµÄÊ±¼ä£¬³¬¹ıÊ±¼äºó£¬Í¼Æ¬½«±»É¾³ı 
-// *  
-// * TotalSizeLimitedDiscCache(File cacheDir, FileNameGenerator fileNameGenerator, int maxCacheSize) :µÚ¶ş¸ö²ÎÊıÍ¬ÉÏ 
-// *  
-// * TotalSizeLimitedDiscCache(File cacheDir, int maxCacheSize) :¶¨Òå»º´æµÄ´óĞ¡£¬Èç³¬¹ıÁË£¬¾Í»áÉ¾³ıoldÍ¼Æ¬¡£ UnlimitedDiscCache(File cacheDir) £º»º´æÃ»ÓĞÏŞÖÆ 
-// *  
-// * UnlimitedDiscCache(File cacheDir, FileNameGenerator fileNameGenerator)£ºµÚ¶ş¸ö²ÎÊıÍ¬ÉÏ 
-// */  
-//.discCache(new FileCountLimitedDiscCache(new File("/sdcard/cache"), 100))//  
-///** 
-// * ÉèÖÃ»º´æµÄ´óĞ¡(ÒÔ×Ö½ÚÎªµ¥Î»)Ä¬ÈÏ:±¾µØ»º´æÊÇ²»ÏŞÖÆ´óĞ¡ 
-// * ×¢Òâ:Èç¹ûÄãÊ¹ÓÃÕâ¸ö·½·¨,ÄÇÃ´TotalSizeLimitedDiscCache½«±»ÓÃ×÷´ÅÅÌ»º´æ 
-// * Äú¿ÉÒÔÊ¹ÓÃdiscCache(DiscCacheAware)DiscCacheAwareÒıÈë×Ô¼ºµÄÊµÏÖ·½·¨ 
-// *  
-// * @param maxCacheSize´óĞ¡ 
-// */  
-//.discCacheSize(10*1024*1024)  
-///** 
-//    * ÉèÖÃÍ¼Æ¬±£´æµ½±¾µØµÄ²ÎÊı 
-//    * @param maxImageWidthForDiscCache ±£´æµÄ×î´ó¿í¶È 
-//    * @param maxImageHeightForDiscCache ±£´æµÄ×î´ó¸ß¶È 
-//    * @param compressFormat    ±£´æµÄÑ¹Ëõ¸ñÊ½ 
-//    * @param compressQuality ÌáÊ¾Ñ¹ËõµÄ³Ì¶È£¬ÓĞ0-100.ÏëpngÕâÖÖÍ¼Æ¬ÎŞËğºÄ£¬¾Í²»±ØÉèÖÃÁË 
-//    * @param BitmapProcessor ´¦ÀíÎ»Í¼,¿ÉÒÔ¸ü¸ÄÔ­À´µÄÎ»Í¼,ÊµÏÖ±ØĞëÊÇÏß³Ì°²È«µÄ¡£ 
-//    */  
-//  .discCacheExtraOptions(100,10,android.graphics.Bitmap.CompressFormat.JPEG,0, null )  
-///** 
-// * ÉèÖÃ»º´æÎÄ¼şµÄÊıÁ¿ 
-// * @param maxFileCountÊıÁ¿ 
-// */  
-//.discCacheFileCount(100)  
-///** 
-// * .taskExecutor(Executor executor) Ìí¼Ó¸öÏß³Ì³Ø£¬½øĞĞÏÂÔØ 
-// *  
-// * @param executor 
-// *            Ïß³Ì³Ø 
-// *            Èç¹û½øĞĞÁËÕâ¸öÉèÖÃ£¬ÄÇÃ´threadPoolSize(int)£¬threadPriority( 
-// *            int)£¬tasksProcessingOrder(QueueProcessingType) 
-// *            ½«²»»áÆğ×÷ÓÃ 
-// */  
-//  
-///** 
-// * ÉèÖÃ»º´æÎÄ¼şµÄÃû×Ö 
-// *  
-// * @param fileNameGenerator 
-// *            discCacheFileNameGenerator(FileNameGenerator 
-// *            fileNameGenerator) ²ÎÊıfileNameGenerator£º 
-// *            HashCodeFileNameGenerator 
-// *            ()£ºÍ¨¹ıHashCode½«urlÉú³ÉÎÄ¼şµÄÎ¨Ò»Ãû×Ö 
-// *            Md5FileNameGenerator()£ºÍ¨¹ıMd5½«urlÉú²úÎÄ¼şµÄÎ¨Ò»Ãû×Ö 
-// */  
-//.discCacheFileNameGenerator(new Md5FileNameGenerator())  
-//  
-///** 
-// * ÉèÖÃÓÃÓÚÏÔÊ¾Í¼Æ¬µÄÏß³Ì³Ø´óĞ¡ 
-// * @param threadPoolSize 
-// */  
-//.threadPoolSize(5)//  
-//  
-//  
-///** 
-// * ÉèÖÃÏß³ÌµÄÓÅÏÈ¼¶ 
-// * @param threadPriority 
-// */  
-//.threadPriority(Thread.MIN_PRIORITY + 3)  
-///** 
-// * tasksProcessingOrder(QueueProcessingType tasksProcessingType) 
-// * ÉèÖÃÍ¼Æ¬ÏÂÔØºÍÏÔÊ¾µÄ¹¤×÷¶ÓÁĞÅÅĞò 
-// *  
-// * @param tasksProcessingType 
-// */  
-//.tasksProcessingOrder(QueueProcessingType.LIFO)  
-///** 
-// * taskExecutorForCachedImages(Executor executorForCachedImages) 
-// * ÏÂÔØ»º´æÍ¼Æ¬ 
-// *  
-// * @param executorForCachedImages 
-// */  
-//// =========================================================//  
-//.writeDebugLogs()  
-//.build();  
-//  
-//  
-//ImageLoader.getInstance().init(config);  
+//ä¸‹é¢è®©æˆ‘ä»¬æ¥çœ‹çœ‹æ¯ä¸€ä¸ªé€‰é¡¹ã€‚
+//
+//â€¢ maxImageWidthForMemoryCache() å’ŒmaxImageHeightForMemoryCache()ç”¨äºå°†å›¾ç‰‡å°†å›¾ç‰‡è§£ææˆBitmapå¯¹è±¡ã€‚ä¸ºäº†ä¸å‚¨å­˜æ•´ä¸ªå›¾ç‰‡ï¼Œæ ¹æ®ImageViewå‚æ•°çš„å€¼ï¼ˆè¦åŠ è½½å›¾ç‰‡çš„é‚£ä¸ªï¼‰å‡å°‘å›¾ç‰‡çš„å¤§å°ã€‚maxWidthå’ŒmaxHeight(ç¬¬ä¸€é˜¶æ®µ),layout_width layout_height(ç¬¬äºŒé˜¶æ®µ)ã€‚å¦‚æœä¸å®šä¹‰è¿™äº›å‚æ•°(å€¼ä¸ºfill_parentå’Œwrap_contentè¢«è§†ä¸ºä¸ç¡®å®šçš„å¤§å°),ç„¶åå°ºå¯¸çš„è®¾å®šå°±ä¼šæ ¹æ®maxImageWidthForMemoryCache()å’ŒmaxImageHeightForMemoryCache()çš„è®¾ç½®è€Œå®šã€‚åŸå§‹å›¾åƒçš„å¤§å°æœ€å¤§ä¼šç¼©å°åˆ°2å€(é€‚åˆç”¨fast decoding),ç›´åˆ°å®½åº¦æˆ–é«˜åº¦å˜å¾—å°äºæŒ‡å®šå€¼;
+//
+//oé»˜è®¤å€¼ - è®¾å¤‡çš„å±å¹•å¤§å°
+//
+//â€¢ httpReadTimeout()è®¾ç½®å›¾ç‰‡ä»ç½‘ç»œä¸­åŠ è½½çš„æœ€å¤§è¶…æ—¶æ—¶é—´ï¼ˆä»¥æ¯«ç§’ä¸ºå•ä½ï¼‰
+//
+//o é»˜è®¤å€¼- 30ç§’
+//
+//â€¢ threadPoolSize() è®¾ç½®çº¿ç¨‹æ± çš„å¤§å°. æ¯ä¸€ä¸ªå›¾ç‰‡åŠ è½½å’Œæ˜¾ç¤ºçš„ä»»åŠ¡éƒ½æ˜¯åœ¨ä¸€ä¸ªä¸ªå•ç‹¬çš„çº¿ç¨‹ä¸­è¿›è¡Œçš„ï¼Œè¿™äº›çº¿ç¨‹åœ¨ä»å›¾ç‰‡ç½‘ç»œä¸­è¢«ä¸‹è½½çš„æ—¶å€™å°±ä¼šè¿›å…¥çº¿ç¨‹æ± ã€‚å› æ­¤ï¼Œæ± çš„å¤§å°å†³å®šèƒ½åŒæ—¶è¿è¡Œçš„çº¿ç¨‹æ•°ã€‚ä¸€ä¸ªå¤§çš„çº¿ç¨‹æ± èƒ½æ˜¾è‘—åœ°æ‹–æ…¢UIçš„å“åº”é€Ÿåº¦ï¼Œä¾‹å¦‚ï¼Œåˆ—è¡¨çš„æ»šåŠ¨å°±ä¼šå˜æ…¢. 
+//o é»˜è®¤å€¼- 5
+//
+//â€¢ threadPriority()è®¾ç½®æ­£åœ¨è¿è¡Œä»»åŠ¡çš„æ‰€æœ‰çº¿ç¨‹åœ¨ç³»ç»Ÿä¸­çš„ä¼˜å…ˆçº§ï¼ˆ1åˆ°10ï¼‰ï¼›
+//
+//oé»˜è®¤å€¼- 4
+//
+//â€¢ è°ƒç”¨denyCacheImageMultipleSizesInMemory()å¼ºåˆ¶UILåœ¨å†…å­˜ä¸­ä¸èƒ½å­˜å‚¨å†…å®¹ç›¸åŒä½†å¤§å°ä¸åŒçš„å›¾åƒã€‚ç”±äºå®Œæ•´å¤§å°çš„å›¾ç‰‡ä¼šå­˜å‚¨åœ¨ç£ç›˜ç¼“å­˜ä¸­ï¼Œåé¢å½“å›¾ç‰‡åŠ è½½è¿›å…¥å†…å­˜ï¼Œä»–ä»¬å°±ä¼šç¼©å°åˆ°ImageViewçš„å¤§å°ï¼ˆå›¾ç‰‡è¦æ˜¾ç¤ºçš„å°ºå¯¸ï¼‰ï¼Œç„¶è€Œåœ¨æŸäº›æƒ…å†µä¸‹,ç›¸åŒçš„å›¾åƒç¬¬ä¸€æ¬¡æ˜¾ç¤ºåœ¨ä¸€ä¸ªå°çš„Viewä¸­,ç„¶ååˆéœ€è¦åœ¨ä¸€ä¸ªå¤§çš„Viewä¸­æ˜¾ç¤ºã€‚åŒæ—¶,ä¸¤ä¸ªä¸åŒå¤§å°çš„ç›¸åŒå†…å®¹çš„å›¾ç‰‡å°±ä¼šè¢«å°†è¢«å­˜å‚¨åœ¨å†…å­˜ä¸­ã€‚è¿™æ˜¯é»˜è®¤çš„æ“ä½œã€‚denyCacheImageMultipleSizesInMemory()æŒ‡ä»¤ç¡®ä¿åˆ é™¤å‰ä¸€ä¸ªåŠ è½½çš„å›¾åƒç¼“å­˜çš„å†…å­˜çš„å¤§å°
+//
+//â€¢ ä½¿ç”¨memoryCache(),ä½ å¯ä»¥æŒ‡å®šå†…å­˜ç¼“å­˜çš„å®ç°ã€‚ä½ å¯ä»¥ä½¿ç”¨ç°æˆçš„è§£å†³æ–¹æ¡ˆ(ä»–ä»¬éƒ½æ˜¯å®ç°limited  size-cache,å¦‚æœè¶…è¿‡ç¼“å­˜å¤§å°,å°±é€šè¿‡ä¸€å®šç®—æ³•åˆ é™¤ä¸€ä¸ªå¯¹è±¡):
+//
+//o FIFOLimitedCache (æ ¹æ®å…ˆè¿›å…ˆå‡ºçš„åŸåˆ™ä¸Šåˆ é™¤å¤šä½™å¯¹è±¡)
+//o LargestLimitedCache (ç©ºé—´å ç”¨æœ€å¤§çš„å¯¹è±¡ä¼šè¢«åˆ é™¤)
+//o UsingAgeLimitedCache (æœ€æ—©è¢«æ·»åŠ çš„å¯¹è±¡ä¼šè¢«åˆ é™¤)
+//o UsingFreqLimitedCache (æœ€å°‘è¢«ç”¨åˆ°çš„å¯¹è±¡ä¼šè¢«åˆ é™¤)
+//æˆ–è€…,ä½ å¯ä»¥å®ç°é€šè¿‡å®ç°æ¥å£MemoryCacheAware <String,Bitmap>æ¥å®ç°è‡ªå·±çš„ç¼“å­˜ï¼›
+//o é»˜è®¤å€¼ - ä½¿ç”¨2 MBçš„å†…å­˜é™åˆ¶çš„UsingFreqLimitedCache
+//memoryCacheSize() è®¾ç½®å†…å­˜ç¼“å­˜çš„æœ€å¤§å ç”¨ç©ºé—´. åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œé»˜è®¤çš„ç¼“å­˜ç­–ç•¥æ˜¯ - UsingFreqLimitedCache.
+//o é»˜è®¤å€¼ - 2 MB
+//
+//â€¢ Using discCache(), ä½ å¯ä»¥å®šä¹‰è‡ªå·±çš„ç£ç›˜ç¼“å­˜. ä¹Ÿå¯ä»¥ç°æˆçš„è§£å†³æ–¹æ¡ˆ (æ–‡ä»¶è·Ÿç‰¹å®šçš„URLåŒ¹é…ï¼Œæ–‡ä»¶åä¸ºè¿™äº›URLçš„å“ˆå¸Œå€¼):
+//
+//o UnlimitedDiscCache (é€šå¸¸çš„ç­–ç•¥, ç¼“å­˜å¤§å°æ²¡æœ‰é™åˆ¶)
+//o FileCountLimitedDiscCache (é™å®šå¤§å°çš„ç¼“å­˜)
+//o TotalSizeLimitedDiscCache (é™å®šæ–‡ä»¶ä¸ªæ•°çš„ç¼“å­˜ç­–ç•¥)
+//å¦å¤–,ä½ ä¹Ÿå¯ä»¥é€šè¿‡å®ç°DiscCacheAwareæ¥å£å®šä¹‰è‡ªå·±çš„ç¼“å­˜
+//o é»˜è®¤å€¼ - UnlimitedDiscCache
+//
+//â€¢ ä½¿ç”¨defaultDisplayImageOptions(),ä½ å¯ä»¥è®¾ç½®imageæ˜¾ç¤ºé€‰é¡¹,å¦‚æœè‡ªå®šä¹‰é€‰é¡¹æ²¡æœ‰ä¼ é€’ç»™displayImage(),å®ƒå°†ç”¨äºdisplayimage(â€¦)æ–¹æ³•çš„æ¯ä¸€æ¬¡è°ƒç”¨ã€‚ä¸‹é¢,æˆ‘å°†è¯¦ç»†è®¨è®ºè¿™äº›é€‰é¡¹ã€‚
+//
+//æˆ‘ä»¬å¯ä»¥æ„å»ºä¸€ä¸ªconfigurationå¯¹è±¡æˆ–ä¿¡ä»»ä¸€ä¸ªå¼€å‘äººå‘˜(æ¯”å¦‚æˆ‘)ç„¶åä½¿ç”¨é»˜è®¤çš„configuration:
+//
+// 
+//
+//ImageLoaderConfiguration config =
+//ImageLoaderConfiguration.createDefault(context);
+// 
+//
+//å› æ­¤,configurationå°±åˆ›å»ºå¥½äº†ã€‚ç°åœ¨,ImageLoaderå¯ä»¥é€šè¿‡å®ƒåˆå§‹åŒ–äº†:
+//
+//ImageLoader.getInstance().init(config);
+//
+//å°±è¿™æ ·,ImageLoaderå·²ç»å¯ä»¥ä½¿ç”¨äº†ã€‚

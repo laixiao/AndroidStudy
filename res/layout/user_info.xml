@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
-
-  
-
         <LinearLayout
             android:id="@+id/user_info_titlelayout"
             android:layout_width="wrap_content"
@@ -126,7 +123,7 @@
                         android:id="@+id/user_info_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="10dp"
                         android:layout_centerHorizontal="true"
                         
                         android:text="昵称:"
@@ -147,8 +144,8 @@
                         android:id="@+id/personico"
                         android:layout_width="93dp"
                         android:layout_height="93dp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:adjustViewBounds="true"
@@ -177,9 +174,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                       
-                        
+                        android:layout_alignParentBottom="true"						                
                         android:layout_alignParentLeft="true" >
 
                         <Button
@@ -192,8 +187,8 @@
 
                         <Button
                             android:id="@+id/user_info_submit01"
-                             android:layout_weight="1"
-                              android:background="@drawable/user_info_submit01"
+                            android:layout_weight="1"
+                            android:background="@drawable/user_info_submit01"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="保存修改" />

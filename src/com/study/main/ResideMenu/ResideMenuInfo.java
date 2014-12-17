@@ -1,6 +1,7 @@
 package com.study.main.ResideMenu;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.GetListener;
 
@@ -59,6 +60,7 @@ public class ResideMenuInfo extends LinearLayout {
 		.displayer(new RoundedBitmapDisplayer(90))
 		.build();	
 		BmobQuery<User> query=new BmobQuery<User>();
+		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		query.getObject(context, currentUser.getObjectId(), new GetListener<User>() {
 			
 			@Override
@@ -66,7 +68,7 @@ public class ResideMenuInfo extends LinearLayout {
 				// TODO Auto-generated method stub
 						ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(context),iv_icon, options,null);	
 						tv_username.setText(arg0.getNickname());
-						tv_dengji.setText(arg0.getMoney()+"Ôª");
+						tv_dengji.setText("Óà¶î£º"+arg0.getMoney());
 						
 			}
 			
