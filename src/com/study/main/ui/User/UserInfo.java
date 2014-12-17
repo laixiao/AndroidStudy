@@ -876,7 +876,8 @@ public class UserInfo extends Activity {
 															shuoshuo.update(context, new UpdateListener() {										
 																@Override
 																public void onSuccess() {
-																	isfavourlist.get(position).setIsfavour(false);																	
+																	isfavourlist.get(position).setIsfavour(false);	
+																	isfavourlist.get(position).setFavourCount(isfavourlist.get(position).getFavourCount()-1);
 																	adapter.notifyDataSetChanged();
 																	sweetAlertDialog.dismiss();
 																	Toast.makeText(UserInfo.this, "取消收藏成功", Toast.LENGTH_LONG).show();
@@ -929,7 +930,7 @@ public class UserInfo extends Activity {
 											public void onSuccess() {
 												sweetAlertDialog.dismiss();
 												Toast.makeText(UserInfo.this, "收藏成功啦", Toast.LENGTH_LONG).show();	
-												
+												isfavourlist.get(position).setFavourCount(isfavourlist.get(position).getFavourCount()+1);
 												isfavourlist.get(position).setIsfavour(true);
 												adapter.notifyDataSetChanged();
 											}

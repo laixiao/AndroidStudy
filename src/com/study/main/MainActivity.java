@@ -491,7 +491,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		case R.id.exit:
 			Toast.makeText(MainActivity.this, "触发了退出方法", Toast.LENGTH_LONG)
 					.show();
-			finish();
+			//finish();
 			System.exit(0);
 			super.onBackPressed();
 			break;
@@ -806,7 +806,8 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 															shuoshuo.update(context, new UpdateListener() {										
 																@Override
 																public void onSuccess() {
-																	isfavourlist.get(position).setIsfavour(false);																	
+																	isfavourlist.get(position).setIsfavour(false);	
+																	isfavourlist.get(position).setFavourCount(isfavourlist.get(position).getFavourCount()-1);
 																	adapter.notifyDataSetChanged();
 																	sweetAlertDialog.dismiss();
 																	Toast.makeText(MainActivity.this, "取消收藏成功", Toast.LENGTH_LONG).show();
@@ -859,7 +860,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 											public void onSuccess() {
 												sweetAlertDialog.dismiss();
 												Toast.makeText(MainActivity.this, "收藏成功啦", Toast.LENGTH_LONG).show();	
-												
+												isfavourlist.get(position).setFavourCount(isfavourlist.get(position).getFavourCount()+1);
 												isfavourlist.get(position).setIsfavour(true);
 												adapter.notifyDataSetChanged();
 											}
