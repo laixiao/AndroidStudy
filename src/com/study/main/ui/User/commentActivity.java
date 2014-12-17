@@ -24,7 +24,9 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.study.main.R;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
@@ -39,7 +41,9 @@ public class commentActivity extends Activity {
 	private EditText comment_content;
 	private Button comment_commit;
 	Comment comment;
-	ShuoShuo qiangYu;
+	ShuoShuo shuoshuo;
+	User currentUser;
+	DisplayImageOptions options;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +53,21 @@ public class commentActivity extends Activity {
 		setContentView(R.layout.commentactivity);
 
 		adapter=new firstListAdapter(commentActivity.this);
-		
+		currentUser=BmobUser.getCurrentUser(commentActivity.this, User.class);
 		comment_listView1 = (ListView) this.findViewById(R.id.comment_listView1);
 		comment_activity_back=(ImageView) this.findViewById(R.id.comment_activity_back);
 		comment_content=(EditText) this.findViewById(R.id.comment_content);
 		comment_commit=(Button) this.findViewById(R.id.comment_commit);
-		qiangYu= (ShuoShuo) getIntent().getSerializableExtra("data");
-		
+		shuoshuo= (ShuoShuo) getIntent().getSerializableExtra("data");
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.icon_profile)
+		.showImageForEmptyUri(R.drawable.icon_profile)
+		.showImageOnFail(R.drawable.icon_profile)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+		.displayer(new RoundedBitmapDisplayer(90))
+		.build();
 		fetch();
 		
 		comment_listView1.setAdapter(adapter);
@@ -66,9 +78,9 @@ public class commentActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				comment=new Comment();
-				comment.setQiangYu(qiangYu);
+				comment.setShuoshuo(shuoshuo);
 				comment.setContent(comment_content.getText().toString());
-				comment.setUser(qiangYu.getAuthor());
+				comment.setUser(currentUser);
 				comment.save(commentActivity.this, new SaveListener() {
 					
 					@Override
@@ -80,7 +92,8 @@ public class commentActivity extends Activity {
 						
 						commentList.clear();
 						fetch();
-						comment.delete(commentActivity.this);
+						
+						//comment.delete(commentActivity.this);
 					}
 					
 					@Override
@@ -101,8 +114,9 @@ public class commentActivity extends Activity {
 	private void fetch() {
 		// TODO Auto-generated method stub
 		BmobQuery<Comment> query = new BmobQuery<Comment>();
-		query.addWhereEqualTo("qiangYu", qiangYu);
-		query.setLimit(99);
+		query.addWhereEqualTo("shuoshuo", shuoshuo);
+		query.include("user");
+		query.setLimit(999);
 		query.findObjects(commentActivity.this, new FindListener<Comment>() {
 			@Override
 			public void onSuccess(List<Comment> arg0) {
@@ -127,8 +141,7 @@ public class commentActivity extends Activity {
 			this.context = context;
 		}
 
-		public View getView(final int position, View convertView,
-				ViewGroup parent) {
+		public View getView(final int position, View convertView,ViewGroup parent) {
 			ViewHolder holder = null;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context).inflate(R.layout.comment_list, null);
@@ -137,23 +150,25 @@ public class commentActivity extends Activity {
 				holder.comment_list_time = (TextView) convertView.findViewById(R.id.comment_list_time);
 				holder.comment_list_content = (TextView) convertView.findViewById(R.id.comment_list_content);
 				holder.comment_list_index = (TextView) convertView.findViewById(R.id.comment_list_index);
+				holder.list_item_user_logo=(ImageView) convertView.findViewById(R.id.list_item_user_logo);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			
 			Comment comment=(Comment) getItem(position);
+			
 			holder.comment_list_name.setText(comment.getUser().getNickname());
 			holder.comment_list_time.setText(comment.getCreatedAt()+"");
 			holder.comment_list_content.setText(comment.getContent());
 			holder.comment_list_index.setText(position+"¥");
-			
+			ImageLoader.getInstance().displayImage(comment.getUser().getAvatar().getFileUrl(context), holder.list_item_user_logo, options,null);
 			return convertView;
 		}
 
 		class ViewHolder {
 			public TextView comment_list_name, comment_list_time, comment_list_content,comment_list_index;
-			// public ImageView contentImage;
+			public ImageView list_item_user_logo;
 
 		}
 

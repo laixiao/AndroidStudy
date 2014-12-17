@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
 	<ImageView 
         android:id="@+id/list_item_user_logo"
         android:layout_width="30dp"
@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="time" />
+            android:textSize="12sp"
+            android:text="发表评论时间" />
 
         <TextView
             android:id="@+id/comment_list_index"
@@ -43,15 +44,16 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/list_item_user_logo"
             android:text="userName"
-            android:textColor="@color/theme_color"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/comment_list_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/comment_list_name"
-            android:layout_below="@+id/comment_list_name"
+            android:layout_below="@+id/list_item_user_logo"
+            android:layout_toLeftOf="@+id/comment_list_index"
+            android:layout_toRightOf="@+id/list_item_user_logo"
             android:text="comment"
             android:textColor="#666666"
             android:textSize="16sp" />

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+     >
 
     <LinearLayout
         android:id="@+id/comment_activity_title"
@@ -48,6 +50,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_edittext_account"
             android:ems="10"
+            android:textColor="#000000"
             android:hint="来评论一句吧"
             android:minHeight="40dp"
             android:paddingLeft="4dip" />
