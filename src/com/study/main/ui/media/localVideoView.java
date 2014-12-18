@@ -81,10 +81,11 @@ public class localVideoView extends Activity implements OnInfoListener, OnBuffer
 
 		path = getIntent().getStringExtra("path");
 		if (path == "") {
-			Toast.makeText(localVideoView.this, "暂时无法播放", Toast.LENGTH_LONG).show();
+			Toast.makeText(localVideoView.this, "亲，暂时无法播放", Toast.LENGTH_LONG).show();
 			return;		
 		} else {
-			if (path.startsWith("http:"))
+			try{
+			if (path.startsWith("http:")||path.startsWith("https:"))
 				videoView.setVideoURI(Uri.parse(path));
 			else
 				videoView.setVideoPath(path);
@@ -104,9 +105,12 @@ public class localVideoView extends Activity implements OnInfoListener, OnBuffer
 							mediaPlayer.setPlaybackSpeed(1.0f);
 						}
 					});
-			
+			}catch(Exception e){
+				Toast.makeText(localVideoView.this, "亲，暂时无法播放", Toast.LENGTH_LONG).show();
+				finish();
+			}
 		}
-
+		
 	}
 
 //	@Override
