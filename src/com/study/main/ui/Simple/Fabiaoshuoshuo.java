@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,28 +48,15 @@ public class Fabiaoshuoshuo extends Activity {
 	private static final int REQUEST_CODE_ALBUM = 1;
 	private static final int REQUEST_CODE_CAMERA = 2;
 	private EditText content;
-	private TextView fabiaoshuoshuo_progress;
 	private LinearLayout openLayout;
 	private LinearLayout takeLayout;
 	private ImageView albumPic;
 	private ImageView takePic;
-	private Button fabiao01, fanhui01;
+	private ImageButton fanhui01,fabiao01;
 	String dateTime;
 	String targeturl = null;
 	User currentUser;
-	private Handler handle=new Handler(){
 
-		@Override
-		public void handleMessage(Message msg) {
-			int what=msg.what;
-			int prog=msg.arg1;
-			fabiaoshuoshuo_progress.setText(prog+"%");
-			if(what==100){
-				finish();
-			}
-		}
-		
-	};
 	
 	
 	@Override
@@ -86,11 +74,10 @@ public class Fabiaoshuoshuo extends Activity {
 		content = (EditText) findViewById(R.id.edit_content);
 		openLayout = (LinearLayout) findViewById(R.id.open_layout);
 		takeLayout = (LinearLayout) findViewById(R.id.take_layout);
-		fabiaoshuoshuo_progress=(TextView) this.findViewById(R.id.fabiaoshuoshuo_progress);
 		albumPic = (ImageView) findViewById(R.id.open_pic);
 		takePic = (ImageView) findViewById(R.id.take_pic);
-		fabiao01 = (Button) findViewById(R.id.fabiao01);
-		fanhui01 = (Button) findViewById(R.id.fanhui01);
+		fabiao01 = (ImageButton) findViewById(R.id.fabiao01);
+		fanhui01 = (ImageButton) findViewById(R.id.fanhui01);
 		
 
 		setListener();
@@ -110,8 +97,7 @@ public class Fabiaoshuoshuo extends Activity {
                     .setTitleText("亲，内容不能为空")
                     .setContentText("")
                     .show();
-				}
-				if (targeturl == null) {
+				}else if (targeturl == null) {
 					publishWithoutFigure(commitContent, null);
 				} else {
 					publish(commitContent);
@@ -188,8 +174,12 @@ public class Fabiaoshuoshuo extends Activity {
 
 			@Override
 			public void onSuccess() {
-				
+				new SweetAlertDialog(Fabiaoshuoshuo.this, SweetAlertDialog.SUCCESS_TYPE)
+	              .setTitleText("发表说说成功")
+	              .setContentText("返回主页")
+	              .show();
 				setResult(RESULT_OK);
+				
 				finish();
 			}
 
@@ -219,13 +209,6 @@ public class Fabiaoshuoshuo extends Activity {
 			public void onSuccess() {
 				// TODO Auto-generated method stub
 				publishWithoutFigure(commitContent, figureFile);
-			}
-
-			@Override
-			public void onProgress(Integer arg0) {
-					Message message=Message.obtain(handle, 100);
-					message.arg1=arg0;
-					message.sendToTarget();
 			}
 			
 			public void onFailure(int arg0, String arg1) {

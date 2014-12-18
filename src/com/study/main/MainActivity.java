@@ -397,31 +397,25 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			intent.setClass(getApplicationContext(), laoluoActivity.class);
 			startActivity(intent);
 		} else if (view == menu_item02) {
-			Toast.makeText(MainActivity.this, "menu_item02", Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this, "menu_item02正在开发当中", Toast.LENGTH_LONG).show();
 		} else if (view == menu_item03) {
-			//Intent intent = new Intent();
-			// intent.putExtra("flog", "装扮");
-			// intent.setClass(getApplicationContext(), LocalList.class);
-			// startActivity(intent);
+			Toast.makeText(MainActivity.this, "menu_item03正在开发当中", Toast.LENGTH_LONG).show();
+
 		} else if (view == menu_item04) {
-//			Intent intent = new Intent();
-//			// intent.putExtra("flog", "收藏");
-//			intent.setClass(getApplicationContext(), text1.class);
-//			startActivity(intent);
+			Toast.makeText(MainActivity.this, "menu_item04正在开发当中", Toast.LENGTH_LONG).show();
+
 		} else if (view == menu_item05) {
-			Intent intent = new Intent();
-			// intent.putExtra("flog", "相册");
-			intent.setClass(getApplicationContext(), test1.class);
-			startActivity(intent);
+			Toast.makeText(MainActivity.this, "menu_item05正在开发当中", Toast.LENGTH_LONG).show();
+
 		}
 		else if (view == info) {
 			Intent intent = new Intent();
 			intent.setClass(getApplicationContext(), UserInfo.class);
 			startActivity(intent);
 		} else if (view == setting) {
-			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, SettingActivity.class);
-			startActivity(intent);
+			Toast.makeText(MainActivity.this, "setting正在开发当中", Toast.LENGTH_LONG).show();
+
+			
 		}
 	}
 
