@@ -39,30 +39,30 @@ public final class R {
 	}
 	public static final class drawable {
 		public static final int blue_button_background = 0x7f02000c;
-		public static final int dialog_background = 0x7f020021;
-		public static final int error_center_x = 0x7f020026;
-		public static final int error_circle = 0x7f020027;
+		public static final int dialog_background = 0x7f020020;
+		public static final int error_center_x = 0x7f020025;
+		public static final int error_circle = 0x7f020026;
 		public static final int gray_button_background = 0x7f020029;
-		public static final int red_button_background = 0x7f02004e;
-		public static final int success_bow = 0x7f020065;
-		public static final int success_circle = 0x7f020066;
-		public static final int warning_circle = 0x7f020084;
-		public static final int warning_sigh = 0x7f020085;
+		public static final int red_button_background = 0x7f02004b;
+		public static final int success_bow = 0x7f020061;
+		public static final int success_circle = 0x7f020062;
+		public static final int warning_circle = 0x7f020078;
+		public static final int warning_sigh = 0x7f020079;
 	}
 	public static final class id {
-		public static final int cancel_button = 0x7f0a002c;
-		public static final int confirm_button = 0x7f0a002d;
-		public static final int content_text = 0x7f0a002b;
-		public static final int custom_image = 0x7f0a0022;
-		public static final int error_frame = 0x7f0a0023;
-		public static final int error_x = 0x7f0a0024;
-		public static final int loading = 0x7f0a0021;
-		public static final int mask_left = 0x7f0a0027;
-		public static final int mask_right = 0x7f0a0026;
-		public static final int success_frame = 0x7f0a0025;
-		public static final int success_tick = 0x7f0a0028;
-		public static final int title_text = 0x7f0a002a;
-		public static final int warning_frame = 0x7f0a0029;
+		public static final int cancel_button = 0x7f0a002b;
+		public static final int confirm_button = 0x7f0a002c;
+		public static final int content_text = 0x7f0a002a;
+		public static final int custom_image = 0x7f0a0021;
+		public static final int error_frame = 0x7f0a0022;
+		public static final int error_x = 0x7f0a0023;
+		public static final int loading = 0x7f0a0020;
+		public static final int mask_left = 0x7f0a0026;
+		public static final int mask_right = 0x7f0a0025;
+		public static final int success_frame = 0x7f0a0024;
+		public static final int success_tick = 0x7f0a0027;
+		public static final int title_text = 0x7f0a0029;
+		public static final int warning_frame = 0x7f0a0028;
 		public static final int x = 0x7f0a0003;
 		public static final int y = 0x7f0a0004;
 		public static final int z = 0x7f0a0005;

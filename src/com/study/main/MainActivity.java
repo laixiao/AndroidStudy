@@ -80,10 +80,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener,OnItemClickListener {
 	private RelativeLayout titlelayout01, titlelayout02, titlelayout03,middlelayout1, middlelayout2, middlelayout3;
-	private ListView listView01;
 	private Button button1, button2, button3;
-	private Button fabiaoshuoshuo;
-	private ImageButton imageButton1;
+	private ImageButton imageButton1,fabiaoshuoshuo;
 	private ResideMenu resideMenu;
 	private ResideMenuItem menu_item01;
 	private ResideMenuItem menu_item02;
@@ -227,8 +225,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		button1.setSelected(true);
 		button2 = (Button) this.findViewById(R.id.button2);
 		button3 = (Button) this.findViewById(R.id.button3);
-		listView01 = (ListView) this.findViewById(R.id.listView01);
-		fabiaoshuoshuo = (Button) this.findViewById(R.id.fabiaoshuoshuo);
+		fabiaoshuoshuo = (ImageButton) this.findViewById(R.id.fabiaoshuoshuo);
 		mAdapter = new FileAdapter(this, null);
 		listView = (ListView) this.findViewById(android.R.id.list);
 		swip = (SwipeRefreshLayout) this.findViewById(R.id.swip);
@@ -775,8 +772,10 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			//	Log.e("2:", ""+isfavourlist.get(position).getIsfavour());				
 			if(isfavourlist.get(position).getIsfavour()==true){
 				holder.list_item_action_fav.setText("已收藏  "+isfavourlist.get(position).getFavourCount());
+				holder.list_item_action_fav.setSelected(true);
 			}else if(isfavourlist.get(position).getIsfavour()==false){
-				holder.list_item_action_fav.setText("收藏  "+isfavourlist.get(position).getFavourCount());				
+				holder.list_item_action_fav.setText("收藏  "+isfavourlist.get(position).getFavourCount());
+				holder.list_item_action_fav.setSelected(false);
 			}
 			}
 //			Toast.makeText(MainActivity.this, ""+position, Toast.LENGTH_LONG).show();
