@@ -362,7 +362,7 @@ containing a value of this type.
         public static final int warning_sigh=0x7f02007b;
     }
     public static final class id {
-        public static final int ImageView01=0x7f0a005c;
+        public static final int ImageView01=0x7f0a005e;
         public static final int alphabet_scroller=0x7f0a0057;
         public static final int both=0x7f0a0006;
         public static final int bottomlayout=0x7f0a0018;
@@ -387,7 +387,7 @@ containing a value of this type.
         public static final int comment_list_name=0x7f0a0033;
         public static final int comment_list_time=0x7f0a0031;
         public static final int confirm_button=0x7f0a002c;
-        public static final int content_001=0x7f0a005e;
+        public static final int content_001=0x7f0a005d;
         public static final int content_text=0x7f0a002a;
         public static final int custom_image=0x7f0a0021;
         public static final int datepicker=0x7f0a003b;
@@ -514,7 +514,7 @@ containing a value of this type.
         public static final int titlelayout01=0x7f0a000f;
         public static final int titlelayout02=0x7f0a0012;
         public static final int titlelayout03=0x7f0a0014;
-        public static final int tubiao=0x7f0a005d;
+        public static final int tubiao=0x7f0a005c;
         public static final int tv_dengji=0x7f0a008e;
         public static final int tv_title=0x7f0a0090;
         public static final int tv_username=0x7f0a008d;
