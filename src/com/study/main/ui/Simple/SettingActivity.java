@@ -15,7 +15,7 @@ public class SettingActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.user_info);
+		setContentView(R.layout.settingactivity);
 
 //		TextView text = (TextView) findViewById(R.id.textView);
 //		Intent receive = getIntent();
