@@ -30,6 +30,7 @@ import com.study.main.ResideMenu.ResideMenuItem;
 import com.study.main.ResideMenu.ResideMenuSetting;
 import com.study.main.ui.Simple.Fabiaoshuoshuo;
 import com.study.main.ui.Simple.laoluoActivity;
+import com.study.main.ui.Simple.zhangzehuaActivity;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.UserInfo;
 import com.study.main.ui.User.commentActivity;
@@ -389,7 +390,10 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			intent.setClass(getApplicationContext(), laoluoActivity.class);
 			startActivity(intent);
 		} else if (view == menu_item02) {
-			Toast.makeText(MainActivity.this, "menu_item02正在开发当中", Toast.LENGTH_LONG).show();
+			
+			Intent intent = new Intent();		
+			intent.setClass(getApplicationContext(), zhangzehuaActivity.class);
+			startActivity(intent);
 		} else if (view == menu_item03) {
 			Toast.makeText(MainActivity.this, "menu_item03正在开发当中", Toast.LENGTH_LONG).show();
 

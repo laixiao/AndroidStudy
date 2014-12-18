@@ -370,7 +370,7 @@ containing a value of this type.
         public static final int button2=0x7f0a001e;
         public static final int button3=0x7f0a001f;
         public static final int cancel_button=0x7f0a002b;
-        public static final int checkversion=0x7f0a00b2;
+        public static final int checkversion=0x7f0a00b5;
         public static final int child_image=0x7f0a002e;
         public static final int child_text=0x7f0a002f;
         public static final int childlayout=0x7f0a002d;
@@ -408,7 +408,7 @@ containing a value of this type.
         public static final int edit_content=0x7f0a004b;
         public static final int error_frame=0x7f0a0022;
         public static final int error_x=0x7f0a0023;
-        public static final int exit=0x7f0a00b1;
+        public static final int exit=0x7f0a00b4;
         public static final int expandableListView1=0x7f0a0061;
         public static final int fabiao01=0x7f0a004a;
         public static final int fabiaoshuoshuo=0x7f0a0016;
@@ -541,6 +541,9 @@ containing a value of this type.
         public static final int y=0x7f0a0004;
         public static final int yewanpifu=0x7f0a0092;
         public static final int z=0x7f0a0005;
+        public static final int zhangzehua_back=0x7f0a00b1;
+        public static final int zhangzehua_expandableListView1=0x7f0a00b3;
+        public static final int zhangzehua_swip=0x7f0a00b2;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -575,6 +578,7 @@ containing a value of this type.
         public static final int user_info=0x7f03001d;
         public static final int videoviewdemo=0x7f03001e;
         public static final int water_fall_view_inner=0x7f03001f;
+        public static final int zhangzehuaactivity=0x7f030020;
     }
     public static final class menu {
         public static final int menu=0x7f0b0000;

@@ -67,6 +67,7 @@
         </activity>
         <activity android:name="com.study.main.ui.Simple.laoluoActivity" >
         </activity>
+        <activity android:name="com.study.main.ui.Simple.zhangzehuaActivity"></activity>
         <activity android:name="com.study.main.ui.Simple.DownloadListActivity"></activity>
         <activity android:name="com.study.main.test.test1"></activity>
         

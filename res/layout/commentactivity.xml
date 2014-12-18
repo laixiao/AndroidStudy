@@ -17,8 +17,9 @@
             android:id="@+id/comment_activity_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:src="@drawable/user_infoback" />
+            android:layout_marginLeft="6dp"
+            android:padding="8dp"
+            android:src="@drawable/back01_48" />
     </LinearLayout>
 
     <ListView

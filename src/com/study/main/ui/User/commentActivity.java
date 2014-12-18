@@ -59,6 +59,7 @@ public class commentActivity extends Activity {
 		comment_content=(EditText) this.findViewById(R.id.comment_content);
 		comment_commit=(Button) this.findViewById(R.id.comment_commit);
 		shuoshuo= (ShuoShuo) getIntent().getSerializableExtra("data");
+		
 		options = new DisplayImageOptions.Builder()
 		.showImageOnLoading(R.drawable.icon_profile)
 		.showImageForEmptyUri(R.drawable.icon_profile)
@@ -68,12 +69,28 @@ public class commentActivity extends Activity {
 		.considerExifParams(true)
 		.displayer(new RoundedBitmapDisplayer(90))
 		.build();
+		
 		fetch();
 		
 		comment_listView1.setAdapter(adapter);
 		
+		setListener();
+	
+	}
+
+	private void setListener() {
+		//1.back
+		comment_activity_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 		
-		comment_commit.setOnClickListener(new View.OnClickListener() {
+		//2.comment_commit
+	comment_commit.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
