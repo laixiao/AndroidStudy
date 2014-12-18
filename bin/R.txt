@@ -165,7 +165,7 @@ int drawable success_circle 0x7f020066
 int drawable take_picture 0x7f020067
 int drawable title_bg 0x7f020068
 int drawable titlebutton01 0x7f020069
-int drawable user_bg1 0x7f02006a
+int drawable top_bar 0x7f02006a
 int drawable user_group 0x7f02006b
 int drawable user_icon_default_main 0x7f02006c
 int drawable user_info_quit 0x7f02006d

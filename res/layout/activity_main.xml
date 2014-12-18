@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/title_bg"
+        android:background="@drawable/top_bar"
         android:visibility="visible" >
 
         <TextView
@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
+            
+            android:padding="13dp"
             android:background="#00000000"
             android:src="@drawable/titlebutton01" />
     </RelativeLayout>
@@ -158,7 +159,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/title_bg"
+        android:background="@drawable/top_bar"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 

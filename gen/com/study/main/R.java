@@ -342,7 +342,7 @@ containing a value of this type.
         public static final int take_picture=0x7f020067;
         public static final int title_bg=0x7f020068;
         public static final int titlebutton01=0x7f020069;
-        public static final int user_bg1=0x7f02006a;
+        public static final int top_bar=0x7f02006a;
         public static final int user_group=0x7f02006b;
         public static final int user_icon_default_main=0x7f02006c;
         public static final int user_info_quit=0x7f02006d;
