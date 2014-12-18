@@ -1,4 +1,4 @@
-package com.study.main.ui.Simple;
+package com.study.main.ui.ResideMenuItemUi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.study.main.R;
 import com.study.main.Entity.laoluo_child;
 import com.study.main.Entity.laoluo_parent;
+import com.study.main.ui.Simple.DownloadListActivity;
 import com.study.main.ui.media.DownloadManager;
 import com.study.main.ui.media.DownloadService;
 import com.study.main.ui.media.localVideoView;
@@ -122,7 +123,7 @@ public class laoluoActivity extends Activity {
 				// TODO Auto-generated method stub
 				groupData.addAll(arg0);
 			//	expandableAdapter.notifyDataSetChanged();
-				Toast.makeText(laoluoActivity.this, "父成功", Toast.LENGTH_LONG).show();
+			//	Toast.makeText(laoluoActivity.this, "父成功", Toast.LENGTH_LONG).show();
 				
 				//子1查询
 				final List<laoluo_child> children1 = new ArrayList<laoluo_child>();
@@ -342,7 +343,7 @@ public class laoluoActivity extends Activity {
 																																						query18.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																							public void onSuccess(List<laoluo_child> arg18) {
 																																								// TODO Auto-generated method stub
-																																								Toast.makeText(laoluoActivity.this, "子数据加载成功", Toast.LENGTH_LONG).show();
+																																								Toast.makeText(laoluoActivity.this, "数据加载成功", Toast.LENGTH_LONG).show();
 																																								children18.addAll(arg18);
 																																								childData.add(children18);
 																																								expandableAdapter.notifyDataSetChanged();

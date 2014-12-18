@@ -28,9 +28,10 @@ import com.study.main.ResideMenu.ResideMenu;
 import com.study.main.ResideMenu.ResideMenuInfo;
 import com.study.main.ResideMenu.ResideMenuItem;
 import com.study.main.ResideMenu.ResideMenuSetting;
+import com.study.main.ui.ResideMenuItemUi.SettingActivity;
+import com.study.main.ui.ResideMenuItemUi.laoluoActivity;
+import com.study.main.ui.ResideMenuItemUi.zhangzehuaActivity;
 import com.study.main.ui.Simple.Fabiaoshuoshuo;
-import com.study.main.ui.Simple.laoluoActivity;
-import com.study.main.ui.Simple.zhangzehuaActivity;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.UserInfo;
 import com.study.main.ui.User.commentActivity;
@@ -405,12 +406,16 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 
 		}
 		else if (view == info) {
+			
 			Intent intent = new Intent();
 			intent.setClass(getApplicationContext(), UserInfo.class);
 			startActivity(intent);
+			
 		} else if (view == setting) {
-			Toast.makeText(MainActivity.this, "setting正在开发当中", Toast.LENGTH_LONG).show();
-
+			
+			Intent intent = new Intent();
+			intent.setClass(getApplicationContext(), SettingActivity.class);
+			startActivity(intent);
 			
 		}
 	}

@@ -1,4 +1,4 @@
-package com.study.main.ui.Simple;
+package com.study.main.ui.ResideMenuItemUi;
 
 import com.study.main.R;
 
