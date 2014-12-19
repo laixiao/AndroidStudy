@@ -28,6 +28,9 @@ import com.study.main.ResideMenu.ResideMenu;
 import com.study.main.ResideMenu.ResideMenuInfo;
 import com.study.main.ResideMenu.ResideMenuItem;
 import com.study.main.ResideMenu.ResideMenuSetting;
+import com.study.main.ui.ResideMenuItemUi.HeimaAndroid;
+import com.study.main.ui.ResideMenuItemUi.HeimaJavaweb;
+import com.study.main.ui.ResideMenuItemUi.Jiuye;
 import com.study.main.ui.ResideMenuItemUi.SettingActivity;
 import com.study.main.ui.ResideMenuItemUi.laoluoActivity;
 import com.study.main.ui.ResideMenuItemUi.zhangzehuaActivity;
@@ -396,14 +399,18 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			intent.setClass(getApplicationContext(), zhangzehuaActivity.class);
 			startActivity(intent);
 		} else if (view == menu_item03) {
-			Toast.makeText(MainActivity.this, "menu_item03正在开发当中", Toast.LENGTH_LONG).show();
-
+			
+			Intent intent = new Intent();		
+			intent.setClass(getApplicationContext(), HeimaJavaweb.class);
+			startActivity(intent);
 		} else if (view == menu_item04) {
-			Toast.makeText(MainActivity.this, "menu_item04正在开发当中", Toast.LENGTH_LONG).show();
-
+			Intent intent = new Intent();		
+			intent.setClass(getApplicationContext(), HeimaAndroid.class);
+			startActivity(intent);
 		} else if (view == menu_item05) {
-			Toast.makeText(MainActivity.this, "menu_item05正在开发当中", Toast.LENGTH_LONG).show();
-
+			Intent intent = new Intent();		
+			intent.setClass(getApplicationContext(), Jiuye.class);
+			startActivity(intent);
 		}
 		else if (view == info) {
 			

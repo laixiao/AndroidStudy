@@ -18,6 +18,7 @@ import com.study.main.ui.media.localVideoView;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.listener.FindListener;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -130,6 +131,7 @@ public class laoluoActivity extends Activity {
 				BmobQuery<laoluo_child> query1=new BmobQuery<laoluo_child>();
 				query1.addWhereEqualTo("parent", "L5Xp1116");
 				query1.order("sortid");
+				query1.setLimit(99);
 				query1.setCachePolicy(cachePolicy);
 				query1.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {
 					
@@ -145,6 +147,7 @@ public class laoluoActivity extends Activity {
 						BmobQuery<laoluo_child> query2=new BmobQuery<laoluo_child>();
 						query2.addWhereEqualTo("parent", "kmgL555P");
 						query2.order("sortid");
+						query2.setLimit(99);
 						query2.setCachePolicy(cachePolicy);
 						query2.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 							public void onSuccess(List<laoluo_child> arg2) {
@@ -158,6 +161,7 @@ public class laoluoActivity extends Activity {
 								BmobQuery<laoluo_child> query3=new BmobQuery<laoluo_child>();
 								query3.addWhereEqualTo("parent", "18AL333G");
 								query3.order("sortid");
+								query3.setLimit(99);
 								query3.setCachePolicy(cachePolicy);
 								query3.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 									public void onSuccess(List<laoluo_child> arg3) {
@@ -170,6 +174,7 @@ public class laoluoActivity extends Activity {
 										BmobQuery<laoluo_child> query4=new BmobQuery<laoluo_child>();
 										query4.addWhereEqualTo("parent", "4ZfQ888D");
 										query4.order("sortid");
+										query4.setLimit(99);
 										query4.setCachePolicy(cachePolicy);
 										query4.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 											public void onSuccess(List<laoluo_child> arg4) {
@@ -182,6 +187,7 @@ public class laoluoActivity extends Activity {
 												BmobQuery<laoluo_child> query5=new BmobQuery<laoluo_child>();
 												query5.addWhereEqualTo("parent", "S4LpVVV1");
 												query5.order("sortid");
+												query5.setLimit(99);
 												query5.setCachePolicy(cachePolicy);
 												query5.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 													public void onSuccess(List<laoluo_child> arg5) {
@@ -194,6 +200,7 @@ public class laoluoActivity extends Activity {
 														BmobQuery<laoluo_child> query6=new BmobQuery<laoluo_child>();
 														query6.addWhereEqualTo("parent", "6yAOCCCT");
 														query6.order("sortid");
+														query6.setLimit(99);
 														query6.setCachePolicy(cachePolicy);
 														query6.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 															public void onSuccess(List<laoluo_child> arg6) {
@@ -206,6 +213,7 @@ public class laoluoActivity extends Activity {
 																BmobQuery<laoluo_child> query7=new BmobQuery<laoluo_child>();
 																query7.addWhereEqualTo("parent", "zh7K666J");
 																query7.order("sortid");
+																query7.setLimit(99);
 																query7.setCachePolicy(cachePolicy);
 																query7.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																	public void onSuccess(List<laoluo_child> arg7) {
@@ -218,6 +226,7 @@ public class laoluoActivity extends Activity {
 																		BmobQuery<laoluo_child> query8=new BmobQuery<laoluo_child>();
 																		query8.addWhereEqualTo("parent", "ZdUkCCCd");
 																		query8.order("sortid");
+																		query8.setLimit(99);
 																		query8.setCachePolicy(cachePolicy);
 																		query8.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																			public void onSuccess(List<laoluo_child> arg8) {
@@ -243,6 +252,7 @@ public class laoluoActivity extends Activity {
 																						BmobQuery<laoluo_child> query10=new BmobQuery<laoluo_child>();
 																						query10.addWhereEqualTo("parent", "nKrOxxxL");
 																						query10.order("sortid");
+																						query10.setLimit(99);
 																						query10.setCachePolicy(cachePolicy);
 																						query10.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																							public void onSuccess(List<laoluo_child> arg10) {
@@ -255,6 +265,7 @@ public class laoluoActivity extends Activity {
 																								BmobQuery<laoluo_child> query11=new BmobQuery<laoluo_child>();
 																								query11.addWhereEqualTo("parent", "nwJ1000B");
 																								query11.order("sortid");
+																								query11.setLimit(99);
 																								query11.setCachePolicy(cachePolicy);
 																								query11.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																									public void onSuccess(List<laoluo_child> arg11) {
@@ -267,6 +278,7 @@ public class laoluoActivity extends Activity {
 																										BmobQuery<laoluo_child> query12=new BmobQuery<laoluo_child>();
 																										query12.addWhereEqualTo("parent", "KkqI2225");
 																										query12.order("sortid");
+																										query12.setLimit(99);
 																										query12.setCachePolicy(cachePolicy);
 																										query12.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																											public void onSuccess(List<laoluo_child> arg12) {
@@ -279,6 +291,7 @@ public class laoluoActivity extends Activity {
 																												BmobQuery<laoluo_child> query13=new BmobQuery<laoluo_child>();
 																												query13.addWhereEqualTo("parent", "mRLP888b");
 																												query13.order("sortid");
+																												query13.setLimit(99);
 																												query13.setCachePolicy(cachePolicy);
 																												query13.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																													public void onSuccess(List<laoluo_child> arg13) {
@@ -291,6 +304,7 @@ public class laoluoActivity extends Activity {
 																														BmobQuery<laoluo_child> query14=new BmobQuery<laoluo_child>();
 																														query14.addWhereEqualTo("parent", "bQ9K333O");
 																														query14.order("sortid");
+																														query14.setLimit(99);
 																														query14.setCachePolicy(cachePolicy);
 																														query14.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																															public void onSuccess(List<laoluo_child> arg14) {
@@ -303,6 +317,7 @@ public class laoluoActivity extends Activity {
 																																BmobQuery<laoluo_child> query15=new BmobQuery<laoluo_child>();
 																																query15.addWhereEqualTo("parent", "otjHIHHI");
 																																query15.order("sortid");
+																																query15.setLimit(99);
 																																query15.setCachePolicy(cachePolicy);
 																																query15.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																	public void onSuccess(List<laoluo_child> arg15) {
@@ -315,6 +330,7 @@ public class laoluoActivity extends Activity {
 																																		BmobQuery<laoluo_child> query16=new BmobQuery<laoluo_child>();
 																																		query16.addWhereEqualTo("parent", "4T3NV88V");
 																																		query16.order("sortid");
+																																		query16.setLimit(99);
 																																		query16.setCachePolicy(cachePolicy);
 																																		query16.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																			public void onSuccess(List<laoluo_child> arg16) {
@@ -327,34 +343,20 @@ public class laoluoActivity extends Activity {
 																																				BmobQuery<laoluo_child> query17=new BmobQuery<laoluo_child>();
 																																				query17.addWhereEqualTo("parent", "eg6cIFFI");
 																																				query17.order("sortid");
+																																				query17.setLimit(99);
 																																				query17.setCachePolicy(cachePolicy);
 																																				query17.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																					public void onSuccess(List<laoluo_child> arg17) {
-																																						// TODO Auto-generated method stub
+																																						new SweetAlertDialog(laoluoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+																																						.setTitleText("亲，数据获取成功啦！")
+																																                        .setContentText("")
+																																                        .show();
 																																						children17.addAll(arg17);
 																																						childData.add(children17);
-																																			//			expandableAdapter.notifyDataSetChanged();
-																																						//子18查询
-																																						final List<laoluo_child> children18 = new ArrayList<laoluo_child>();
-																																						BmobQuery<laoluo_child> query18=new BmobQuery<laoluo_child>();
-																																						query18.addWhereEqualTo("parent", "Ss632002");
-																																						query18.order("sortid");
-																																						query18.setCachePolicy(cachePolicy);
-																																						query18.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
-																																							public void onSuccess(List<laoluo_child> arg18) {
-																																								// TODO Auto-generated method stub
-																																								Toast.makeText(laoluoActivity.this, "数据加载成功", Toast.LENGTH_LONG).show();
-																																								children18.addAll(arg18);
-																																								childData.add(children18);
-																																								expandableAdapter.notifyDataSetChanged();
-																																					
-																																							}							
-																																							@Override
-																																							public void onError(int arg0, String arg1) {
-																																								// TODO Auto-generated method stub
-																																								
-																																							}
-																																						});
+																																						
+																																						expandableAdapter.notifyDataSetChanged();
+																																						
+																																						
 																																					}							
 																																					@Override
 																																					public void onError(int arg0, String arg1) {

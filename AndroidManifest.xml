@@ -22,12 +22,11 @@
         android:name="com.study.main.UILApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-       >
+        android:label="@string/app_name" >
         <activity
-            android:name="com.study.main.SplashActivity"        
-            android:label="@string/app_name" 
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:name="com.study.main.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,16 +44,21 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar"
-           	android:windowSoftInputMode="stateAlwaysHidden" />
-        
-        <activity android:name="com.study.main.ui.User.LoginAndRegister"></activity>
-        <activity android:name="com.study.main.ui.User.UserInfo"></activity>
-         <activity android:name="com.study.main.ui.User.otherInfo"></activity>
-          <activity android:name="com.study.main.ui.User.commentActivity"></activity>
-          <activity android:name="com.study.main.ui.User.FavourActivity"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name="com.study.main.ui.User.LoginAndRegister" >
+        </activity>
+        <activity android:name="com.study.main.ui.User.UserInfo" >
+        </activity>
+        <activity android:name="com.study.main.ui.User.otherInfo" >
+        </activity>
+        <activity android:name="com.study.main.ui.User.commentActivity" >
+        </activity>
+        <activity android:name="com.study.main.ui.User.FavourActivity" >
+        </activity>
         <activity android:name="com.study.main.ui.media.LocalList" >
         </activity>
-        <activity android:name="com.study.main.ui.media.localVideoView"
+        <activity
+            android:name="com.study.main.ui.media.localVideoView"
             android:screenOrientation="landscape" >
         </activity>
         <activity android:name="com.study.main.ui.media.uploadfile" >
@@ -67,10 +71,18 @@
         </activity>
         <activity android:name="com.study.main.ui.ResideMenuItemUi.laoluoActivity" >
         </activity>
-        <activity android:name="com.study.main.ui.ResideMenuItemUi.zhangzehuaActivity"></activity>
-        <activity android:name="com.study.main.ui.Simple.DownloadListActivity"></activity>
-        <activity android:name="com.study.main.test.test1"></activity>
-        
+        <activity android:name="com.study.main.ui.ResideMenuItemUi.zhangzehuaActivity" >
+        </activity>
+        <activity android:name="com.study.main.ui.ResideMenuItemUi.HeimaAndroid" >
+        </activity>
+        <activity android:name="com.study.main.ui.ResideMenuItemUi.HeimaJavaweb" >
+        </activity>
+        <activity android:name="com.study.main.ui.ResideMenuItemUi.Jiuye" >
+        </activity>
+        <activity android:name="com.study.main.ui.Simple.DownloadListActivity" >
+        </activity>
+        <activity android:name="com.study.main.test.test1" >
+        </activity>
     </application>
 
 </manifest>

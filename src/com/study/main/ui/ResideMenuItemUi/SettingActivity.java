@@ -3,10 +3,8 @@ package com.study.main.ui.ResideMenuItemUi;
 import com.study.main.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.TextView;
 
 public class SettingActivity extends Activity {
 
