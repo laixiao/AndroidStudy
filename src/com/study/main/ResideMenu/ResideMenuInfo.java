@@ -1,16 +1,11 @@
 package com.study.main.ResideMenu;
 
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.GetListener;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.study.main.R;
 import com.study.main.Entity.User;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -59,31 +54,12 @@ public class ResideMenuInfo extends LinearLayout {
 		.considerExifParams(true)
 		.displayer(new RoundedBitmapDisplayer(90))
 		.build();	
-		BmobQuery<User> query=new BmobQuery<User>();
-		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
-		query.getObject(context, currentUser.getObjectId(), new GetListener<User>() {
-			
-			@Override
-			public void onSuccess(User arg0) {
-				// TODO Auto-generated method stub
-						ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(context),iv_icon, options,null);	
-						tv_username.setText(arg0.getNickname());
-						tv_dengji.setText("”‡∂Ó£∫"+arg0.getMoney());
-						
-			}
-			
-			@Override
-			public void onFailure(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		
 		
+		ImageLoader.getInstance().displayImage(currentUser.getAvatar().getFileUrl(context),iv_icon, options,null);	
+		tv_username.setText(currentUser.getNickname());
+		tv_dengji.setText(""+currentUser.getSignature());
 		
-	
-		
-			
 	}
 
 	/**

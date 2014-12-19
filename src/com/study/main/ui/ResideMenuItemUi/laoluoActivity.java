@@ -487,7 +487,7 @@ public class laoluoActivity extends Activity {
 			@Override
 			public void onError(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				Toast.makeText(laoluoActivity.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
+			//	Toast.makeText(laoluoActivity.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
 			}
 		});
 		

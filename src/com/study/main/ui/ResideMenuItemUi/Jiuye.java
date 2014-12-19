@@ -171,7 +171,7 @@ public class Jiuye extends Activity {
 			@Override
 			public void onError(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				Toast.makeText(Jiuye.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
+			//	Toast.makeText(Jiuye.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
 			}
 		});
 		

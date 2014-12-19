@@ -937,7 +937,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		query.setSkip(page*limit);		// 2.从第几条数据开始
 		query.order("-createdAt");
 		query.include("author");
-		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+	//	query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override
@@ -958,7 +958,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 						
 						final Isfavour isfavour=new Isfavour();
 						BmobQuery<Favour> query=new BmobQuery<Favour>();
-						query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+					//	query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 						query.addWhereRelatedTo("favour", new BmobPointer(td));
 						query.include("user");
 						query.findObjects(MainActivity.this, new FindListener<Favour>() {						
@@ -977,42 +977,13 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 								isfavour.setIsfavour(isorno);
 								isfavour.setFavourCount(arg0.size());
 								isfavourlist.add(isfavour);
-							//	Log.e("1:",""+isfavour.getIsfavour());
-							//	Log.e("", td.getContent()+"="+td.getIsFavour()+"");//通过
-								
-//								BmobQuery<Love> query2=new BmobQuery<Love>();
-//								query2.addWhereEqualTo("love", new BmobPointer(td));
-//								query2.include("user");
-//								query2.findObjects(MainActivity.this, new FindListener<Love>() {				
-//									public void onSuccess(List<Love> arg0) {
-//										// TODO Auto-generated method stub
-//										boolean isorno=false;
-//										for(Love i:arg0){								
-//											if(i.getUser()!=null&&currentUser!=null){
-//												if(i.getUser().getObjectId().equals(currentUser.getObjectId())){
-//													isorno=true;
-//												//	td.setIsFavour(true);	
-//												//	Log.e("", td.getContent()+":"+td.getIsFavour()+"");//通过
-//												}
-//											}													
-//										}
-//										isfavour.setIslove(isorno);
-//										isfavourlist.add(isfavour);
-//									}
-//									
-//									@Override
-//									public void onError(int arg0, String arg1) {
-//										// TODO Auto-generated method stub
-//										
-//									}
-//								});
 								
 							}
 							
 							@Override
 							public void onError(int arg0, String arg1) {
-								// TODO Auto-generated method stub
-								Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+//								// TODO Auto-generated method stub
+//								Toast.makeText(MainActivity.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
 							}
 						});	
 						

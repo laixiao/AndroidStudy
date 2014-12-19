@@ -355,8 +355,8 @@ public class HeimaAndroid extends Activity {
 			
 			@Override
 			public void onError(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				Toast.makeText(HeimaAndroid.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
+//				// TODO Auto-generated method stub
+//				Toast.makeText(HeimaAndroid.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
 			}
 		});
 		

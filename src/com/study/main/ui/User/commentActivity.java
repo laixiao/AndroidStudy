@@ -31,6 +31,7 @@ import com.study.main.R;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.Entity.Comment;
+import com.study.main.ui.ResideMenuItemUi.Jiuye;
 
 public class commentActivity extends Activity {
 
@@ -129,7 +130,8 @@ public class commentActivity extends Activity {
 	}
 
 	private void fetch() {
-		// TODO Auto-generated method stub
+		final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(commentActivity.this).setTitleText("正在获取数据，请稍后...").setContentText("");
+		sweetAlertDialog.show();
 		BmobQuery<Comment> query = new BmobQuery<Comment>();
 		query.addWhereEqualTo("shuoshuo", shuoshuo);
 		query.include("user");
@@ -137,7 +139,7 @@ public class commentActivity extends Activity {
 		query.findObjects(commentActivity.this, new FindListener<Comment>() {
 			@Override
 			public void onSuccess(List<Comment> arg0) {
-				// TODO Auto-generated method stub
+				sweetAlertDialog.dismiss();
 				commentList.addAll(arg0);
 				adapter.notifyDataSetChanged();
 			}

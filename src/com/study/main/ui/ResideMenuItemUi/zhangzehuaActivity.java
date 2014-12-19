@@ -212,7 +212,7 @@ public class zhangzehuaActivity extends Activity {
 			@Override
 			public void onError(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				Toast.makeText(zhangzehuaActivity.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
+				//Toast.makeText(zhangzehuaActivity.this, "Ê§°Ü"+arg1, Toast.LENGTH_LONG).show();
 			}
 		});
 		

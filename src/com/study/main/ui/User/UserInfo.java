@@ -197,8 +197,7 @@ public class UserInfo extends Activity {
 						
 						@Override
 						public void onError(int arg0, String arg1) {
-							// TODO Auto-generated method stub
-							Toast.makeText(UserInfo.this, "查询收藏失败："+arg1, Toast.LENGTH_LONG).show();
+							
 						}
 					});	
 					
@@ -525,8 +524,10 @@ public class UserInfo extends Activity {
 									UserInfo.this, User.class);
 
 							setResult(RESULT_OK);
-							Toast.makeText(UserInfo.this, "Success",
-									Toast.LENGTH_LONG).show();
+							new SweetAlertDialog(UserInfo.this, SweetAlertDialog.SUCCESS_TYPE)
+	                        .setTitleText("修改成功")
+	                        .setContentText("个人信息修改成功")
+	                        .show();
 						}
 
 						@Override
@@ -547,11 +548,10 @@ public class UserInfo extends Activity {
 
 				@Override
 				public void onFailure(int arg0, String arg1) {
-					// TODO Auto-generated method stub
-					// LogUtils.i(TAG, "涓婁紶鏂囦欢澶辫触銆�"+arg1);
-					Toast.makeText(UserInfo.this,
-							arg0 + "Failure" + arg1, Toast.LENGTH_LONG)
-							.show();
+					new SweetAlertDialog(UserInfo.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("个人信息修改失败")
+                    .setContentText("原因："+arg1)
+                    .show();
 				}
 			});
 		} else {
