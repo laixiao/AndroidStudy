@@ -166,6 +166,7 @@ public class UserInfo extends Activity {
 		query.order("-createdAt");
 		query.include("author");
 		query.setLimit(999);
+		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		query.addWhereEqualTo("author", currentUser);
 		query.findObjects(UserInfo.this, new FindListener<ShuoShuo>() {
 			
@@ -177,7 +178,7 @@ public class UserInfo extends Activity {
 					BmobQuery<Favour> query=new BmobQuery<Favour>();
 					query.addWhereRelatedTo("favour", new BmobPointer(td));
 					query.include("user");
-			//		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+					query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 					query.findObjects(UserInfo.this, new FindListener<Favour>() {						
 						@Override
 						public void onSuccess(List<Favour> arg0) {
@@ -246,48 +247,24 @@ public class UserInfo extends Activity {
 	}
 
 	private void initView() {
-		// TODO Auto-generated method stub
-		BmobQuery<User> userQuery = new BmobQuery<User>();
-	//	userQuery.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
-	//	userQuery.setMaxCacheAge(1000*360*24*30L);//一天
-		userQuery.getObject(UserInfo.this,currentUser.getObjectId(), new GetListener<User>() {			
-			public void onSuccess(User arg0) {
-				
-				if(arg0.getAvatar()!=null){		
-					ImageLoader.getInstance().displayImage(arg0.getAvatar().getFileUrl(UserInfo.this), personico, options,
-							new SimpleImageLoadingListener(){
-								@Override
-								public void onLoadingComplete(String imageUri, View view,Bitmap loadedImage) {
-									// TODO Auto-generated method stub
-									super.onLoadingComplete(imageUri, view, loadedImage);
-								}						
-					});
-				}
-					isSex = arg0.isSex();
-					if (isSex) {
-						user_infosex.setImageResource(R.drawable.user_infosex2);
-					} else {
-						user_infosex.setImageResource(R.drawable.user_infosex1);
-					}
-					Message msg = Message.obtain(handler);
-					Bundle bundle = new Bundle();
-					bundle.putString("Signature", arg0.getSignature());
-					bundle.putString("Birthday", arg0.getBirthday());
-					bundle.putString("PhoneNumber", arg0.getPhonenumber());
-					bundle.putString("Nickname", arg0.getNickname());
-					msg.setData(bundle);
-					msg.sendToTarget();
+		if(currentUser.getAvatar()!=null){
+			ImageLoader.getInstance().displayImage(currentUser.getAvatar().getFileUrl(UserInfo.this), personico, options,null);
+		}
+		isSex =currentUser.isSex();
+		if (isSex) {
+		user_infosex.setImageResource(R.drawable.user_infosex2);
+			} else {
+				user_infosex.setImageResource(R.drawable.user_infosex1);
+			}
+		Message msg = Message.obtain(handler);
+		Bundle bundle = new Bundle();
+		bundle.putString("Signature",currentUser.getSignature());
+		bundle.putString("Birthday", currentUser.getBirthday());
+		bundle.putString("PhoneNumber",currentUser.getPhonenumber());
+		bundle.putString("Nickname",currentUser.getNickname());
+		msg.setData(bundle);
+		msg.sendToTarget();
 
-				
-			}
-			
-			@Override
-			public void onFailure(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
 
 	}
 

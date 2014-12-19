@@ -24,9 +24,12 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.study.main.MainActivity;
 import com.study.main.R;
 import com.study.main.Entity.Favour;
 import com.study.main.Entity.ShuoShuo;
@@ -97,10 +100,12 @@ public class FavourActivity extends Activity{
 
 
 	private void getData() {
+		final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(FavourActivity.this).setTitleText("正在获取收藏喔，请稍后...").setContentText("");
+		sweetAlertDialog.show();
 		BmobQuery<Favour>  query=new BmobQuery<Favour>();
 		query.order("-createdAt");
 		query.include("shuoshuo");
-	//	query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+		//query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		query.setLimit(999);
 		query.addWhereEqualTo("user", currentUser);
 		query.findObjects(FavourActivity.this, new FindListener<Favour>() {
@@ -109,14 +114,13 @@ public class FavourActivity extends Activity{
 				for (final Favour td : arg0) {
 					
 					BmobQuery<ShuoShuo> query=new BmobQuery<ShuoShuo>();
-				//	query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+					//query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 					query.include("author");
-					//query.addWhereEqualTo("objectId", td.getShuoshuo().getObjectId());
 					query.getObject(FavourActivity.this,td.getShuoshuo().getObjectId(), new GetListener<ShuoShuo>() {
 						
 						@Override
 						public void onSuccess(ShuoShuo arg0) {
-							
+							sweetAlertDialog.dismiss();
 							FavourShuoshuoList.add(arg0);
 							adapter.notifyDataSetChanged();
 						}

@@ -102,7 +102,8 @@ public class Jiuye extends Activity {
 
 	private void initData() {
 		
-		
+		final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(Jiuye.this).setTitleText("正在获取数据，请稍后...").setContentText("");
+		sweetAlertDialog.show();
 		BmobQuery<JiuyeParent> query0=new BmobQuery<JiuyeParent>();
 		query0.setCachePolicy(cachePolicy);
 		query0.setLimit(99);
@@ -138,10 +139,7 @@ public class Jiuye extends Activity {
 						query2.setCachePolicy(cachePolicy);
 						query2.findObjects(Jiuye.this, new FindListener<JiuyeChild>() {				
 							public void onSuccess(List<JiuyeChild> arg2) {
-								new SweetAlertDialog(Jiuye.this, SweetAlertDialog.SUCCESS_TYPE)
-								.setTitleText("亲，数据获取成功啦！")
-		                        .setContentText("")
-		                        .show();
+								sweetAlertDialog.dismiss();
 								children2.addAll(arg2);
 								childData.add(children2);
 								expandableAdapter.notifyDataSetChanged();

@@ -8,6 +8,7 @@ import com.study.main.R;
 import com.study.main.Entity.HeimaJavawebChild;
 import com.study.main.Entity.HeimaJavawebParent;
 import com.study.main.ui.Simple.DownloadListActivity;
+import com.study.main.ui.User.FavourActivity;
 import com.study.main.ui.media.DownloadManager;
 import com.study.main.ui.media.DownloadService;
 import com.study.main.ui.media.localVideoView;
@@ -102,7 +103,8 @@ public class HeimaJavaweb extends Activity {
 
 	private void initData() {
 		
-		
+		final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(HeimaJavaweb.this).setTitleText("正在获取数据，请稍后...").setContentText("");
+		sweetAlertDialog.show();
 		BmobQuery<HeimaJavawebParent> query0=new BmobQuery<HeimaJavawebParent>();
 		query0.setCachePolicy(cachePolicy);
 		query0.setLimit(99);
@@ -401,10 +403,7 @@ public class HeimaJavaweb extends Activity {
 																																														query22.setCachePolicy(cachePolicy);
 																																														query22.findObjects(HeimaJavaweb.this, new FindListener<HeimaJavawebChild>() {				
 																																															public void onSuccess(List<HeimaJavawebChild> arg22) {
-																																																new SweetAlertDialog(HeimaJavaweb.this, SweetAlertDialog.SUCCESS_TYPE)
-																																																.setTitleText("亲，数据获取成功啦！")
-																																										                        .setContentText("")
-																																										                        .show();
+																																																sweetAlertDialog.dismiss();
 																																																children22.addAll(arg22);
 																																																childData.add(children22);
 																																																expandableAdapter.notifyDataSetChanged();

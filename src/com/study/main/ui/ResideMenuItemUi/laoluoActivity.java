@@ -11,6 +11,7 @@ import com.study.main.R;
 import com.study.main.Entity.laoluo_child;
 import com.study.main.Entity.laoluo_parent;
 import com.study.main.ui.Simple.DownloadListActivity;
+import com.study.main.ui.User.FavourActivity;
 import com.study.main.ui.media.DownloadManager;
 import com.study.main.ui.media.DownloadService;
 import com.study.main.ui.media.localVideoView;
@@ -112,7 +113,8 @@ public class laoluoActivity extends Activity {
 
 	private void initData() {
 		
-		
+		final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(laoluoActivity.this).setTitleText("正在获取数据，请稍后...").setContentText("");
+		sweetAlertDialog.show();
 		BmobQuery<laoluo_parent> query0=new BmobQuery<laoluo_parent>();
 		query0.setCachePolicy(cachePolicy);
 		query0.setLimit(99);
@@ -347,10 +349,7 @@ public class laoluoActivity extends Activity {
 																																				query17.setCachePolicy(cachePolicy);
 																																				query17.findObjects(laoluoActivity.this, new FindListener<laoluo_child>() {				
 																																					public void onSuccess(List<laoluo_child> arg17) {
-																																						new SweetAlertDialog(laoluoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-																																						.setTitleText("亲，数据获取成功啦！")
-																																                        .setContentText("")
-																																                        .show();
+																																						sweetAlertDialog.dismiss();																								
 																																						children17.addAll(arg17);
 																																						childData.add(children17);
 																																						

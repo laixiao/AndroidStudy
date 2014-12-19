@@ -8,6 +8,7 @@ import com.study.main.R;
 import com.study.main.Entity.HeimaAndroidChild;
 import com.study.main.Entity.HeimaAndroidParent;
 import com.study.main.ui.Simple.DownloadListActivity;
+import com.study.main.ui.User.FavourActivity;
 import com.study.main.ui.media.DownloadManager;
 import com.study.main.ui.media.DownloadService;
 import com.study.main.ui.media.localVideoView;
@@ -102,7 +103,8 @@ public class HeimaAndroid extends Activity {
 
 	private void initData() {
 		
-		
+		final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(HeimaAndroid.this).setTitleText("正在获取数据，请稍后...").setContentText("");
+		sweetAlertDialog.show();
 		BmobQuery<HeimaAndroidParent> query0=new BmobQuery<HeimaAndroidParent>();
 		query0.setCachePolicy(cachePolicy);
 		query0.setLimit(99);
@@ -260,10 +262,7 @@ public class HeimaAndroid extends Activity {
 																								query11.setCachePolicy(cachePolicy);
 																								query11.findObjects(HeimaAndroid.this, new FindListener<HeimaAndroidChild>() {				
 																									public void onSuccess(List<HeimaAndroidChild> arg11) {
-																										new SweetAlertDialog(HeimaAndroid.this, SweetAlertDialog.SUCCESS_TYPE)
-																				                        .setTitleText("亲，数据获取成功啦！")
-																				                        .setContentText("")
-																				                        .show();
+																										sweetAlertDialog.dismiss();
 																										children11.addAll(arg11);
 																										childData.add(children11);
 																										expandableAdapter.notifyDataSetChanged();

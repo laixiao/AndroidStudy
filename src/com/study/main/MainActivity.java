@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.DeleteListener;
@@ -936,7 +937,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		query.setSkip(page*limit);		// 2.从第几条数据开始
 		query.order("-createdAt");
 		query.include("author");
-		//query.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 		query.findObjects(this, new FindListener<ShuoShuo>() {
 			
 			@Override
@@ -957,6 +958,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 						
 						final Isfavour isfavour=new Isfavour();
 						BmobQuery<Favour> query=new BmobQuery<Favour>();
+						query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
 						query.addWhereRelatedTo("favour", new BmobPointer(td));
 						query.include("user");
 						query.findObjects(MainActivity.this, new FindListener<Favour>() {						
