@@ -6,6 +6,7 @@ import com.study.main.utils.ConfigValue;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.update.BmobUpdateAgent;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ public class SplashActivity extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//2.≥ı ºªØBmob
 		Bmob.initialize(this, ConfigValue.AppId);
+		
+		
 		setContentView(R.layout.splashactivity);		
 		ChangeUi();
 		

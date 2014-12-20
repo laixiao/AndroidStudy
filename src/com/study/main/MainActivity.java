@@ -8,10 +8,13 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.update.BmobUpdateAgent;
+import cn.bmob.v3.update.UpdateResponse;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -120,6 +123,11 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		//自动更新接口
+				BmobUpdateAgent.setUpdateOnlyWifi(false);//设置在任意网络环境下都进行更新自动提醒
+				BmobUpdateAgent.update(this);
+				BmobUpdateAgent.setUpdateCheckConfig(false) ;
+
 		
 		currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);
 		if(currentUser==null){
@@ -451,7 +459,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// 判断菜单是否关闭
-		//	if (is_closed) {
+			if (is_closed) {
 				// // 判断两次点击的时间间隔（默认设置为2秒）
 				// if ((System.currentTimeMillis() - mExitTime) > 2000) {
 				// Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
@@ -467,9 +475,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.addCategory(Intent.CATEGORY_HOME);
 				startActivity(i);
-//			} else {
-//				resideMenu.closeMenu();
-//			}
+			} else {
+				resideMenu.closeMenu();
+			}
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
@@ -489,15 +497,36 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.exit:
-			Toast.makeText(MainActivity.this, "触发了退出方法", Toast.LENGTH_LONG)
-					.show();
 			finish();
 			System.exit(0);
 			super.onBackPressed();
 			break;
 		case R.id.checkversion:
-			Toast.makeText(MainActivity.this, "触发了版本更新方法", Toast.LENGTH_LONG)
-					.show();
+			
+			 BmobUpdateAgent.forceUpdate(MainActivity.this);
+			 BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
+				
+				@Override
+				public void onUpdateReturned(int arg0, UpdateResponse arg1) {
+					switch (arg0) {
+					case 0:
+						Toast.makeText(MainActivity.this, "有更新", Toast.LENGTH_SHORT).show();
+						break;
+					case 1:
+						Toast.makeText(MainActivity.this, "恭喜亲，已经是最新版啦.", Toast.LENGTH_SHORT).show();
+						break;
+					case 2:
+						Toast.makeText(MainActivity.this, "服务器还没有填写相关信息", Toast.LENGTH_SHORT).show();
+						break;
+					case 7:
+						Toast.makeText(MainActivity.this, "该版本已被忽略更新", Toast.LENGTH_SHORT).show();
+						break;
+					default:
+						break;
+					}
+					
+				}
+			});
 			break;
 		default:
 			break;
@@ -600,13 +629,12 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder = (ViewHolder) convertView.getTag();
 			}
 			//1.Get QiangYu
-			
 			shuoshuo= (ShuoShuo) getItem(position);	
 			final User author=shuoshuo.getAuthor();
 			if(author==null){
-				//Toast.makeText(MainActivity.this, position+"user is null", Toast.LENGTH_LONG).show();
+			
 			}else if(author.getAvatar()==null){
-				//Toast.makeText(MainActivity.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
+			
 			}else {				
 				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(MainActivity.this), holder.list_item_user_logo, options01,null);				
 			}

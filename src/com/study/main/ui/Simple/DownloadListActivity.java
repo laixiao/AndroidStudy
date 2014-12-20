@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.*;
+
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
@@ -33,7 +35,7 @@ public class DownloadListActivity extends Activity {
 
     @ViewInject(R.id.download_list)
     private ListView downloadList;
-
+    private ImageView download_back;
     private DownloadManager downloadManager;
     private DownloadListAdapter downloadListAdapter;
 
@@ -41,15 +43,24 @@ public class DownloadListActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.download_list);
         ViewUtils.inject(this);
 
         mAppContext = this.getApplicationContext();
 
         downloadManager = DownloadService.getDownloadManager(mAppContext);
-
+        download_back=(ImageView) this.findViewById(R.id.download_back);
         downloadListAdapter = new DownloadListAdapter(mAppContext);
         downloadList.setAdapter(downloadListAdapter);
+        download_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
     }
 
     @Override
