@@ -999,17 +999,22 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				//	showToast("第"+(page+1)+"页数据加载完成");
 				}else if(actionType == STATE_MORE){
 					//上拉操作，没有更多数据了
-					Toast.makeText(MainActivity.this, "not data", Toast.LENGTH_LONG).show();
+					Toast.makeText(MainActivity.this, "亲，没有更多数据了", Toast.LENGTH_LONG).show();
 				}else if(actionType == STATE_REFRESH){
 					//下拉操作，没有更多数据了
-					Toast.makeText(MainActivity.this, "not data", Toast.LENGTH_LONG).show();
+					Toast.makeText(MainActivity.this, "亲，没有更多数据了", Toast.LENGTH_LONG).show();
 				}
 				list.onRefreshComplete();
 			}		
 			@Override
-			public void onError(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				Toast.makeText(MainActivity.this, arg0+"error"+arg1, Toast.LENGTH_LONG).show();
+			public void onError(int arg0, String arg1) {	
+				
+				if(arg0==9016){
+					Toast.makeText(MainActivity.this,"亲，请检查你的网络.", Toast.LENGTH_LONG).show();
+				}else {
+					Toast.makeText(MainActivity.this,arg1, Toast.LENGTH_LONG).show();
+				}
+				
 				//完成一次下拉刷新
 				list.onRefreshComplete();
 			}
