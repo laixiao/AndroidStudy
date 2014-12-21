@@ -101,7 +101,9 @@
         android:layout_below="@+id/titlelayout01"
         android:background="@drawable/default_bg"
         android:visibility="visible" >
-
+	
+        
+        
     </RelativeLayout>
 
     <RelativeLayout

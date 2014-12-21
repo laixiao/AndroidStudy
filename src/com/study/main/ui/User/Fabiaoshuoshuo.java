@@ -1,4 +1,4 @@
-package com.study.main.ui.Simple;
+package com.study.main.ui.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,6 @@ import jdk.internal.org.objectweb.asm.Handle;
 import com.study.main.R;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
-import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.utils.CacheUtils;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;

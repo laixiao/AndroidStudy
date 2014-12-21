@@ -7,7 +7,7 @@ import com.lidroid.xutils.util.LogUtils;
 import com.study.main.R;
 import com.study.main.Entity.JiuyeChild;
 import com.study.main.Entity.JiuyeParent;
-import com.study.main.ui.Simple.DownloadListActivity;
+import com.study.main.ui.media.DownloadListActivity;
 import com.study.main.ui.media.DownloadManager;
 import com.study.main.ui.media.DownloadService;
 import com.study.main.ui.media.localVideoView;

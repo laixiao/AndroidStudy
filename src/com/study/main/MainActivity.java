@@ -3,6 +3,9 @@ package com.study.main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.youmi.android.offers.OffersManager;
+import net.youmi.android.spot.SpotManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.BmobQuery.CachePolicy;
@@ -32,13 +35,14 @@ import com.study.main.ResideMenu.ResideMenu;
 import com.study.main.ResideMenu.ResideMenuInfo;
 import com.study.main.ResideMenu.ResideMenuItem;
 import com.study.main.ResideMenu.ResideMenuSetting;
+import com.study.main.test.test1;
 import com.study.main.ui.ResideMenuItemUi.HeimaAndroid;
 import com.study.main.ui.ResideMenuItemUi.HeimaJavaweb;
 import com.study.main.ui.ResideMenuItemUi.Jiuye;
 import com.study.main.ui.ResideMenuItemUi.SettingActivity;
 import com.study.main.ui.ResideMenuItemUi.laoluoActivity;
 import com.study.main.ui.ResideMenuItemUi.zhangzehuaActivity;
-import com.study.main.ui.Simple.Fabiaoshuoshuo;
+import com.study.main.ui.User.Fabiaoshuoshuo;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.UserInfo;
 import com.study.main.ui.User.commentActivity;
@@ -108,8 +112,6 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			swip.setRefreshing(false);
 		}
 	};
-
-	
 	PullToRefreshListView list;
 	private ILoadingLayout loadingLayout;
 	ListView listview;
@@ -118,6 +120,8 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	List<ShuoShuo> shuoshuoList = new ArrayList<ShuoShuo>();
 	List<Isfavour> isfavourlist=new ArrayList<Isfavour>();
 	firstListAdapter adapter;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,7 +133,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				BmobUpdateAgent.setUpdateCheckConfig(false) ;
 
 		
-		currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);
+		currentUser = BmobUser.getCurrentUser(MainActivity.this,User.class);	
 		if(currentUser==null){
 			Intent intent=new Intent();
 			intent.setClass(MainActivity.this, LoginAndRegister.class);
@@ -263,15 +267,15 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 		// resideMenu.setDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 		// create menu items;
-		menu_item01 = new ResideMenuItem(this, R.drawable.residebutton1,
+		menu_item01 = new ResideMenuItem(this, R.drawable.residebutton3,
 				R.string.menu_item01);
-		menu_item02 = new ResideMenuItem(this, R.drawable.residebutton5,
+		menu_item02 = new ResideMenuItem(this, R.drawable.residebutton3,
 				R.string.menu_item02);
 		menu_item03 = new ResideMenuItem(this, R.drawable.residebutton3,
 				R.string.menu_item03);
-		menu_item04 = new ResideMenuItem(this, R.drawable.residebutton4,
+		menu_item04 = new ResideMenuItem(this, R.drawable.residebutton3,
 				R.string.menu_item04);
-		menu_item05 = new ResideMenuItem(this, R.drawable.residebutton2,
+		menu_item05 = new ResideMenuItem(this, R.drawable.residebutton3,
 				R.string.menu_item05);
 		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4,
 		// "子菜单1");
@@ -430,10 +434,19 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		} else if (view == setting) {
 			
 			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), SettingActivity.class);
+			intent.setClass(getApplicationContext(), test1.class);
 			startActivity(intent);
 			
 		}
+	}
+
+	//
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		OffersManager.getInstance(this).onAppExit();//释放有米
+		SpotManager.getInstance(this).unregisterSceenReceiver();//释放插屏广告
 	}
 
 	private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {

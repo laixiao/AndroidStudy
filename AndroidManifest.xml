@@ -9,14 +9,17 @@
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 获取wifi状态 -->
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 有米权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name="com.study.main.UILApplication"
@@ -63,11 +66,11 @@
         </activity>
         <activity android:name="com.study.main.ui.media.uploadfile" >
         </activity>
-        <activity android:name="com.study.main.ui.Simple.Fabiaoshuoshuo" >
+        <activity android:name="com.study.main.ui.User.Fabiaoshuoshuo" >
         </activity>
         <activity android:name="com.study.main.ui.ResideMenuItemUi.SettingActivity" >
         </activity>
-        <activity android:name="com.study.main.ui.Simple.mainActivity01" >
+        <activity android:name="com.study.main.ui.Youmi.mainActivity01" >
         </activity>
         <activity android:name="com.study.main.ui.ResideMenuItemUi.laoluoActivity" >
         </activity>
@@ -79,15 +82,42 @@
         </activity>
         <activity android:name="com.study.main.ui.ResideMenuItemUi.Jiuye" >
         </activity>
-        <activity android:name="com.study.main.ui.Simple.DownloadListActivity" >
+        <activity android:name="com.study.main.ui.media.DownloadListActivity" >
         </activity>
         <activity android:name="com.study.main.test.test1" >
         </activity>
-        
-        <activity 
-            android:name="cn.bmob.v3.update.UpdateDialogActivity"
-              android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        <activity android:name="com.study.main.ui.Youmi.youmi" >
         </activity>
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <!-- 有米广告组件 -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false" >
+        </service>
+
+        <receiver android:name="net.youmi.android.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="net.youmi.android.spot.SpotAdContentProvider"
+            android:authorities="com.study.main" />
+        <!-- 有米广告组件 -->
+
     </application>
 
 </manifest>

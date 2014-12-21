@@ -823,7 +823,7 @@ public class UserInfo extends Activity {
 				holder.list_item_action_fav.setSelected(true);
 				holder.list_item_action_fav.setText("已收藏  "+isfavourlist.get(position).getFavourCount());
 			}else if(isfavourlist.get(position).getIsfavour()==false){
-				holder.list_item_action_fav.setSelected(true);
+				holder.list_item_action_fav.setSelected(false);
 				holder.list_item_action_fav.setText("收藏  "+isfavourlist.get(position).getFavourCount());				
 			}
 			}

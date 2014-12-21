@@ -26,12 +26,18 @@
         android:layout_height="wrap_content"
         android:text="下载管理" />
 
+    <Button
+        android:id="@+id/setting_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取积分" />
+
     <TextView
         android:id="@+id/textView"
        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         
-        android:text="作者信息：hero" />
+        android:text="QQ群： 430049289" />
 
 </LinearLayout>

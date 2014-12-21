@@ -3,11 +3,15 @@ package com.study.main.test;
 import java.util.ArrayList;
 import java.util.List;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobQuery.CachePolicy;
 import cn.bmob.v3.listener.FindListener;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.study.main.MainActivity;
 import com.study.main.R;
 import com.study.main.Entity.Isfavour;
+import com.study.main.Entity.MainMsg;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.ui.User.commentActivity;
@@ -36,10 +40,10 @@ import android.widget.Toast;
 
 public class test1 extends Activity{
 
-	private ListView user_info_listView1;
-	DisplayImageOptions options,options2;
-	List<ShuoShuo> shuoshuoList=new ArrayList<ShuoShuo>();
-	UserInfoAdapter adapter;
+	private ListView main_listView1;
+	List<MainMsg> MainMsgList=new ArrayList<MainMsg>();
+	MainListAdapter adapter;
+	private DisplayImageOptions options01;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -47,23 +51,36 @@ public class test1 extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.test1);
 		
-		adapter=new UserInfoAdapter(test1.this);
-		user_info_listView1=(ListView) this.findViewById(R.id.user_info_listView1);	
-		user_info_listView1.setAdapter(adapter);
+		options01 = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.bg_pic_loading)
+		.showImageForEmptyUri(R.drawable.bg_pic_loading)
+		.showImageOnFail(R.drawable.bg_pic_loading)
+		.cacheInMemory(true)
+		.cacheOnDisk(true)
+		.considerExifParams(true)
+	//	.displayer(new RoundedBitmapDisplayer(90))
+		.build();
+		
+		adapter=new MainListAdapter(test1.this);
+		main_listView1=(ListView) this.findViewById(R.id.main_listView1);	
+		main_listView1.setAdapter(adapter);
 		getData();
 		
 	}
 
 	
 	private void getData() {
-		BmobQuery<ShuoShuo>  query=new BmobQuery<ShuoShuo>();
+		
+		
+		BmobQuery<MainMsg>  query=new BmobQuery<MainMsg>();
 		query.setLimit(999);
-		query.findObjects(test1.this, new FindListener<ShuoShuo>() {
-			
+		//query.setMaxCacheAge(100);
+		query.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+		query.findObjects(test1.this, new FindListener<MainMsg>() {
 			@Override
-			public void onSuccess(List<ShuoShuo> arg0) {
+			public void onSuccess(List<MainMsg> arg0) {
 				// TODO Auto-generated method stub
-				shuoshuoList.addAll(arg0);
+				MainMsgList.addAll(arg0);
 				adapter.notifyDataSetChanged();
 			}
 			
@@ -82,105 +99,54 @@ public class test1 extends Activity{
 
 
 
-	private class UserInfoAdapter extends BaseAdapter  {		
+	private class MainListAdapter extends BaseAdapter  {		
 		Context context;		
 		
-		public UserInfoAdapter(Context context){
+		public MainListAdapter(Context context){
 			this.context = context;
 		}
 		@SuppressLint("InflateParams") @Override
 		public View getView(final int position, View convertView,ViewGroup parent) {
 			ViewHolder holder = null;
-			final ShuoShuo shuoshuo;
-			Isfavour isfavour;
+			final MainMsg mainMsg;
+			
 			if (convertView == null) {				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.main_list1, null);
+				
 				holder = new ViewHolder();	
-				holder.list_item_user_name = (TextView)convertView.findViewById(R.id.list_item_user_name);
-				holder.list_item_user_logo = (ImageView)convertView.findViewById(R.id.list_item_user_logo);
-				holder.list_item_action_fav = (TextView)convertView.findViewById(R.id.list_item_action_fav);
-				holder.list_item_content_text = (TextView)convertView.findViewById(R.id.list_item_content_text);
-				holder.list_item_content_image = (ImageView)convertView.findViewById(R.id.list_item_content_image);			
-				holder.list_item_action_comment = (TextView)convertView.findViewById(R.id.list_item_action_comment);
-				holder.list_item_time=(TextView) convertView.findViewById(R.id.list_item_time);
+				holder.main_listitem_username = (TextView)convertView.findViewById(R.id.main_listitem_username);	
+				holder.main_listitem_content = (TextView)convertView.findViewById(R.id.main_listitem_content);			
+				holder.main_listitem_contentimage=(ImageView) convertView.findViewById(R.id.main_listitem_contentimage);
+							
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			//1.Get QiangYu
-			
-			shuoshuo= (ShuoShuo) getItem(position);	
-			final User author=shuoshuo.getAuthor();
-			if(author==null){
-				Toast.makeText(test1.this, position+"user is null", Toast.LENGTH_LONG).show();
-			}else if(author.getAvatar()==null){
-				Toast.makeText(test1.this, position+"Avatar is null", Toast.LENGTH_LONG).show();
-			}else {				
-				ImageLoader.getInstance().displayImage(author.getAvatar().getFileUrl(test1.this), holder.list_item_user_logo, options,null);				
+			//1.Get data		
+			mainMsg= (MainMsg) getItem(position);	
+	
+			holder.main_listitem_username.setText(mainMsg.getTitle());
+			holder.main_listitem_content.setText(mainMsg.getContent());
+			if(mainMsg.getContentfig()!=null){
+				ImageLoader.getInstance().displayImage(mainMsg.getContentfig().getFileUrl(test1.this), holder.main_listitem_contentimage, options01,null);
 			}
-			//2.userName
-			if(author!=null){
-			holder.list_item_user_name.setText(shuoshuo.getAuthor().getNickname());
-			//3.userLogo
-			holder.list_item_user_logo.setOnClickListener(new OnClickListener() {				
-				@Override
-				public void onClick(View v) {									
-						Intent intent=new Intent(test1.this, otherInfo.class);
-						intent.putExtra("data",author);
-						startActivity(intent);					
-				}	
-			});
-			}
-			//4.contentText
-			if(shuoshuo.getContent()!=null){
-				holder.list_item_content_text.setVisibility(View.VISIBLE);
-			holder.list_item_content_text.setText(shuoshuo.getContent());
-			}else{
-				holder.list_item_content_text.setVisibility(View.INVISIBLE);
-			}
-			//5.Contentfigureurl
-			if(shuoshuo.getContentfigureurl()!=null){
-				holder.list_item_content_image.setVisibility(View.VISIBLE);
-				ImageLoader.getInstance().displayImage(shuoshuo.getContentfigureurl().getFileUrl(test1.this), holder.list_item_content_image, options,null);			
-			}else {
-				holder.list_item_content_image.setVisibility(View.GONE);
-			}
-			//6.comment
-			holder.list_item_action_comment.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Intent intent=new Intent(test1.this, commentActivity.class);
-					intent.putExtra("data",shuoshuo);
-					startActivity(intent);
-				}
-			});
-			//7.time 
-			holder.list_item_time.setText(shuoshuo.getCreatedAt());
-
 			return convertView;
 		}
 		class ViewHolder {
-			public TextView list_item_time;
-			public TextView list_item_action_comment;
-			public ImageView list_item_content_image;
-			public TextView list_item_content_text;
-			public TextView list_item_user_name;
-			public TextView list_item_action_fav;
-			public ImageView list_item_user_logo;
-			TextView list_item_textView1;			
+			public TextView main_listitem_username,main_listitem_content;
+			public ImageView main_listitem_contentimage;
+				
 		}
 		
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return shuoshuoList.size();
+			return MainMsgList.size();
 		}
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return shuoshuoList.get(position);
+			return MainMsgList.get(position);
 		}
 		
 		@Override

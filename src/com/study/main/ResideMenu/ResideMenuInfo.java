@@ -55,8 +55,9 @@ public class ResideMenuInfo extends LinearLayout {
 		.displayer(new RoundedBitmapDisplayer(90))
 		.build();	
 		
-		
-		ImageLoader.getInstance().displayImage(currentUser.getAvatar().getFileUrl(context),iv_icon, options,null);	
+		if(currentUser.getAvatar()!=null){
+			ImageLoader.getInstance().displayImage(currentUser.getAvatar().getFileUrl(context),iv_icon, options,null);	
+		}
 		tv_username.setText(currentUser.getNickname());
 		tv_dengji.setText(""+currentUser.getSignature());
 		

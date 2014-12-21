@@ -10,8 +10,8 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.study.main.R;
 import com.study.main.Entity.laoluo_child;
 import com.study.main.Entity.laoluo_parent;
-import com.study.main.ui.Simple.DownloadListActivity;
 import com.study.main.ui.User.FavourActivity;
+import com.study.main.ui.media.DownloadListActivity;
 import com.study.main.ui.media.DownloadManager;
 import com.study.main.ui.media.DownloadService;
 import com.study.main.ui.media.localVideoView;

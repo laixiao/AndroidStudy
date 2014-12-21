@@ -1,4 +1,4 @@
-package com.study.main.ui.Simple;
+package com.study.main.ui.media;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,9 +19,6 @@ import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.study.main.R;
-import com.study.main.ui.media.DownloadInfo;
-import com.study.main.ui.media.DownloadManager;
-import com.study.main.ui.media.DownloadService;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
