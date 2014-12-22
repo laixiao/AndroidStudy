@@ -712,7 +712,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				public void onClick(View v) {
 					new SweetAlertDialog(MainActivity.this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
 	                .setTitleText(""+shuoshuo.getAuthor().getNickname())
-	                .setContentText("亲，此功能正将在下个版本上线喔.")
+	                .setContentText("亲，此功能正还没开放喔.")
 	                .setCustomImage(R.drawable.ic_launcher)	                      
 	                .setCancelClickListener(new OnSweetClickListener() {
 						public void onClick(SweetAlertDialog sweetAlertDialog) {
