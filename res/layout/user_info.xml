@@ -180,7 +180,7 @@
                         <Button
                             android:id="@+id/user_info_quit"
                             android:layout_weight="1"
-                            android:background="@drawable/user_info_quit"
+                            android:background="@drawable/user_info_submit01"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="退出" />
@@ -188,7 +188,7 @@
                         <Button
                             android:id="@+id/user_info_submit01"
                             android:layout_weight="1"
-                            android:background="@drawable/user_info_submit01"
+                            android:background="@drawable/user_info_quit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="保存修改" />

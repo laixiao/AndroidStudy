@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
         android:text="标题"
+         android:textColor="#ffffff"
         android:textSize="23sp" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_alignLeft="@+id/main_listitem_username"
         android:layout_below="@+id/main_listitem_username"
         android:layout_marginLeft="19dp"
+         android:textColor="#ffffff"
         android:text="说点什么吧..."
         android:visibility="visible" />
 

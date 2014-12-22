@@ -17,6 +17,8 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener;
+
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -707,10 +709,22 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			//3.userLogo
 			holder.list_item_user_logo.setOnClickListener(new OnClickListener() {				
 				@Override
-				public void onClick(View v) {									
-						Intent intent=new Intent(MainActivity.this, otherInfo.class);
-						intent.putExtra("data",author);
-						startActivity(intent);					
+				public void onClick(View v) {
+					new SweetAlertDialog(MainActivity.this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
+	                .setTitleText(""+shuoshuo.getAuthor().getNickname())
+	                .setContentText("亲，此功能正将在下个版本上线喔.")
+	                .setCustomImage(R.drawable.ic_launcher)	                      
+	                .setCancelClickListener(new OnSweetClickListener() {
+						public void onClick(SweetAlertDialog sweetAlertDialog) {
+							
+							sweetAlertDialog.dismiss();
+						}
+					})				
+	                .show();
+					//正在开发当中
+//						Intent intent=new Intent(MainActivity.this, otherInfo.class);
+//						intent.putExtra("data",author);
+//						startActivity(intent);					
 				}	
 			});
 			}

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   	android:background="#ffffff"
+   	android:background="@drawable/default_bg"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -33,7 +33,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+           
             android:textSize="25sp"
             android:text="《加群活动》" />
 
@@ -41,7 +41,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+           
             android:textSize="14sp"
             android:text="1.群内有大量学习资料：\n   包括实战项目视频和源码等\n2.加群要求：亲，积分要大于1500喔\n3.积分所得将全部用于提升带宽，完善功能等\n4.非常感谢亲的支持\n5.QQ群：430049289" />
 

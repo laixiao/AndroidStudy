@@ -101,9 +101,7 @@ public class SettingActivity extends Activity {
 					new SweetAlertDialog(SettingActivity.this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
 	                .setTitleText("作者信息")
 	                .setContentText("QQ：2515097216\n邮箱：2515097216@qq.com\n官网：www\n声明：本人大学生一枚，不知世道，如有侵权，请联系我哦。")
-	                .setCustomImage(R.drawable.ic_launcher)
-	                .showCancelButton(true)
-	                .setCancelText("取消")	              
+	                .setCustomImage(R.drawable.ic_launcher)	              	              
 	                .setCancelClickListener(new OnSweetClickListener() {
 						public void onClick(SweetAlertDialog sweetAlertDialog) {
 							
