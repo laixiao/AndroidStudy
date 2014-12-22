@@ -1115,7 +1115,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			public void onError(int arg0, String arg1) {	
 				
 				if(arg0==9016){
-					//Toast.makeText(MainActivity.this,"Ç×£¬Çë¼ì²éÄãµÄÍøÂç.", Toast.LENGTH_LONG).show();
+					Toast.makeText(MainActivity.this,"Ç×£¬Çë¼ì²éÄãµÄÍøÂç.", Toast.LENGTH_LONG).show();
 				}else {
 					Toast.makeText(MainActivity.this,arg1, Toast.LENGTH_LONG).show();
 				}
@@ -1147,7 +1147,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			@Override
 			public void onError(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				Toast.makeText(MainActivity.this,"Ç×£¬Çë¼ì²éÄãµÄÍøÂç.", Toast.LENGTH_LONG).show();
+				//Toast.makeText(MainActivity.this,"Ç×£¬Çë¼ì²éÄãµÄÍøÂç.", Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -1169,7 +1169,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder = new ViewHolder();	
 				holder.main_listitem_username = (TextView)convertView.findViewById(R.id.main_listitem_username);	
 				holder.main_listitem_content = (TextView)convertView.findViewById(R.id.main_listitem_content);			
-										
+				holder.main_listitem_imageView1=(ImageView) convertView.findViewById(R.id.main_listitem_imageView1);					
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -1180,17 +1180,17 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			holder.main_listitem_username.setText(mainMsg.getTitle());
 			holder.main_listitem_content.setText(mainMsg.getContent());
 			
-//			if(mainMsg.getContentfig()!=null){
-//				ImageLoader.getInstance().displayImage(mainMsg.getContentfig().getFileUrl(MainActivity.this), holder.main_listitem_contentimage, options02,null);
-//			}else{
-//				holder.main_listitem_contentimage.setVisibility(View.INVISIBLE);
-//			}
+			if(mainMsg.getContentfig()!=null){
+				ImageLoader.getInstance().displayImage(mainMsg.getContentfig().getFileUrl(MainActivity.this), holder.main_listitem_imageView1, options01,null);
+			}else{
+				holder.main_listitem_imageView1.setVisibility(View.INVISIBLE);
+			}
 			
 			return convertView;
 		}
 		class ViewHolder {
 			public TextView main_listitem_username,main_listitem_content;
-			
+			public ImageView main_listitem_imageView1;
 				
 		}
 		
