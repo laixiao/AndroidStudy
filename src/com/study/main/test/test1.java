@@ -14,8 +14,8 @@ import android.widget.ImageView;
 
 public class test1 extends Activity {  
     private WebView webResetPwd;  
-      String url;
-      private ImageView webView_back;
+    String url;
+ 
     @Override  
     public void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -29,8 +29,7 @@ public class test1 extends Activity {
     
     
 	private void init1() {
-		// TODO Auto-generated method stub
-		 webView_back=(ImageView) this.findViewById(R.id.webView_back);
+	
 	        
 	        
 	        setListener();
@@ -43,14 +42,15 @@ public class test1 extends Activity {
 	          
 	        /*缩放页面方式1. 
 	        webResetPwd.setInitialScale(55); 
-	        */  
-	        /*缩放页面方式2. 会出现放大缩小的按钮 
+	        */ 
+	        
+	        //Webview 设置实现两个手指缩放网页
 	        websetting.setSupportZoom(true); 
 	        websetting.setBuiltInZoomControls(true); 
-	        */  
+	         
 	        /*缩小页面方式3. 
 	        websetting.setDefaultZoom(WebSettings.ZoomDensity.FAR); 
-	        */  
+	        */ 
 	        /*缩放页面方式4. 
 	        websetting.setUseWideViewPort(true);  
 	        websetting.setLoadWithOverviewMode(true); 
@@ -62,15 +62,7 @@ public class test1 extends Activity {
 	
 	
 	private void setListener() {
-		// TODO Auto-generated method stub
-		webView_back.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
+		
 	}
 	
 	
