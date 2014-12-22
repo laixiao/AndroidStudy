@@ -1,9 +1,7 @@
 package com.study.main;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import net.youmi.android.offers.OffersManager;
 import net.youmi.android.spot.SpotManager;
 import cn.bmob.v3.BmobQuery;
@@ -28,6 +26,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.study.main.Entity.Isfavour;
+import com.study.main.Entity.MainMsg;
 import com.study.main.Entity.ShuoShuo;
 import com.study.main.Entity.User;
 import com.study.main.Entity.Favour;
@@ -121,6 +120,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	List<Isfavour> isfavourlist=new ArrayList<Isfavour>();
 	firstListAdapter adapter;
 	
+	private ListView main_listView1;
+	List<MainMsg> MainMsgList=new ArrayList<MainMsg>();
+	MainListAdapter adapter01;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -141,8 +143,29 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		
 		}	
 		
+		init1();
 		init();
 		init3();
+	}
+
+	private void init1() {
+		// TODO Auto-generated method stub
+		adapter01=new MainListAdapter(MainActivity.this);
+		main_listView1=(ListView) this.findViewById(R.id.main_listView1);	
+		main_listView1.setAdapter(adapter01);
+		getListData1();
+		main_listView1.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				// TODO Auto-generated method stub
+				if(MainMsgList.get(position).getUrl()!=null){
+					Intent intent=new Intent(MainActivity.this, test1.class);
+					intent.putExtra("url", MainMsgList.get(position).getUrl());
+					startActivity(intent);
+				}
+			}
+		});
 	}
 
 	private void init3() {
@@ -434,7 +457,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		} else if (view == setting) {
 			
 			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), test1.class);
+			intent.setClass(getApplicationContext(), SettingActivity.class);
 			startActivity(intent);
 			
 		}
@@ -1061,5 +1084,90 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			}
 		});
 	}
+	
+	
+	
+	
+	
+	private void getListData1() {
+		BmobQuery<MainMsg>  query=new BmobQuery<MainMsg>();
+		query.setLimit(999);
+		query.setMaxCacheAge(1000*60*60*24);//µ•Œª£∫∫¡√Î
+		query.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+		query.findObjects(MainActivity.this, new FindListener<MainMsg>() {
+			@Override
+			public void onSuccess(List<MainMsg> arg0) {
+				// TODO Auto-generated method stub
+				MainMsgList.addAll(arg0);
+				adapter.notifyDataSetChanged();
+			}
+			
+			@Override
+			public void onError(int arg0, String arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	
+	private class MainListAdapter extends BaseAdapter  {		
+		Context context;		
+		
+		public MainListAdapter(Context context){
+			this.context = context;
+		}
+		@SuppressLint("InflateParams") @Override
+		public View getView(final int position, View convertView,ViewGroup parent) {
+			ViewHolder holder = null;
+			final MainMsg mainMsg;
+			
+			if (convertView == null) {				
+				convertView = LayoutInflater.from(context).inflate(R.layout.main_list1, null);
+				
+				holder = new ViewHolder();	
+				holder.main_listitem_username = (TextView)convertView.findViewById(R.id.main_listitem_username);	
+				holder.main_listitem_content = (TextView)convertView.findViewById(R.id.main_listitem_content);			
+				holder.main_listitem_contentimage=(ImageView) convertView.findViewById(R.id.main_listitem_contentimage);
+							
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			//1.Get data		
+			mainMsg= (MainMsg) getItem(position);	
+	
+			holder.main_listitem_username.setText(mainMsg.getTitle());
+			holder.main_listitem_content.setText(mainMsg.getContent());
+			if(mainMsg.getContentfig()!=null){
+				ImageLoader.getInstance().displayImage(mainMsg.getContentfig().getFileUrl(MainActivity.this), holder.main_listitem_contentimage, options02,null);
+			}else{
+				holder.main_listitem_contentimage.setVisibility(View.INVISIBLE);
+			}
+			return convertView;
+		}
+		class ViewHolder {
+			public TextView main_listitem_username,main_listitem_content;
+			public ImageView main_listitem_contentimage;
+				
+		}
+		
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return MainMsgList.size();
+		}
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return MainMsgList.get(position);
+		}
+		
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+	}
+	
 
 }
