@@ -101,7 +101,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	private TextView shezhi;
 	private FileAdapter mAdapter;
 	private ListView listView;
-	private SwipeRefreshLayout swip;
+	private SwipeRefreshLayout swip,swip1;
 	User currentUser;
 	Handler handler = new Handler() {
 		@Override
@@ -109,13 +109,23 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			super.handleMessage(msg);
 			// 当更新完数据后，调用setRefreshing(false);来关闭刷新。
 			swip.setRefreshing(false);
+			
+		}
+	};
+	Handler handler1 = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			// 当更新完数据后，调用setRefreshing(false);来关闭刷新。
+			swip1.setRefreshing(false);
+			
 		}
 	};
 	PullToRefreshListView list;
 	private ILoadingLayout loadingLayout;
 	ListView listview;
 	private DisplayImageOptions options01,options02;
-	//1.get data
+
 	List<ShuoShuo> shuoshuoList = new ArrayList<ShuoShuo>();
 	List<Isfavour> isfavourlist=new ArrayList<Isfavour>();
 	firstListAdapter adapter;
@@ -123,7 +133,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	private ListView main_listView1;
 	List<MainMsg> MainMsgList=new ArrayList<MainMsg>();
 	MainListAdapter adapter01;
-	
+	BmobQuery.CachePolicy cachePolicy;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -142,18 +152,9 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			startActivity(intent);
 		
 		}	
-		
-		init1();
-		init();
-		init3();
-	}
-
-	private void init1() {
-		// TODO Auto-generated method stub
 		adapter01=new MainListAdapter(MainActivity.this);
 		main_listView1=(ListView) this.findViewById(R.id.main_listView1);	
 		main_listView1.setAdapter(adapter01);
-		getListData1();
 		main_listView1.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -166,6 +167,18 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				}
 			}
 		});
+		init1();
+		init();
+		init3();
+	}
+
+	private void init1() {
+		
+		
+		cachePolicy=CachePolicy.CACHE_ELSE_NETWORK;
+		getListData1();
+		
+		
 	}
 
 	private void init3() {
@@ -262,6 +275,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		mAdapter = new FileAdapter(this, null);
 		listView = (ListView) this.findViewById(android.R.id.list);
 		swip = (SwipeRefreshLayout) this.findViewById(R.id.swip);
+		swip1=(SwipeRefreshLayout) this.findViewById(R.id.swip1);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
 		new ScanVideoTask().execute();
@@ -272,8 +286,20 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				mAdapter.clear();
 				new ScanVideoTask().execute();
 				handler.sendEmptyMessageDelayed(1, 5000);
-				Toast.makeText(MainActivity.this, "正在刷新本地列表，请稍后...",
+				Toast.makeText(MainActivity.this, "正在刷新本地视频，请稍后...",
 						Toast.LENGTH_LONG).show();
+			}
+		});
+		swip1.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				Toast.makeText(MainActivity.this, "正在获取信息，请稍后...",Toast.LENGTH_LONG).show();
+				MainMsgList.clear();
+				cachePolicy=CachePolicy.NETWORK_ONLY;
+				getListData1();		
+				
+				
 			}
 		});
 
@@ -1090,22 +1116,23 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	
 	
 	private void getListData1() {
+		
 		BmobQuery<MainMsg>  query=new BmobQuery<MainMsg>();
-		query.setLimit(999);
-		query.setMaxCacheAge(1000*60*60*24);//单位：毫秒
-		query.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+		query.setLimit(99);		
+		query.setCachePolicy(cachePolicy);
 		query.findObjects(MainActivity.this, new FindListener<MainMsg>() {
 			@Override
 			public void onSuccess(List<MainMsg> arg0) {
-				// TODO Auto-generated method stub
+				
 				MainMsgList.addAll(arg0);
-				adapter.notifyDataSetChanged();
+				adapter01.notifyDataSetChanged();
+				handler1.sendEmptyMessageDelayed(1, 0);
 			}
 			
 			@Override
 			public void onError(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				
+				Toast.makeText(MainActivity.this,"亲，请检查你的网络.", Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -1127,8 +1154,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 				holder = new ViewHolder();	
 				holder.main_listitem_username = (TextView)convertView.findViewById(R.id.main_listitem_username);	
 				holder.main_listitem_content = (TextView)convertView.findViewById(R.id.main_listitem_content);			
-				holder.main_listitem_contentimage=(ImageView) convertView.findViewById(R.id.main_listitem_contentimage);
-							
+										
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -1138,16 +1164,18 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 	
 			holder.main_listitem_username.setText(mainMsg.getTitle());
 			holder.main_listitem_content.setText(mainMsg.getContent());
-			if(mainMsg.getContentfig()!=null){
-				ImageLoader.getInstance().displayImage(mainMsg.getContentfig().getFileUrl(MainActivity.this), holder.main_listitem_contentimage, options02,null);
-			}else{
-				holder.main_listitem_contentimage.setVisibility(View.INVISIBLE);
-			}
+			
+//			if(mainMsg.getContentfig()!=null){
+//				ImageLoader.getInstance().displayImage(mainMsg.getContentfig().getFileUrl(MainActivity.this), holder.main_listitem_contentimage, options02,null);
+//			}else{
+//				holder.main_listitem_contentimage.setVisibility(View.INVISIBLE);
+//			}
+			
 			return convertView;
 		}
 		class ViewHolder {
 			public TextView main_listitem_username,main_listitem_content;
-			public ImageView main_listitem_contentimage;
+			
 				
 		}
 		

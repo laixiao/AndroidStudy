@@ -26,8 +26,6 @@ public class test1 extends Activity {
        
     }
     
-    
-    
 	private void init1() {
 	
 	        

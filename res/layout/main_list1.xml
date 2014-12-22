@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#00000000"
     android:descendantFocusability="blocksDescendants"
     android:padding="8dip" >
 
-    <ImageView
-        android:id="@+id/main_listitem_contentimage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/main_listitem_content"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/bg_pic_loading"
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@+id/main_listitem_content"
-        style="@style/TextTheme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/main_listitem_username"
-        android:text="说点什么吧..."
-        android:visibility="visible" />
-
     <TextView
         android:id="@+id/main_listitem_username"
         style="@style/TextTheme"
-        android:layout_alignLeft="@+id/main_listitem_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
         android:text="标题"
         android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/main_listitem_content"
+        style="@style/TextTheme"
+        android:layout_alignLeft="@+id/main_listitem_username"
+        android:layout_below="@+id/main_listitem_username"
+        android:layout_marginLeft="19dp"
+        android:text="说点什么吧..."
+        android:visibility="visible" />
 
 </RelativeLayout>
