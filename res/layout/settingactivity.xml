@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/user_infobg2"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,24 +21,63 @@
             android:text="返回" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+          android:layout_weight="15"
+          android:gravity="center"
+        android:background="#00000000"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:text="《加群活动》" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:text="1.群内有大量学习资料：\n   包括实战项目视频和源码等\n2.加群要求：亲，积分要大于1000喔\n3.积分所得将全部用于提升带宽，完善功能等\n4.非常感谢亲的支持" />
+
+        <TextView
+            android:id="@+id/textView"
+          android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="QQ群： 430049289" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/setting_button1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/login_registerbutton1"
         android:text="下载管理" />
 
     <Button
         android:id="@+id/setting_button2"
-        android:layout_width="wrap_content"
+          android:layout_weight="1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/login_registerbutton1"
         android:text="获取积分" />
 
-    <TextView
-        android:id="@+id/textView"
-       
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/setting_button3"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
-        android:text="QQ群： 430049289" />
+        android:background="@drawable/login_registerbutton1"
+        android:text="关于作者" />
+
+  
 
 </LinearLayout>

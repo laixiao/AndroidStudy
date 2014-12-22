@@ -3,6 +3,7 @@ package com.study.main.ui.User;
 import com.study.main.MainActivity;
 import com.study.main.R;
 import com.study.main.Entity.User;
+import com.study.main.ui.ResideMenuItemUi.HeimaAndroid;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -136,7 +137,10 @@ public class LoginAndRegister extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+
+				final SweetAlertDialog sweetAlertDialog =new SweetAlertDialog(LoginAndRegister.this).setTitleText("正在登陆，请稍后...").setContentText("");
+				sweetAlertDialog.show();
+				
 				String username=username01.getText().toString();
 				String password=password01.getText().toString();
 				user = new User();
@@ -147,7 +151,7 @@ public class LoginAndRegister extends Activity {
 				user.login(LoginAndRegister.this, new SaveListener() {
 				    @Override
 				    public void onSuccess() {
-				        // TODO Auto-generated method stub
+				    	sweetAlertDialog.dismiss();
 				      Toast.makeText(LoginAndRegister.this, "登陆成功，正在获取数据", Toast.LENGTH_LONG).show();
 				      Intent intent=new Intent(LoginAndRegister.this, MainActivity.class);
 				      startActivity(intent);
@@ -155,8 +159,8 @@ public class LoginAndRegister extends Activity {
 				    }
 				    @Override
 				    public void onFailure(int code, String msg) {
-				        // TODO Auto-generated method stub
-				    	  Toast.makeText(LoginAndRegister.this,code+ "登陆失败"+msg, Toast.LENGTH_LONG).show();
+				    	sweetAlertDialog.dismiss();
+				    	  Toast.makeText(LoginAndRegister.this,"登陆失败"+msg, Toast.LENGTH_LONG).show();
 				    }
 				});
 				

@@ -153,6 +153,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		
 		}	
 		adapter01=new MainListAdapter(MainActivity.this);
+		adapter01.notifyDataSetChanged();
 		main_listView1=(ListView) this.findViewById(R.id.main_listView1);	
 		main_listView1.setAdapter(adapter01);
 		main_listView1.setOnItemClickListener(new OnItemClickListener() {
