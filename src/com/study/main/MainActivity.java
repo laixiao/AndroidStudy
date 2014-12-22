@@ -330,7 +330,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 		// itemFile = new ResideMenuItem(this, R.drawable.residebutton4,
 		// "子菜单1");
 		info = new ResideMenuInfo(this);
-		setting = new ResideMenuSetting(this, "setting", "");
+		setting = new ResideMenuSetting(this, "设置", "");
 
 		resideMenu.addMenuItem(menu_item01, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(menu_item02, ResideMenu.DIRECTION_LEFT);
@@ -1101,7 +1101,7 @@ public class MainActivity extends Activity implements OnClickListener,OnItemClic
 			public void onError(int arg0, String arg1) {	
 				
 				if(arg0==9016){
-					Toast.makeText(MainActivity.this,"亲，请检查你的网络.", Toast.LENGTH_LONG).show();
+					//Toast.makeText(MainActivity.this,"亲，请检查你的网络.", Toast.LENGTH_LONG).show();
 				}else {
 					Toast.makeText(MainActivity.this,arg1, Toast.LENGTH_LONG).show();
 				}

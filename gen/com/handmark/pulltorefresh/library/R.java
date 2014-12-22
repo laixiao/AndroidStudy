@@ -72,7 +72,7 @@ public final class R {
 	public static final class layout {
 		public static final int pull_to_refresh_header_horizontal = 0x7f030019;
 		public static final int pull_to_refresh_header_vertical = 0x7f03001a;
-		public static final int water_fall_view_inner = 0x7f030024;
+		public static final int water_fall_view_inner = 0x7f030025;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f070014;

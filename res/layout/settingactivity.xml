@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/user_infobg2"
+   	android:background="#ffffff"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -23,10 +23,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="69dp"
-          android:layout_weight="15"
-          android:gravity="center"
+        android:layout_height="wrap_content"
+       
         android:background="#00000000"
+        android:gravity="center"
         android:orientation="vertical" >
 
         <TextView
@@ -43,41 +43,15 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="14sp"
-            android:text="1.群内有大量学习资料：\n   包括实战项目视频和源码等\n2.加群要求：亲，积分要大于1000喔\n3.积分所得将全部用于提升带宽，完善功能等\n4.非常感谢亲的支持" />
+            android:text="1.群内有大量学习资料：\n   包括实战项目视频和源码等\n2.加群要求：亲，积分要大于1500喔\n3.积分所得将全部用于提升带宽，完善功能等\n4.非常感谢亲的支持\n5.QQ群：430049289" />
 
-        <TextView
-            android:id="@+id/textView"
-          android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="QQ群： 430049289" />
+        
     </LinearLayout>
 
-    <Button
-        android:id="@+id/setting_button1"
+    <ListView
+        android:id="@+id/setting_listView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/login_registerbutton1"
-        android:text="下载管理" />
-
-    <Button
-        android:id="@+id/setting_button2"
-          android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/login_registerbutton1"
-        android:text="获取积分" />
-
-    <Button
-        android:id="@+id/setting_button3"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/login_registerbutton1"
-        android:text="关于作者" />
-
-  
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
