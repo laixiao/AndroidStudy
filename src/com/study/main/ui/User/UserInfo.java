@@ -10,8 +10,6 @@ import java.util.List;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.study.main.MainActivity;
 import com.study.main.R;
 import com.study.main.Entity.Favour;
 import com.study.main.Entity.Isfavour;
@@ -27,7 +25,6 @@ import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
@@ -135,7 +132,7 @@ public class UserInfo extends Activity {
 		user_info_phonenumber = (TextView) this.findViewById(R.id.user_info_phonenumber);
 		userinfo_nickname = (TextView) this.findViewById(R.id.userinfo_nickname);
 		userinfo_birthday = (TextView) this.findViewById(R.id.userinfo_birthday);
-		user_info_name= (TextView) this.findViewById(R.id.user_info_name);
+		user_info_name= (TextView) this.findViewById(R.id.user_infoname);
 		user_info_titlelayout=(LinearLayout) this.findViewById(R.id.user_info_titlelayout);
 		adapter=new UserInfoAdapter(UserInfo.this);
 		user_info_listView1=(ListView) this.findViewById(R.id.user_info_listView1);	
@@ -365,7 +362,7 @@ public class UserInfo extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				setAvata(iconUrl);
 			}
 		});
@@ -394,8 +391,7 @@ public class UserInfo extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				DateTimePickDialogUtil dateutil = new DateTimePickDialogUtil(
-						UserInfo.this, "2000年05月20日 05:60");
+				DateTimePickDialogUtil dateutil = new DateTimePickDialogUtil(UserInfo.this, "2000年05月20日 05:60");
 				dateutil.dateTimePicKDialog(userinfo_birthday);
 			}
 		});
@@ -485,10 +481,11 @@ public class UserInfo extends Activity {
 	}
 
 	private void setAvata(String avataPath) {
-		// currentUser = BmobUser.getCurrentUser(this, User.class);
+		final SweetAlertDialog sweetAlertDialog1 =new SweetAlertDialog(UserInfo.this).setTitleText("亲，正在修改信息").setContentText("请稍后...");
+		sweetAlertDialog1.show();
 		if (avataPath != null) {
 			final BmobFile file = new BmobFile(new File(iconUrl));
-			file.upload(this, new UploadFileListener() {
+			file.uploadblock(this, new UploadFileListener() {
 
 				@Override
 				public void onSuccess() {
@@ -519,23 +516,20 @@ public class UserInfo extends Activity {
 
 						@Override
 						public void onSuccess() {
-
-							currentUser = BmobUser.getCurrentUser(
-									UserInfo.this, User.class);
+							sweetAlertDialog1.dismiss();
+							currentUser = BmobUser.getCurrentUser(	UserInfo.this, User.class);
 
 							setResult(RESULT_OK);
 							new SweetAlertDialog(UserInfo.this, SweetAlertDialog.SUCCESS_TYPE)
-	                        .setTitleText("修改成功")
+	                        .setTitleText("成功")
 	                        .setContentText("个人信息修改成功")
 	                        .show();
 						}
 
 						@Override
 						public void onFailure(int arg0, String arg1) {
-							// TODO Auto-generated method stub
-
-							Toast.makeText(UserInfo.this, "erro"+arg1,
-									Toast.LENGTH_LONG).show();
+							sweetAlertDialog1.dismiss();
+							new SweetAlertDialog(UserInfo.this, SweetAlertDialog.ERROR_TYPE).setTitleText("信息修改失败").setContentText(""+arg1).show();
 						}
 					});
 				}

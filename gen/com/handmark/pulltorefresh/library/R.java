@@ -50,8 +50,8 @@ public final class R {
 	}
 	public static final class id {
 		public static final int both = 0x7f0a0006;
-		public static final int column1 = 0x7f0a00cb;
-		public static final int column2 = 0x7f0a00cc;
+		public static final int column1 = 0x7f0a00d3;
+		public static final int column2 = 0x7f0a00d4;
 		public static final int disabled = 0x7f0a0007;
 		public static final int fl_inner = 0x7f0a0095;
 		public static final int flip = 0x7f0a000d;
@@ -72,7 +72,7 @@ public final class R {
 	public static final class layout {
 		public static final int pull_to_refresh_header_horizontal = 0x7f030019;
 		public static final int pull_to_refresh_header_vertical = 0x7f03001a;
-		public static final int water_fall_view_inner = 0x7f030025;
+		public static final int water_fall_view_inner = 0x7f030027;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f070014;

@@ -46,6 +46,7 @@ import com.study.main.ui.ResideMenuItemUi.zhangzehuaActivity;
 import com.study.main.ui.User.Fabiaoshuoshuo;
 import com.study.main.ui.User.LoginAndRegister;
 import com.study.main.ui.User.UserInfo;
+import com.study.main.ui.User.UserInfo1;
 import com.study.main.ui.User.commentActivity;
 import com.study.main.ui.User.otherInfo;
 import com.study.main.ui.media.ArrayAdapter;

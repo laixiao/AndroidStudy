@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/default_bg"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_infotitlebg" >
+
+                    <ImageView
+                        android:id="@+id/user_info1_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="20dp"
+                       	android:paddingTop="6dp"
+                       	android:paddingBottom="6dp"
+                        android:paddingRight="20dp"
+                       
+                        android:src="@drawable/user_infoback" />
+
+                    <Button
+                        android:id="@+id/user_info1_favour"
+                        android:layout_width="wrap_content"
+                        android:background="#00000000"
+                        android:drawableLeft="@drawable/user_infofavour"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="1dp"
+                        android:text="收藏"
+                        />
+                </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/user_info_imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/personico"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/user_infopen" />
+
+    <TextView
+        android:id="@+id/signatureEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/user_info_imageView5"
+        android:layout_toRightOf="@+id/user_info_imageView5"
+        android:text="这家伙很懒。什么都没有留下..."
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/userinfo_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/personico"
+        android:text="name"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/personico"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:layout_alignLeft="@+id/signatureEdit"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="43dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user_infoico" />
+
+    <ImageView
+        android:id="@+id/user_infosex"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignLeft="@+id/userinfo_nickname"
+        android:layout_centerVertical="true"
+        android:src="@drawable/user_infosex1" />
+
+    <TextView
+        android:id="@+id/user_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userinfo_nickname"
+        android:layout_toRightOf="@+id/user_infosex"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/userinfo_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/user_infosex"
+        android:layout_alignTop="@+id/user_birthday"
+        android:src="@drawable/ic_action_love" />
+
+</RelativeLayout>
+
+<ListView
+    android:id="@+id/userinfo_listView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+</ListView>
+
+</LinearLayout>
+
+

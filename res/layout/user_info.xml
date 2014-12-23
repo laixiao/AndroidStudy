@@ -59,8 +59,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:layout_alignLeft="@+id/user_info_name"
-                        android:layout_below="@+id/user_info_name"
+                        android:layout_alignLeft="@+id/user_infoname"
+                        android:layout_below="@+id/user_infoname"
                         android:text="手机:"
                         
                         android:textColor="#000000" />
@@ -120,7 +120,7 @@
                         android:src="@drawable/user_infosex1" />
 
                     <TextView
-                        android:id="@+id/user_info_name"
+                        android:id="@+id/user_infoname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -133,8 +133,8 @@
                         android:id="@+id/userinfo_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/user_info_name"
-                        android:layout_alignBottom="@+id/user_info_name"
+                        android:layout_toRightOf="@+id/user_infoname"
+                        android:layout_alignBottom="@+id/user_infoname"
                         android:layout_marginLeft="10dp"
                         android:text="name"
                        

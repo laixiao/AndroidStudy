@@ -181,7 +181,10 @@ public class commentActivity extends Activity {
 			holder.comment_list_time.setText(comment.getCreatedAt()+"");
 			holder.comment_list_content.setText(comment.getContent());
 			holder.comment_list_index.setText(position+"¥");
-			ImageLoader.getInstance().displayImage(comment.getUser().getAvatar().getFileUrl(context), holder.list_item_user_logo, options,null);
+			if(comment.getUser().getAvatar()!=null){
+				ImageLoader.getInstance().displayImage(comment.getUser().getAvatar().getFileUrl(context), holder.list_item_user_logo, options,null);
+			}
+			
 			return convertView;
 		}
 

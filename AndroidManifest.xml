@@ -68,6 +68,7 @@
         </activity>
         <activity android:name="com.study.main.ui.User.Fabiaoshuoshuo" >
         </activity>
+        <activity android:name="com.study.main.ui.User.UserInfo1"></activity>
         <activity android:name="com.study.main.ui.ResideMenuItemUi.SettingActivity" >
         </activity>
         <activity android:name="com.study.main.ui.Youmi.mainActivity01" >

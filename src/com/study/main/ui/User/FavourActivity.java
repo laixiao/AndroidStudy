@@ -231,10 +231,14 @@ public class FavourActivity extends Activity{
 			holder.list_item_action_fav.setText("删除");
 			holder.list_item_action_fav.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
+					
+					final SweetAlertDialog sweetAlertDialog1 =new SweetAlertDialog(FavourActivity.this).setTitleText("亲，正在取消收藏").setContentText("请稍后...");
+					sweetAlertDialog1.show();
 					Favour favour=favoursList.get(position);					
 					favour.delete(context, new DeleteListener() {
 
 						public void onSuccess() {
+							sweetAlertDialog1.dismiss();
 							FavourShuoshuoList.clear();
 							getData();	
 							adapter.notifyDataSetChanged();
@@ -242,8 +246,9 @@ public class FavourActivity extends Activity{
 						}
 						
 						@Override
-						public void onFailure(int arg0, String arg1) {							
-							Toast.makeText(FavourActivity.this, "取消收藏失败", Toast.LENGTH_LONG).show();		
+						public void onFailure(int arg0, String arg1) {	
+							sweetAlertDialog1.dismiss();
+							new SweetAlertDialog(FavourActivity.this, SweetAlertDialog.ERROR_TYPE).setTitleText("取消收藏失败").setContentText(""+arg1).show();		
 						}
 					});
 					

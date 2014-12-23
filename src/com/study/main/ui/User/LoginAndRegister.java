@@ -203,7 +203,7 @@ public class LoginAndRegister extends Activity {
 					public void onSuccess() {
 						// TODO Auto-generated method stub
 						 Toast.makeText(LoginAndRegister.this,"×¢²á³É¹¦À²", Toast.LENGTH_LONG).show();
-						 Intent intent=new Intent(LoginAndRegister.this, UserInfo.class);
+						 Intent intent=new Intent(LoginAndRegister.this, MainActivity.class);
 						 startActivity(intent);
 						 finish();
 					}
